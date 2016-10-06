@@ -12,8 +12,9 @@
 /db/*.sqlite3-journal
 
 # Igore pdf uploaded files
-/public/*/*/*.pdf
-#/public/system/*
+*.pdf
+/public/**/**/*.pdf
+/public/system/*
 
 # Ignore all logfiles and tempfiles.
 /log/*
