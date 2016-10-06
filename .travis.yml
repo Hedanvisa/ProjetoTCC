@@ -2,6 +2,7 @@ language: ruby
 rvm: 
     - 2.2.2
 script:
+    - bundle install
     - RAILS_ENV=test bundle exec rake db:schema:load --trace
     - bundle exec rake db:migrate
     - bundle exec rspec spec/
