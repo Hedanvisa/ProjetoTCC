@@ -1,4 +1,4 @@
 class Professor < ActiveRecord::Base
-	validates :nome, presence: true, uniqueness: true
-	validates :email, presence: true, uniqueness: true
+	validates :nome, presence: true
+	validates :email, uniqueness: true
 end
