@@ -1,0 +1,39 @@
+<%= form_for([@estudante, @trabalho]) do |f| %>
+	<% if @trabalho.errors.any? %>
+		<div class='alert alert-danger'>
+			<strong>
+				Não foi possível completar o cadastro:
+			</strong>
+			<ul>
+				<% @trabalho.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class='form-group'>
+		<%= f.label :titulo %>
+		<%= f.text_field :titulo, class: 'form-control' %>
+	</div>
+	<div class='form-group'>
+		<%= f.label :arquivo %>
+		<%= f.file_field :arquivo, class: 'form-control' %>
+	</div>
+
+	<%= f.fields_for :orientador, @trabalho.orientador do |orientador| %>
+		<div class='form-group'>
+			<%= orientador.label :nome, "Nome do Orientador" %>
+			<%= orientador.text_field :nome, class: 'form-control' %>
+		</div>
+		<div class='form-group'>
+			<%= orientador.label :email, "Email do Orientador" %>
+			<%= orientador.email_field :email, class: 'form-control' %>
+		</div>
+	<% end %>
+
+
+	<%= f.submit "Upload", class: 'btn btn-primary' %>
+
+<% end %>
+

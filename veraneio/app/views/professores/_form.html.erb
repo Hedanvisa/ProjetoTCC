@@ -1,0 +1,8 @@
+<%= form_for @professor do |f| %>
+	<%= f.label :nome %>
+	<%= f.text_field :nome %>
+	<%= f.label :email %>
+	<%= f.email_field :email %>
+
+	<%= f.submit %>
+<% end %>
