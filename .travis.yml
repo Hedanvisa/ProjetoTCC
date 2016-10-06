@@ -7,5 +7,6 @@ script:
     - bundle exec rspec spec/
     - rake test
 before_script:
+    - cd veraneio
     - cp config/database.travis.yml config/database.yml
     - cp config/secrets.example.yml config/secrets.yml
