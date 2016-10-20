@@ -11,22 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001015133) do
-
-  create_table "estudantes", force: :cascade do |t|
-    t.string   "nome"
-    t.string   "email"
-    t.string   "ra"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "professores", force: :cascade do |t|
-    t.string   "nome"
-    t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20161020193027) do
 
   create_table "trabalhos", force: :cascade do |t|
     t.string   "titulo"
@@ -40,11 +25,22 @@ ActiveRecord::Schema.define(version: 20161001015133) do
     t.string   "arquivo_content_type"
     t.integer  "arquivo_file_size"
     t.datetime "arquivo_updated_at"
+    t.string   "estado"
   end
 
   add_index "trabalhos", ["banca_1_id"], name: "index_trabalhos_on_banca_1_id"
   add_index "trabalhos", ["banca_2_id"], name: "index_trabalhos_on_banca_2_id"
   add_index "trabalhos", ["estudante_id"], name: "index_trabalhos_on_estudante_id"
   add_index "trabalhos", ["orientador_id"], name: "index_trabalhos_on_orientador_id"
+
+  create_table "usuarios", force: :cascade do |t|
+    t.string   "nome"
+    t.string   "email"
+    t.string   "ra"
+    t.string   "password_digest"
+    t.string   "type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
 end
