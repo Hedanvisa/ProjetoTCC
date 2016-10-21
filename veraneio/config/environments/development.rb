@@ -16,13 +16,12 @@ Rails.application.configure do
 	# Don't care if the mailer can't send.
 	config.action_mailer.raise_delivery_errors = true
 
-
-	ction_mailer.delivery_method = :smtp
+	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
 		address:              'smtp.gmail.com',
 		port:                 587,
 		user_name:            'notificacaotcc@gmail.com',
-		password:             ENV[GMAIL_PASS],
+		password:             ENV['GMAIL_PASS'],
 		authentication:       'plain',
 		enable_starttls_auto: true  }
 
