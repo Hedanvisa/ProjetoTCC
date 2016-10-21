@@ -12,9 +12,7 @@ class Notificador < ApplicationMailer
 
 	def aluno_novo_trabalho(trabalho,estudante)
 		@estudante = estudante
-		@trabalho = Trabalho.find_by :estudante_id @estudante.id
-		puts @estudante
-		puts @trabalho
+		@trabalho = trabalho
 		mail(to:estudante.email, subject: "Arquivo #{@trabalho.arquivo_file_name} submetido")
 	end
 end

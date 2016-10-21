@@ -1,5 +1,5 @@
 class TrabalhosController < ApplicationController
-	before_action :autenticar_usuario!
+#	before_action :autenticar_usuario!
 
 	def new
 		@estudante = Estudante.find(params[:estudante_id])
@@ -45,10 +45,9 @@ class TrabalhosController < ApplicationController
 		end
 
 		if @trabalho.save
-
-			#e=envia emaill par aluno
-			aluno_novo_trabalho(@trabalho,@aluno)
-			redirect_to login_path, notice: "Trabalho enviado com sucesso!!!"
+			@estudante = Estudante.find(params[:estudante_id])
+			Notificador.aluno_novo_trabalho(@trabalho,@estudante).deliver_now
+			redirect_to login_path, notice: "Trabalho enviado ;)"
 		else
 			render 'new'
 		end
