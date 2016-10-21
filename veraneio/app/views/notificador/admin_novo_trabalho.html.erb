@@ -6,8 +6,8 @@
 	<body>
 		<h1>Um novo arquivo de TCC foi enviado no sistema.</h1>
 		<p>
-		O aluno <%=@estudante.nome%> cadastrou o arquivo <%=@estudante.trabalho.titulo%></br>
-		Para visualizar o trabalho clique no link <%= link_to @estudante.trabalho %>
+		O aluno <%=@estudante.nome%> de RA: <%=@estudante.ra%> cadastrou o arquivo <%=@estudante.trabalho.titulo%> no sistema de TCC.</br>
+		Para visualizar o trabalho clique <%=link_to "aqui" , estudante_trabalho_url({estudante_id: @estudante.id, id:@estudante.trabalho.id})%>
 		</p>
 	</body>
 </html>

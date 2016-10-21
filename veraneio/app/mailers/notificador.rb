@@ -5,9 +5,9 @@ class Notificador < ApplicationMailer
 		mail(to: "danielcostavalerio@hotmail.com", subject: "enviando email rails")	
 	end
 
-	def admin_novo_trabalho(usuario, estudante)
+	def admin_novo_trabalho(administrador, estudante)
 		@estudante = estudante
-		mail(to:usuario.email, subject: "Trabalho de TCC cadastrado")
+		mail(to:administrador.email, subject: "Nova atividade no Sistema TCC")
 	end
 
 	def aluno_novo_trabalho(usuario)
