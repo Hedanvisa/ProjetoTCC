@@ -1,0 +1,2 @@
+module Avaliacao::BancaHelper
+end
