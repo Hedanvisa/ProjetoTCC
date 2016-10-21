@@ -47,6 +47,8 @@ class TrabalhosController < ApplicationController
 		if @trabalho.save
 			@adm = Usuario.where(email:"danielcostavalerio@gmail.com").first
 			Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now
+			@estudante = Estudante.find(params[:estudante_id])
+			Notificador.aluno_novo_trabalho(@trabalho,@estudante).deliver_now
 			redirect_to login_path, notice: "Trabalho enviado com sucesso!!!"
 		else
 			render 'new'
