@@ -45,6 +45,9 @@ class TrabalhosController < ApplicationController
 		end
 
 		if @trabalho.save
+
+			#e=envia emaill par aluno
+			aluno_novo_trabalho(@trabalho,@aluno)
 			redirect_to login_path, notice: "Trabalho enviado com sucesso!!!"
 		else
 			render 'new'

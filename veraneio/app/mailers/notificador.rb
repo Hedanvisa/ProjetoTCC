@@ -10,7 +10,11 @@ class Notificador < ApplicationMailer
 		mail(to:usuario.email, subject: "Trabalho de TCC cadastrado")
 	end
 
-	def aluno_novo_trabalho(usuario)
-		mail(to:usuario.email, subject: "Seu trabalho de TCC foi enviado")
+	def aluno_novo_trabalho(trabalho,estudante)
+		@estudante = estudante
+		@trabalho = Trabalho.find_by :estudante_id @estudante.id
+		puts @estudante
+		puts @trabalho
+		mail(to:estudante.email, subject: "Arquivo #{@trabalho.arquivo_file_name} submetido")
 	end
 end
