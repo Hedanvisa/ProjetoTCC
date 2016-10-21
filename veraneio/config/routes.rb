@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   end
 
 
+  get 'cadastrar', to: 'estudantes#new', as: 'cadastrar'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#new', as: 'logout'
+
   root 'estudantes#new'
 
   # Example of regular route:
