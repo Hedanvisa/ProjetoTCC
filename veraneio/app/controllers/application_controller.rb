@@ -5,15 +5,15 @@ class ApplicationController < ActionController::Base
 
 	private
 
-	def current_user
+	def usuario_atual
 		if session[:usuario_id]
-			@usuario_logado ||= Usuario.find(session[:usuario_id])
+			@usuario_atual ||= Usuario.find(session[:usuario_id])
 		end
 	end
 
-	helper_method :usuario_logado
+	helper_method :usuario_atual
 
-	def usuario_logado
-		redirect_to login_path unless usuario_logado
+	def autenticar_usuario!
+		redirect_to login_path unless usuario_atual
 	end
 end

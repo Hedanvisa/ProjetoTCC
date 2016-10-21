@@ -16,10 +16,20 @@
 		<%= trabalho.label :titulo %>
 		<%= trabalho.text_field :titulo, class: 'form-control' %>
 	</div>
-	<div class='form-group'>
-		<%= trabalho.label :arquivo %>
-		<%= trabalho.file_field :arquivo, class: 'form-control' %>
-	</div>
+
+	<% unless @trabalho.arquivo.exists? %>
+		<div class='form-group'>
+			<%= trabalho.label :arquivo %>
+			<%= trabalho.file_field :arquivo, class: 'form-control' %>
+		</div>
+	<% else %>
+		<div class='form-group'>
+			<%= trabalho.label :arquivo %>
+			<%= link_to "Trabalho" , @trabalho.arquivo.url(:original) %>
+			<%= link_to "Remover" , {action: :update},  class:'btn btn-danger', data: {confirm: "Você tem certeza?"} %>
+		</div>
+	<% end %>
+
 
 	<%= trabalho.fields_for :orientador, @trabalho.orientador do |orientador| %>
 		<div class='form-group'>

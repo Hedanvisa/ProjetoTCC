@@ -1,4 +1,5 @@
 class TrabalhosController < ApplicationController
+	before_action :autenticar_usuario!
 
 	def new
 		@estudante = Estudante.find(params[:estudante_id])
@@ -6,6 +7,16 @@ class TrabalhosController < ApplicationController
 		@trabalho.build_orientador
 		@trabalho.build_banca_1
 		@trabalho.build_banca_2
+	end
+
+	def show
+		@estudante = Estudante.find(params[:estudante_id])
+		@trabalho = @estudante.trabalho
+		@orientador = @trabalho.orientador
+		@banca_1 = @trabalho.banca_1
+		@banca_2 = @trabalho.banca_2
+
+		render 'new'
 	end
 
 	def create
@@ -34,10 +45,22 @@ class TrabalhosController < ApplicationController
 		end
 
 		if @trabalho.save
-			redirect_to new_estudante_url, notice: "Trabalho enviado com sucesso!!!"
+			redirect_to login_path, notice: "Trabalho enviado com sucesso!!!"
 		else
 			render 'new'
 		end
+	end
+	
+	def edit
+		@estudante = Estudante.find(params[:estudante_id])
+		@trabalho = @estudante.trabalho
+		@trabalho.arquivo.destroy
+		@trabalho.arquivo = nil
+
+		render 'new'
+	end
+
+	def update
 	end
 
 	private
