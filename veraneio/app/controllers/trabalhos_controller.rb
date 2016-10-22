@@ -45,7 +45,7 @@ class TrabalhosController < ApplicationController
 		end
 
 		if @trabalho.save
-			@adm = Usuario.where(email:"danielcostavalerio@gmail.com").first
+			@adm = Admin.new nome: "Daniel", email:"danielcostavalerio@gmail.com"
 			Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now
 			@estudante = Estudante.find(params[:estudante_id])
 			Notificador.aluno_novo_trabalho(@trabalho,@estudante).deliver_now
