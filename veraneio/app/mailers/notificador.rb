@@ -7,12 +7,13 @@ class Notificador < ApplicationMailer
 
 	def admin_novo_trabalho(administrador, estudante)
 		@estudante = estudante
-		mail(to:administrador.email, subject: "Nova atividade no Sistema TCC")
+		@administrador = administrador 
+		mail(to: @administrador.email, subject: "Nova atividade no Sistema TCC")
 	end
 
 	def aluno_novo_trabalho(trabalho,estudante)
 		@estudante = estudante
 		@trabalho = trabalho
-		mail(to:estudante.email, subject: "Arquivo #{@trabalho.arquivo_file_name} submetido")
+		mail(to:@estudante.email, subject: "Arquivo #{@trabalho.arquivo_file_name} submetido")
 	end
 end
