@@ -1,0 +1,37 @@
+<div class="panel-group" id="accordion">
+  <% @trabalhos.each do |trabalho| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+            <ol class="breadcrumb"> 
+              <li><span class="label label-info"><%= trabalho.estado %></span></li>
+              <li><%= trabalho.updated_at %></li>
+              <li><%= trabalho.estudante.nome %></li>
+              <li><%= trabalho.titulo %></li>
+            </ol>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">
+          
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+            Nome Professor | e-mail
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+              <li role="presentation" class="dropdown-header">Dropdown header 1</li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li
+              <li role="presentation" class="divider"></li>
+              <li role="presentation" class="dropdown-header">Dropdown header 2</li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+            </ul>
+          </div>
+          
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
