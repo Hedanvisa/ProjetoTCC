@@ -44,10 +44,15 @@ class TrabalhosController < ApplicationController
 			@trabalho.banca_2 = Professor.create(trabalhos_param[:banca_2_attributes])
 		end
 
-		if @trabalho.save
+		if @trabalho.save 
+			#danielcostavalerio@gmail.com
+			@adm = Admin.new nome: "Daniel", email:"rickftime@gmail.com"
 			@estudante = Estudante.find(params[:estudante_id])
-			Notificador.aluno_novo_trabalho(@trabalho,@estudante).deliver_now
-			redirect_to login_path, notice: "Trabalho enviado ;)"
+			Thread.new do 
+				Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now
+				Notificador.aluno_novo_trabalho(@trabalho,@estudante).deliver_now
+			end
+			redirect_to login_path, notice: "Trabalho enviado com sucesso!!!"
 		else
 			render 'new'
 		end

@@ -1,15 +1,42 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+admin:
+  nome: Venice
+  email: venice@venice.com
+  ra: null
+  password_digest: <%= BCrypt::Password.create("root", cost:4 ) %>
+  type: Admin
 
-one:
-  nome: MyString
-  email: MyString
-  ra: MyString
-  password_digest: MyString
-  type: 
+anakin:
+  nome: Anakin
+  email: anakin@anakin.com
+  ra: 1234567
+  password_digest: <%= BCrypt::Password.create("root", cost:4 ) %>
+  type: Estudante
 
-two:
-  nome: MyString
-  email: MyString
-  ra: MyString
-  password_digest: MyString
-  type: 
+chewie:
+  nome: Chewie
+  email: chewie@chewie.com
+  ra: 1234570
+  password_digest: <%= BCrypt::Password.create("root", cost:4 ) %>
+  type: Estudante
+
+obiwan:
+  nome: Obiwan
+  email: obiwan@obiwan.com
+  ra: 1234568
+  password_digest: null
+  type: Professor
+
+yoda:
+  nome: Yoda
+  email: null
+  ra: 1234570
+  password_digest: null
+  type: Professor
+
+ben:
+  nome: Ben
+  email: null
+  ra: 1234573
+  password_digest: null
+  type: Professor
