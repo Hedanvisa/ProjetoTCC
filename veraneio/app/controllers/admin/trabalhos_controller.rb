@@ -4,6 +4,5 @@ class Admin::TrabalhosController < ApplicationController
     def index
         @trabalhos = Trabalho.all
         @professores = Professor.all
-        
     end
 end
