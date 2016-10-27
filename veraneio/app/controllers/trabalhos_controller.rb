@@ -1,8 +1,7 @@
 class TrabalhosController < ApplicationController
-#	before_action :autenticar_usuario!
+	before_action :set_estudante
 
 	def new
-		@estudante = Estudante.find(params[:estudante_id])
 		@trabalho = @estudante.build_trabalho
 		@trabalho.build_orientador
 		@trabalho.build_banca_1
@@ -10,7 +9,6 @@ class TrabalhosController < ApplicationController
 	end
 
 	def show
-		@estudante = Estudante.find(params[:estudante_id])
 		@trabalho = @estudante.trabalho
 		@orientador = @trabalho.orientador
 		@banca_1 = @trabalho.banca_1
@@ -20,7 +18,6 @@ class TrabalhosController < ApplicationController
 	end
 
 	def create
-		@estudante = Estudante.find(params[:estudante_id])
 		@trabalho = @estudante.build_trabalho(trabalhos_param)
 		@orientador = Professor.where(email: params[:trabalho][:orientador_attributes][:email]).first
 		@banca_1 = Professor.where(nome: params[:trabalho][:banca_1_attributes][:nome]).first
@@ -45,8 +42,7 @@ class TrabalhosController < ApplicationController
 		end
 
 		if @trabalho.save 
-			#danielcostavalerio@gmail.com
-			@adm = Admin.new nome: "Daniel", email:"rickftime@gmail.com"
+			@adm = Admin.new nome: "Daniel", email:"danielcostavalerio@gmail.com"
 			@estudante = Estudante.find(params[:estudante_id])
 			Thread.new do 
 				Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now
@@ -59,7 +55,6 @@ class TrabalhosController < ApplicationController
 	end
 	
 	def edit
-		@estudante = Estudante.find(params[:estudante_id])
 		@trabalho = @estudante.trabalho
 		@trabalho.arquivo.destroy
 		@trabalho.arquivo = nil
@@ -73,5 +68,9 @@ class TrabalhosController < ApplicationController
 	private
 	def trabalhos_param
 		params.require(:trabalho).permit(:titulo, :arquivo, orientador_attributes: [:nome, :email], banca_1_attributes: [:nome], banca_2_attributes: [:nome])
+	end
+
+	def set_estudante
+		@estudante = Estudante.find(params[:estudante_id])
 	end
 end

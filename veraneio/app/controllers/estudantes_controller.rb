@@ -1,5 +1,4 @@
 class EstudantesController < ApplicationController
-
 	def new
 		@estudante = Estudante.new
 	end
@@ -17,6 +16,6 @@ class EstudantesController < ApplicationController
 	private
 
 	def estudante_params
-		params.require(:estudante).permit(:nome, :email, :ra, :password)
+		params.require(:estudante).permit(:nome, :email, :ra, :password, :password_confirmation)
 	end
 end
