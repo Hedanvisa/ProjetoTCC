@@ -17,7 +17,12 @@ Rails.application.routes.draw do
   get 'cadastrar', to: 'estudantes#new', as: 'cadastrar'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
-  get 'admin', to: 'admin/trabalhos#index', as: 'admin'
+
+  namespace 'admin' do
+    get 'trabalho', to: 'trabalhos#index', as: 'trabalhos'
+    get 'estudante', to: 'estudante#index', as: 'estudantes'
+    get 'professor', to: 'professor#index', as: 'professores'
+  end
 
   root 'sessions#new'
 

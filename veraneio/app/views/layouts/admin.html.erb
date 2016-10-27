@@ -9,12 +9,12 @@
 	<body>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
-      	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7"> 
-					<ul class="nav navbar-nav"> 
-						<li class="active"><a href="#">Trabalhos</a></li> 
-						<li><a href="#">Estudantes</a></li>
-						<li><a href="#">Professores</a></li> 
-					</ul> 
+      	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
+					<ul class="nav navbar-nav">
+						<li class="<%= 'active' if current_page?(admin_trabalhos_path) %>"><%= link_to "Trabalhos", admin_trabalhos_path %></li>
+						<li class="<%= 'active' if current_page?(admin_estudantes_path) %>"><%= link_to "estudantes", admin_estudantes_path %></li>
+						<li class="<%= 'active' if current_page?(admin_professores_path) %>"><%= link_to "Professores", admin_professores_path %></li>
+					</ul>
 				</div>
       </div>
     </nav>
@@ -23,6 +23,3 @@
 			</div>
 	</body>
 </html>
-
-
-
