@@ -1,44 +1,85 @@
-<div class="panel-group" id="accordion">
-  <% @trabalhos.each do |trabalho| %>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#<%=trabalho.id %>">
-            <ol class="breadcrumb"> 
-              <li><span class="label label-info"><%= trabalho.estado %></span></li>
-              <li><%= trabalho.updated_at %></li>
-              <li><%= trabalho.estudante.nome %></li>
-              <li><%= trabalho.titulo %></li>
-            </ol>
-          </a>
-        </h4>
-      </div>
-      <div id="<%=trabalho.id %>" class="panel-collapse collapse in">
-        <div class="panel-body">
-          
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-            Nome Professor | e-mail
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-            <%@professores.each do |professor|%>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= professor.nome %> | <%= professor.email %></a></li>
-              <% end %>
-            </ul>
-
+  <div class="panel-group" id="accordion">
+    <% @trabalhos.each do |trabalho| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#<%=trabalho.id %>">
+              <ol class="breadcrumb"> 
+                <li><span class="label label-info"><%= trabalho.estado %></span></li>
+                <li><%= trabalho.updated_at %></li>
+                <li><%= trabalho.estudante.nome %></li>
+                <li><%= trabalho.titulo %></li>
+              </ol>
+            </a>
+          </h4>
+        </div>
+        <div id="<%=trabalho.id %>" class="panel-collapse collapse in">
+          <div class="panel-body">
             
-            <button type="button" class="btn btn-info">
-              <span class="glyphicon glyphicon-edit"></span> Editar
-            </button>
+            <div class="form-group">
+                <div class="col-xs-5 selectContainer">
+                    <select class="form-control" name="size">
+                        <option value="<%= trabalho.orientador.id %>"><%= trabalho.orientador.nome %> | <%= trabalho.orientador.email %></option>
+                    </select>
+                </div>
 
-            <button type="button" class="btn btn-info"><b>+</b>
-              <span class="glyphicon glyphicon-user"></span>
-            </button>
+                <button type="button" class="btn btn-info">
+                <span class="glyphicon glyphicon-edit"></span> Editar
+                </button>
 
+              <button type="button" class="btn btn-info"><b>+</b>
+                <span class="glyphicon glyphicon-user"></span>
+              </button>
+            </div>
+
+              <div class="form-group">
+                <div class="col-xs-3 selectContainer">
+                    <select class="form-control" name="size">
+                        
+                        <% if trabalho.banca_1.nil? %>
+                          <option value="">Banca 1</option>
+                        <% else %>
+                          <option value=""> <%= trabalho.banca_1.nome %> </option>
+                        <% end %>
+
+                        <%@professores.each do |professor|%>
+                          <option value="<%= professor.id %>"><%= professor.nome %> | <%= professor.email %></option>
+                        <% end %>
+                    </select>
+                </div>
+
+                <button type="button" class="btn btn-info">
+                <span class="glyphicon glyphicon-edit"></span> Editar
+                </button>
+
+              <button type="button" class="btn btn-info"><b>+</b>
+                <span class="glyphicon glyphicon-user"></span>
+              </button>
+            </div>
+
+                        <div class="form-group">
+                <div class="col-xs-3 selectContainer">
+                    <select class="form-control" name="size">
+                        <option value="">Banca 2</option>
+                        <%@professores.each do |professor|%>
+                          <option value="<%= professor.id %>"><%= professor.nome %> | <%= professor.email %></option>
+                        <% end %>
+                    </select>
+                </div>
+
+                <button type="button" class="btn btn-info">
+                <span class="glyphicon glyphicon-edit"></span> Editar
+                </button>
+
+              <button type="button" class="btn btn-info"><b>+</b>
+                <span class="glyphicon glyphicon-user"></span>
+              </button>
+            </div>
+
+
+            <button class="btn btn-default btn-pressure pull-right">Enviar para Avaliacao</button>
           </div>
-          <button class="btn btn-default btn-pressure pull-right">Enviar para Avaliacao</button>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
