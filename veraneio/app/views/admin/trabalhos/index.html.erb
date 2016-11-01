@@ -27,19 +27,16 @@
 						<span class="glyphicon glyphicon-edit"></span> Editar
 					</button>
 
-					<button type="button" class="btn btn-info"><b>+</b>
-						<span class="glyphicon glyphicon-user"></span>
-					</button>
 				</div>
 
 				<div class="form-group">
-					<div class="col-xs-3 selectContainer">
+					<div class="col-xs-5 selectContainer">
 						<select class="form-control" name="size">
 
 							<% if trabalho.banca_1.nil? %>
 								<option value="">Banca 1</option>
 							<% else %>
-								<option value=""> <%= trabalho.banca_1.nome %> </option>
+								<option value=""> <%= trabalho.banca_1.nome %> | <%= trabalho.banca_1.email %> </option>
 							<% end %>
 
 							<%@professores.each do |professor|%>
@@ -52,15 +49,18 @@
 						<span class="glyphicon glyphicon-edit"></span> Editar
 					</button>
 
-					<button type="button" class="btn btn-info"><b>+</b>
-						<span class="glyphicon glyphicon-user"></span>
-					</button>
 				</div>
 
 				<div class="form-group">
-					<div class="col-xs-3 selectContainer">
+					<div class="col-xs-5 selectContainer">
 						<select class="form-control" name="size">
-							<option value="">Banca 2</option>
+
+							<% if trabalho.banca_1.nil? %>
+								<option value="">Banca 2</option>
+							<% else %>
+								<option value=""> <%= trabalho.banca_2.nome %> | <%= trabalho.banca_2.email %> </option>
+							<% end %>
+
 							<%@professores.each do |professor|%>
 								<option value="<%= professor.id %>"><%= professor.nome %> | <%= professor.email %></option>
 							<% end %>
@@ -70,13 +70,13 @@
 					<button type="button" class="btn btn-info">
 						<span class="glyphicon glyphicon-edit"></span> Editar
 					</button>
-
-					<button type="button" class="btn btn-info"><b>+</b>
-						<span class="glyphicon glyphicon-user"></span>
-					</button>
 				</div>
 
-
+                <div class="container">
+                    <button type="button" class="btn btn-info"><b>Novo Professor</b>
+						<span class="glyphicon glyphicon-user"></span>
+					</button>
+                </div>
 				<button class="btn btn-default btn-pressure pull-right">Enviar para Avaliacao</button>
 			</div>
 		</div>
