@@ -10,6 +10,10 @@
 # Ignore tags
 tags
 
+# Ignore vim files
+*.swp
+/**/*.swp
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
