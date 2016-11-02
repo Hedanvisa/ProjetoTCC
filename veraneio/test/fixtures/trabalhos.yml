@@ -7,3 +7,10 @@ trabalho_1:
     banca_1: yoda
     banca_2: ben
 
+trabalho_2:
+    titulo: "As Ilhas"
+    estudante: chewie
+    orientador: yoda
+    banca_1: chewie
+    banca_2: ben
+

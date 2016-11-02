@@ -24,19 +24,19 @@ obiwan:
   nome: Obiwan
   email: obiwan@obiwan.com
   ra: 1234568
-  password_digest: null
+  password_digest: <%= BCrypt::Password.create("root", cost:4 ) %>
   type: Professor
 
 yoda:
   nome: Yoda
-  email: null
+  email: yoda@yoda.com
   ra: 1234570
-  password_digest: null
+  password_digest: <%= BCrypt::Password.create("root", cost:4 ) %>
   type: Professor
 
 ben:
   nome: Ben
-  email: null
+  email: ben@ben.com
   ra: 1234573
-  password_digest: null
+  password_digest: <%= BCrypt::Password.create("root", cost:4 ) %>
   type: Professor

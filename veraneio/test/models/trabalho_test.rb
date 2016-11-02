@@ -3,6 +3,7 @@ require 'test_helper'
 class TrabalhoTest < ActiveSupport::TestCase
 	def setup
 		@trabalho = trabalhos(:trabalho_1)
+		@trabalho_dois = trabalhos(:trabalho_2)
 	end
 
 	test 'trabalho nao pode ser criado sem titulo' do
