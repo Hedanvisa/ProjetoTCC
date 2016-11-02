@@ -13,7 +13,7 @@
 				</a>
 			</h4>
 		</div>
-		<div id="<%=trabalho.id %>" class="panel-collapse collapse in">
+		<div id="<%=trabalho.id %>" class="panel-collapse collapse out">
 			<div class="panel-body">
 
 				<div class="form-group">
@@ -73,7 +73,8 @@
 				</div>
 
                 <div class="container">
-                    <button type="button" class="btn btn-info"><b>Novo Professor</b>
+                    <button type="button" class="btn btn-info">
+						<%= link_to "Novo Professor", admin_professor_index_path %>
 						<span class="glyphicon glyphicon-user"></span>
 					</button>
 					<button type="button" class="btn btn-info">

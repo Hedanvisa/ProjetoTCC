@@ -1,7 +1,12 @@
 class Admin::ProfessorController < ApplicationController
     layout 'admin'
     
+    def new
+        @professor = Professor.new
+    end
+
     def index
+        @professor = Professor.new
         @professores = Professor.all
     end
 

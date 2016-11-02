@@ -8,9 +8,9 @@ class ProfessoresController < ApplicationController
 		@professor = Professor.new(professor_params)
 
 		if @professor.save
-			rediret_to new_estudante_url, notice: "Salviu"
+			redirect_to admin_professor_index_path, notice: "Salviu"
 		else
-			redirect_to new_estudante_url, alert: "Vish"
+			redirect_to admin_professor_index_path, alert: "Vish"
 		end
 	end
 
