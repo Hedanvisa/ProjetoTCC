@@ -16,4 +16,10 @@ class Notificador < ApplicationMailer
 		@trabalho = trabalho
 		mail(to:@estudante.email, subject: "Arquivo #{@trabalho.arquivo_file_name} submetido")
 	end
+	
+	def banca_avaliacao(estudante, membro_banca)
+		@estudante = estudante
+		@membro_banca = membro_banca
+		mail(to:@membro_banca.email, subject: "Um novo trabalho de TCC dependente de sua avaliação foi submetido")
+	end
 end

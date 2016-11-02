@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   namespace 'admin' do
     get 'trabalho', to: 'trabalhos#index', as: 'trabalhos'
     get 'estudante', to: 'estudante#index', as: 'estudantes'
-    get 'professor', to: 'professor#index', as: 'professores'
+#    get 'professor', to: 'professor#index', as: 'professores'
+	resources :professor
   end
 
   root 'sessions#new'

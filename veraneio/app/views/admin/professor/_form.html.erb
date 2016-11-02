@@ -1,0 +1,13 @@
+<%= form_for (@professor) do |p| %>
+	<div class='form-group'>
+		<%= p.label :nome %>
+		<%= p.text_field :nome, class: 'form_control'  %>
+	</div>
+
+	<div class='form-group'>
+		<%= p.label :email %>
+		<%= p.text_field :email, class: 'form_control' %>
+	</div>
+	
+	<%= p.submit "Salvar", class: "btn btn-primary" %>
+<% end %>
