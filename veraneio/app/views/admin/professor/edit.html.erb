@@ -1,4 +1,4 @@
-<%= form_for ([:admin, professor]) do |p| %>
+<%= form_for professor, :url => {:action => edit_admin_professor}  do |p| %>
 	<div class='form-group'>
 		<%= p.label :nome %>
 		<%= p.text_field :nome, class: 'form_control'  %>

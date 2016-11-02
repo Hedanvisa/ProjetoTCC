@@ -25,7 +25,6 @@
 
 					<button type="button" class="btn btn-info">
 						<span class="glyphicon glyphicon-edit"></span> 
-						<%= link_to "Editar", admin_professores_path %>
 					</button>
 
 				</div>
@@ -48,7 +47,6 @@
 
 					<button type="button" class="btn btn-info">
 						<span class="glyphicon glyphicon-edit"></span> 
-						<%= link_to "Editar", admin_professores_path %>
 					</button>
 
 				</div>
@@ -71,13 +69,16 @@
 
 					<button type="button" class="btn btn-info">
 						<span class="glyphicon glyphicon-edit"></span> 
-						<%= link_to "Editar", admin_professores_path %>
 					</button>
 				</div>
 
                 <div class="container">
                     <button type="button" class="btn btn-info"><b>Novo Professor</b>
 						<span class="glyphicon glyphicon-user"></span>
+					</button>
+					<button type="button" class="btn btn-info">
+						<%= link_to "Editar", admin_professor_index_path %>
+						<span class="glyphicon glyphicon-edit"></span> 
 					</button>
                 </div>
 				<button class="btn btn-default btn-pressure pull-right">Enviar para Avaliacao</button>

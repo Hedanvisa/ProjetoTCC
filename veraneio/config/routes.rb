@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   resources :sessions
-  resources :professores, only: [:create, :new, :show]
+  resources :professores, only: [:create, :new, :show, :edit, :update]
 
   resources :estudantes, only: [:create, :new, :show] do
 	  resources :trabalhos do
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get 'trabalho', to: 'trabalhos#index', as: 'trabalhos'
     get 'estudante', to: 'estudante#index', as: 'estudantes'
 #    get 'professor', to: 'professor#index', as: 'professores'
-	resources :professor
+	  resources :professor
   end
 
   root 'sessions#new'
