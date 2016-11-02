@@ -2,6 +2,17 @@
 	<h2>Log in</h2>
 </div>
 
+<% if notice %>
+	<div class='alert alert-success'>
+		<%= notice %>
+	</div>
+<% elsif alert %>
+	<div class='alert alert-danger'>
+		<%= alert %>
+	</div>
+<% end %>
+
+
 <%= form_tag sessions_path, class: 'form-signin' do %>
 	<div class='form-group'>
 		<%= label_tag :email %>

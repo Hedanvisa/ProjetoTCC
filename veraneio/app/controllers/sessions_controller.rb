@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 			session[:usuario_id] = usuario.id
 			redirect_to estudante_trabalho_path estudante_id: usuario.id, id: usuario.trabalho, notice: "Bem Vindo"
 		else
-			flash.now.alert = "Senha ou Email inválido"
+			flash.now[:alert]= "Senha ou Email inválido"
 			render "new"
 		end
 	end
