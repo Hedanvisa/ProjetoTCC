@@ -4,10 +4,11 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#<%=professor.id %>">
-            <ol class="breadcrumb"> 
-              <li><%= professor.nome %></li>
-              <li><%= professor.email %></li>
-            </ol>
+			  <%= professor.nome %>
+			  <%= professor.email %>
+			  <div class="btn">
+				  <%= link_to "Editar", edit_admin_professor_path(professor.id)%>
+			  </div>
           </a>
         </h4>
       </div>
