@@ -26,7 +26,7 @@
 		<div class='form-group'>
 			<%= trabalho.label :arquivo %>
 			<%= link_to "Trabalho" , @trabalho.arquivo.url(:original) %>
-			<%= link_to "Remover" , {action: :update},  class:'btn btn-danger', data: {confirm: "Você tem certeza?"} %>
+			<%= button_to "Remover", {:action => :update},  class:'btn btn-danger', data: {confirm: "Você tem certeza?"} %>
 		</div>
 	<% end %>
 
