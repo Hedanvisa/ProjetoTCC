@@ -63,6 +63,9 @@ class TrabalhosController < ApplicationController
 	end
 
 	def update
+		@estudante.trabalho.arquivo.destroy
+		@estudante.trabalho.arquivo.clear
+		redirect_to estudante_trabalho_path
 	end
 
 	private

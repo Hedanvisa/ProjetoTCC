@@ -1,22 +1,10 @@
-<div class="panel-group" id="accordion">
-  <% @estudantes.each do |estudante| %>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#<%=estudante.id %>">
-            <ol class="breadcrumb"> 
-              <li><%= estudante.ra %></li>
-              <li><%= estudante.nome %></li>
-              <li><%= estudante.email %></li>
-            </ol>
-          </a>
-        </h4>
-      </div>
-      <div id="<%=estudante.id %>" class="panel-collapse collapse in">
-        <div class="panel-body">
-          <button class="btn btn-default btn-pressure pull-right">Salvar Alteracoes</button>
-        </div>
+
+
+    <div class="container">
+      <div class="list-group">
+        <% @estudantes.each do |estudante| %>
+          <a href="#" class="list-group-item"><%= estudante.email %></a>
+        <% end %>
       </div>
     </div>
-  <% end %>
-</div>
+  
