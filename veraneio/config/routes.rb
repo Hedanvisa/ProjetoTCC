@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'estudante', to: 'estudante#index', as: 'estudantes'
 #    get 'professor', to: 'professor#index', as: 'professores'
 	  resources :professor
+    resources :trabalho
   end
 
   root 'sessions#new'

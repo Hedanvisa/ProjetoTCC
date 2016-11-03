@@ -1,0 +1,43 @@
+<%= form_for ([:admin, trabalho]) do |t| %>
+    <div class="panel-group" id="accordion2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion2" href="#<%=t.object.id %>">
+                        <ol class="breadcrumb"> 
+                            <li><span class="label label-info"><%= t.object.estado %></span></li>
+                            <li><%= t.object.updated_at %></li>
+                            <li><%= t.object.estudante.nome %></li>
+                            <li><%= t.object.titulo %></li>
+                        </ol>
+                    </a>
+                </h4>
+            </div>
+            <div id="<%=t.object.id %>" class="panel-collapse collapse out">
+                <div class="panel-body">
+                    <form role="form">
+                        <div class="form-group">                            
+                            
+                            <%= select_tag 'orientador', options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
+                        
+                            <%= select_tag 'banca_1', options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
+                        
+                            <%= select_tag 'banca_2', options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
+
+                        </div>
+                    </form>
+                        <button type="button" class="btn btn-info">
+                            <%= link_to "Novo Professor", admin_professor_index_path %>
+                            <span class="glyphicon glyphicon-user"></span>
+                        </button>
+                        <button type="button" class="btn btn-info">
+                            <%= link_to "Editar", admin_professor_index_path %>
+                            <span class="glyphicon glyphicon-edit"></span> 
+                        </button>
+                    
+                    <%= t.submit "Enviar para Avaliacao", class: 'btn btn-primary pull-right' %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
