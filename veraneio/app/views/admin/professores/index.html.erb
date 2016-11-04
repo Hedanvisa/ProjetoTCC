@@ -34,6 +34,9 @@
         <div class="panel-body">
           <%= render 'admin/professores/form' , professor: professor %>
         </div>
+		<div class="btn btn-danger pull-right">
+			<%= link_to "Excluir",admin_professor_path(professor), method: :delete, data:{confirm: "Tem Certeza?"} %>
+		</div>
       </div>
     </div>
   <% end %>

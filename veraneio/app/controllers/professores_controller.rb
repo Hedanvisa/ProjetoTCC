@@ -1,4 +1,5 @@
 class ProfessoresController < ApplicationController
+	before_action :set_professor, only: [:destroy]
 
 	def new
 		@professor = Professor.new
@@ -16,6 +17,9 @@ class ProfessoresController < ApplicationController
 
 
 	private
+	def set_professor
+		@professor = Professor.find(params[:id])
+	end
 
 	def professor_params 
 		params.require(:professor).permit(:nome, :email)

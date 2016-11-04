@@ -1,4 +1,5 @@
 class Admin::ProfessoresController < ApplicationController
+	before_action :set_professor, only: [:update, :destroy, :edit]
     layout 'admin'
     
     def new
@@ -11,11 +12,17 @@ class Admin::ProfessoresController < ApplicationController
     end
 
 	def edit
-		@professor = Professor.find(params[:id])
+	end
+
+	def destroy
+		if @professor.destroy
+			redirect_to admin_professores_path, notice: "Professor Excluido"
+		else
+			redirect_to admin_professores_path, notice: "Erro ao excluir Professor"
+		end
 	end
 
     def update
-        @professor = Professor.find(params[:id])
         if @professor.update professor_params
             redirect_to admin_professores_path, notice: "Professor atualizado com sucesso"
         else
@@ -24,6 +31,9 @@ class Admin::ProfessoresController < ApplicationController
     end
 
     private
+	def set_professor
+		@professor = Professor.find(params[:id])
+	end
     def professor_params
         params.require(:professor).permit(:nome, :email)
     end
