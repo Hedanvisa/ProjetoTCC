@@ -22,13 +22,50 @@
             <%= t.submit "Enviar para Avaliacao", class: 'btn btn-primary pull-right' %>
         </div>
     <% elsif t.object.estado == "Enviado para Avaliação" %>
-        <div class="form-group">
-        <h2>List Group With Badges</h2>
-        <ul class="list-group">
-            <li class="list-group-item"><%= t.object.banca_1.nome %> <span class="badge">12</span></li>
-            <li class="list-group-item">Deleted <span class="badge">5</span></li>
-            <li class="list-group-item">Warnings <span class="badge">3</span></li>
-        </ul>
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <span class="badge">12</span>
+                        </div>
+                        <div class="col-xs-9 text-left">
+                            <h4>Orientador</h4>
+                            <h4><%= t.object.orientador.nome %></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <span class="badge">5</span>
+                        </div>
+                        <div class="col-xs-9 text-left">
+                            <h4>Banca 1</h4>
+                            <h4><%= t.object.banca_1.nome %></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <span class="badge">3</span>
+                        </div>
+                        <div class="col-xs-9 text-left">
+                            <h4>Banca 2</h4>
+                            <h4><%= t.object.banca_2.nome %></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <%= t.submit "Enviar para Avaliacao", class: 'btn btn-primary pull-right' %>
     <% end %>
