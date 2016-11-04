@@ -1,4 +1,4 @@
-class Admin::EstudanteController < ApplicationController
+class Admin::EstudantesController < ApplicationController
     layout 'admin'
     
     def index
@@ -12,9 +12,9 @@ class Admin::EstudanteController < ApplicationController
     def update
         @estudante = Estudante.find(params[:id])
         if @estudante.update estudante_param
-            redirect_to admin_estudante_index_path, notice: "Estudante atualizado com sucesso"
+            redirect_to admin_estudantes_path, notice: "Estudante atualizado com sucesso"
         else
-            redirect_to admin_estudante_index_path, alert: "Erro na atualizacao!"
+            redirect_to admin_estudantes_path, alert: "Erro na atualizacao!"
         end
     end
 

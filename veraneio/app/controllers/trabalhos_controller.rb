@@ -25,6 +25,8 @@ class TrabalhosController < ApplicationController
 
 		verifica_se_existe_no_banco
 
+		@trabalho.estado = "Recebido do Aluno"
+
 		if @trabalho.save 
 			@adm = Admin.new nome: "Daniel", email:"danielcostavalerio@gmail.com"
 			@estudante = Estudante.find(params[:estudante_id])

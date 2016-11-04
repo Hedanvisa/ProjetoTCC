@@ -11,15 +11,18 @@ class Admin::TrabalhosController < ApplicationController
     end
 
     def update
-        @orientador = Professor.where(email: params[:trabalho][:orientador_attributes][:email]).first
-		@banca_1 = Professor.where(email: params[:trabalho][:banca_1_attributes][:nome]).first
-		@banca_2 = params[:banca_2]
+        @orientador = Professor.where(email: params[:orientador]).first
+		@banca_1 = Professor.where(email: params[:banca_1]).first
+		@banca_2 = Professor.where(email: params[:banca_2]).first
 
-        redirect_to admin_trabalho_index_path
+		@trabalho = Trabalho.find params[:id]
+		@trabalho.update estado: "Enviado para Avaliação"
+
+        redirect_to admin_trabalhos_path
     end
 
     private
     def trabalhos_param
-        params.require(:trabalho).permit(orientador_attributes: [:nome, :email], banca_1_attributes: [:nome], banca_2_attributes: [:nome])
+        params.require(:trabalho).permit(:orientador, :banca_1, :banca_2)
     end
 end

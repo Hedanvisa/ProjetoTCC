@@ -1,4 +1,4 @@
-class Admin::ProfessorController < ApplicationController
+class Admin::ProfessoresController < ApplicationController
     layout 'admin'
     
     def new
@@ -17,9 +17,9 @@ class Admin::ProfessorController < ApplicationController
     def update
         @professor = Professor.find(params[:id])
         if @professor.update professor_params
-            redirect_to admin_professor_index_path, notice: "Professor atualizado com sucesso"
+            redirect_to admin_professores_path, notice: "Professor atualizado com sucesso"
         else
-            redirect_to admin_professor_index_path, alert: "Erro na atualizacao!"
+            redirect_to admin_professores_path, alert: "Erro na atualizacao!"
         end
     end
 

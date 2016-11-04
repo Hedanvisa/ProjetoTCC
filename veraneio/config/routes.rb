@@ -1,33 +1,23 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'sessions#new'
 
   resources :sessions
   resources :professores, only: [:create, :new, :show, :edit, :update]
-
   resources :estudantes, only: [:create, :new, :show] do
 	  resources :trabalhos do
 	  end
   end
-
 
   get 'cadastrar', to: 'estudantes#new', as: 'cadastrar'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
   namespace 'admin' do
-    get 'trabalho', to: 'trabalhos#index', as: 'trabalhos'
-    get 'estudante', to: 'estudante#index', as: 'estudantes'
-#    get 'professor', to: 'professor#index', as: 'professores'
-	  resources :professor
-    resources :trabalho
-    resources :estudante
+	  resources :professores
+	  resources :trabalhos
+	  resources :estudantes
   end
 
-  root 'sessions#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

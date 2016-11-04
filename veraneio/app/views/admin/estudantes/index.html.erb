@@ -4,35 +4,35 @@
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion2" href="#a">
             <ol class="breadcrumb"> 
-              <li>Novo Professor</li>
+              <li>Novo Estudante</li>
             </ol>
           </a>
         </h4>
       </div>
       <div id="#a" class="panel-collapse collapse in">
         <div class="panel-body">
-          <%= render 'professores/form' %>
+          
         </div>
       </div>
     </div>
 </div>
 
 <div class="panel-group" id="accordion">
-  <% @professores.each do |professor| %>
+  <% @estudantes.each do |estudante| %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#<%=professor.id %>">
+          <a data-toggle="collapse" data-parent="#accordion" href="#<%=estudante.id %>">
             <ol class="breadcrumb"> 
-              <li><%= professor.nome %></li>
-              <li><%= professor.email %></li>
+              <li><%= estudante.nome %></li>
+              <li><%= estudante.email %></li>
             </ol>
           </a>
         </h4>
       </div>
-      <div id="<%=professor.id %>" class="panel-collapse collapse out">
+      <div id="<%=estudante.id %>" class="panel-collapse collapse out">
         <div class="panel-body">
-          <%= render 'admin/professor/form' , professor: professor %>
+          <%= render 'admin/estudantes/form' , estudante: estudante %>
         </div>
       </div>
     </div>
