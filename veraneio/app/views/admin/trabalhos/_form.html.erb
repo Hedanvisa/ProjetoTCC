@@ -4,7 +4,7 @@
             <div role="form">
                 <div class="form-group">                            
                     
-                    <%= t.select :orientador, options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
+			<%= t.select :orientador, options_for_select([t.object.orientador.nome]) %>
                     <%= t.select :banca_1, options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
                     <%= t.select :banca_2, options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
 
