@@ -17,8 +17,12 @@ class Admin::TrabalhosController < ApplicationController
         @trabalho = Trabalho.find params[:id]
         
         if @trabalho.estado == "Recebido do Aluno"
-            if @banca_1 != @banca_2 
+            if @banca_1 == @banca_2 
                 #Dani, divirta-se aqui
+		Thread.new do
+			Notificador.banca_avaliacao(@trabalho.estudante, @banca1)
+			Notificador.banca_avaliacao(@trabalho.estudante, @banca2)
+		end
 
                 @trabalho.update estado: "Enviado para Avaliação"
             end
