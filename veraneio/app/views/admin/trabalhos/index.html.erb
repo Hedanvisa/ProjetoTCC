@@ -1,3 +1,93 @@
-<% @trabalhos.each do |trabalho| %>
-	<%= render 'admin/trabalhos/form' , trabalho: trabalho %>
-<% end %>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-left">
+                            <div>Recebidos do Aluno</div>
+                            <div class="huge">26</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-left">
+                            <div>Enviados para Avaliacao</div>
+                            <div class="huge">26</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-left">
+                            <div>Encaminhado para o Orientador</div>
+                            <div class="huge">26</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
+                </div>
+                <!-- /.panel-heading -->
+                
+                <div class="panel-body">
+
+                  <div class="panel-group" id="accordion">
+                    <% @trabalhos.each do |trabalho| %>
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#<%=trabalho.id %>">
+                              <ol class="breadcrumb"> 
+                                <li><span class="label label-info"><%= trabalho.estado %></span></li>
+                                <li><%= trabalho.updated_at %></li>
+                                <li><%= trabalho.estudante.nome %></li>
+                                <li><%= trabalho.titulo %></li>
+                              </ol>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="<%=trabalho.id %>" class="panel-collapse collapse out">
+                          <div class="panel-body">
+                            <%= render 'admin/trabalhos/form' , trabalho: trabalho %>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>                            
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-8 -->
+    </div>
+    <!-- /.row -->
+<!-- /#page-wrapper -->
+</div>

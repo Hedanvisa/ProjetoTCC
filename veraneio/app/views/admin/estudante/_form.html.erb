@@ -1,0 +1,13 @@
+<%= form_for ([:admin, estudante]) do |e| %>
+	<div class='form-group'>
+		<%= e.label :nome %>
+		<%= e.text_field :nome, class: 'form_control'  %>
+	</div>
+
+	<div class='form-group'>
+		<%= e.label :email %>
+		<%= e.email_field :email, class: 'form_control' %>
+	</div>
+	
+	<%= e.submit class: "btn btn-primary" %>
+<% end %>

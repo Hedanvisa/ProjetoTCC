@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 #    get 'professor', to: 'professor#index', as: 'professores'
 	  resources :professor
     resources :trabalho
+    resources :estudante
   end
 
   root 'sessions#new'
