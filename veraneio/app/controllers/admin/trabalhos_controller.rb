@@ -11,20 +11,23 @@ class Admin::TrabalhosController < ApplicationController
     end
 
     def update
-        @orientador = Professor.where(email: params[:orientador]).first
         @banca_1 = Professor.where(email: params[:banca_1]).first
         @banca_2 = Professor.where(email: params[:banca_2]).first
         @trabalho = Trabalho.find params[:id]
-        
-        if @trabalho.estado == "Recebido do Aluno"
-            puts("o: #{@orientador.email}")
-            if @banca_1.email != @banca_2.email 
-                #Dani, divirta-se aqui
+        @orientador = @trabalho.orientador
 
+		puts(@orientador.email)
+
+        if @trabalho.estado == "Recebido do Aluno"
+		
+            if @banca_1 == @banca_2 
+                Thread.new do
+                    Notificador.banca_avaliacao(@trabalho.estudante, @banca_1).deliver_now
+                    Notificador.banca_avaliacao(@trabalho.estudante, @banca_2).deliver_now
+                end
                 @trabalho.update estado: "Enviado para Avaliação"
             end
         end
-
         redirect_to admin_trabalhos_path
     end
 
