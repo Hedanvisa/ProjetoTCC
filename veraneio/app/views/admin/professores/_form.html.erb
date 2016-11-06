@@ -8,6 +8,6 @@
 		<%= p.label :email %>
 		<%= p.email_field :email, class: 'form_control' %>
 	</div>
-	
+	<button type="button" class="btn btn-danger pull-right"><%= link_to "Excluir",admin_professor_path(professor), method: :delete, data:{confirm: "Tem Certeza?"} %></button>
 	<%= p.submit class: "btn btn-primary" %>
 <% end %>

@@ -3,10 +3,12 @@
         <div class="panel-body">
             <div role="form">
                 <div class="form-group">                            
-                    
-			<%= t.select :orientador, options_for_select([t.object.orientador.nome]) %>
-                    <%= t.select :banca_1, options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
-                    <%= t.select :banca_2, options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
+                    <label> Orientador </label>
+			        <%= t.select :orientador, options_for_select([t.object.orientador.nome]), {}, { class: "form form-group form-control" } %>
+                    <label> Banca 1 </label>
+                    <%= t.select :banca_1, options_for_select(@professores.collect{ |p| [p.nome, p.email] }), {}, { class: "form form-group form-control" } %>
+                    <label> Banca 2 </label>
+                    <%= t.select :banca_2, options_for_select(@professores.collect{ |p| [p.nome, p.email] }), {}, { class: "form form-group form-control" } %>
 
                 </div>
             </div>
@@ -31,7 +33,11 @@
                         </div>
                         <div class="col-xs-9 text-left">
                             <h4>Orientador</h4>
-                            <h4><%= t.object.orientador.nome %></h4>
+                            <% if t.object.orientador.nil? %>
+                                <h4> Sem Professores </h4>
+                            <% else %>
+                                <h4><%= t.object.orientador.nome %></h4>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -46,7 +52,11 @@
                         </div>
                         <div class="col-xs-9 text-left">
                             <h4>Banca 1</h4>
-                            <h4><%= t.object.banca_1.nome %></h4>
+                            <% if t.object.banca_1.nil? %>
+                                <h4> Sem professores </h4>
+                            <% else %>
+                                <h4><%= t.object.banca_1.nome %></h4>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -61,7 +71,11 @@
                         </div>
                         <div class="col-xs-9 text-left">
                             <h4>Banca 2</h4>
-                            <h4><%= t.object.banca_2.nome %></h4>
+                            <% if t.object.banca_2.nil? %>
+                                <h4> Sem professores </h4>
+                            <% else %>
+                                <h4><%= t.object.banca_2.nome %></h4>
+                            <% end %>
                         </div>
                     </div>
                 </div>
