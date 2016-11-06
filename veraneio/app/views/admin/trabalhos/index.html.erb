@@ -53,7 +53,11 @@
             <!-- /.panel -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
+                    <% if @trabalhos.empty? %>
+                        <i class="fa fa-clock-o fa-fw"></i> Sem trabalhos, ainda
+                    <% else %>
+                        <i class="fa fa-clock-o fa-fw"></i> trabalhos
+                    <% end %>
                 </div>
                 <!-- /.panel-heading -->
                 

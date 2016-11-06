@@ -17,7 +17,8 @@ class Admin::TrabalhosController < ApplicationController
         @trabalho = Trabalho.find params[:id]
         
         if @trabalho.estado == "Recebido do Aluno"
-            if @banca_1 != @banca_2 
+            puts("o: #{@orientador.email}")
+            if @banca_1.email != @banca_2.email 
                 #Dani, divirta-se aqui
 
                 @trabalho.update estado: "Enviado para Avaliação"
