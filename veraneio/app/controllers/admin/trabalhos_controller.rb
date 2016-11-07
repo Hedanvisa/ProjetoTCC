@@ -4,6 +4,9 @@ class Admin::TrabalhosController < ApplicationController
     def index
         @trabalhos = Trabalho.all
         @professores = Professor.all
+        @count_recebidos = Trabalho.where(estado: "Recebido do Aluno").count
+        @count_avaliacao = Trabalho.where(estado: "Enviado para Avaliação").count
+        @count_encaminhado = Trabalho.where(estado: "Encaminhado para o Orientador").count
     end
 
     def edit

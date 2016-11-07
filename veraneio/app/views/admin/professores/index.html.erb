@@ -23,7 +23,12 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#<%=professor.id %>" class="cabecalho">
-            <ol class="breadcrumb"> 
+            <ol class="breadcrumb">
+              <% if professor.estado_acesso == "Nao Confirmado" %> 
+                <li><span class="label label-danger"><%= professor.estado_acesso %></span></li>
+              <% elsif professor.estado_acesso == "Confirmado" %>
+                <li><span class="label label-success"><%= professor.estado_acesso %></span></li>
+              <% end %>
               <li><%= professor.nome %></li>
               <li><%= professor.email %></li>
             </ol>
