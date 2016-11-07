@@ -22,34 +22,18 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-3">
-                            <span class="badge">12</span>
-                        </div>
-                        <div class="col-xs-9 text-left">
+                        <div class="col-xs-12 text-left">
                             <h4>Orientador</h4>
                             <% if t.object.orientador.nil? %>
                                 <h4> Sem Professores </h4>
                             <% else %>
                                 <h4><%= t.object.orientador.nome %></h4>
                             <% end %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 form-group">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <span class="badge">5</span>
-                        </div>
-                        <div class="col-xs-9 text-left">
-                            <h4>Banca 1</h4>
-                            <% if t.object.banca_1.nil? %>
-                                <h4> Sem professores </h4>
+                            <% if t.object.nota_banca_1.nil? %>
+                                <span class="label label-warning">Aguardando Nota </span>
                             <% else %>
-                                <h4><%= t.object.banca_1.nome %></h4>
+                                <span class="label label-success">Avaliado</span>
+                                <span class="badge"><%= t.object.nota_banca_1 %></span>
                             <% end %>
                         </div>
                     </div>
@@ -60,9 +44,29 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-3">
-                            <span class="badge">3</span>
+                        <div class="col-xs-12 text-left">
+                            <h4>Banca 1</h4>
+                            <% if t.object.banca_1.nil? %>
+                                <h4> Sem professores </h4>
+                            <% else %>
+                                <h4><%= t.object.banca_1.nome %></h4>
+                            <% end %>
+
+                            <% if t.object.nota_banca_1.nil? %>
+                                <span class="label label-warning">Aguardando Nota </span>
+                            <% else %>
+                                <span class="label label-success">Avaliado</span>
+                                <span class="badge"><%= t.object.nota_banca_1 %></span>
+                            <% end %>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 form-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
                         <div class="col-xs-9 text-left">
                             <h4>Banca 2</h4>
                             <% if t.object.banca_2.nil? %>
@@ -70,13 +74,20 @@
                             <% else %>
                                 <h4><%= t.object.banca_2.nome %></h4>
                             <% end %>
+
+                            <% if t.object.nota_banca_2.nil? %>
+                                <span class="label label-success">Aguardando Nota </span>
+                            <% else %>
+                                <span class="label label-success">Avaliado</span>
+                                <span class="badge"><%= t.object.nota_banca_2 %></span>
+                            <% end %>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="panel-body">
-            <%= t.submit "Enviar para Avaliacao", class: 'form-group btn btn-primary pull-right' %>
+            <%= t.submit "Encaminhar para o Orientador", class: 'form-group btn btn-primary pull-right' %>
         </div>
     <% end %>
 <% end %>
