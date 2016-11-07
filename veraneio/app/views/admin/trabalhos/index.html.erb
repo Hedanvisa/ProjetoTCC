@@ -56,7 +56,7 @@
                     <% if @trabalhos.empty? %>
                         <i class="fa fa-clock-o fa-fw"></i> Sem trabalhos, ainda
                     <% else %>
-                        <i class="fa fa-clock-o fa-fw"></i> trabalhos
+                        <i class="fa fa-clock-o fa-fw"></i> Trabalhos
                     <% end %>
                 </div>
                 <!-- /.panel-heading -->
@@ -66,9 +66,9 @@
                   <div class="panel-group" id="accordion">
                     <% @trabalhos.each do |trabalho| %>
                       <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading ca">
                           <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#<%=trabalho.id %>">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#<%=trabalho.id %>" class="cabecalho">
                               <ol class="breadcrumb">
                                 <% if trabalho.estado == "Recebido do Aluno" %> 
                                     <li><span class="label label-danger"><%= trabalho.estado %></span></li>

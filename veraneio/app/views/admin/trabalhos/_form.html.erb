@@ -12,19 +12,13 @@
 
                 </div>
             </div>
-            <button type="button" class="btn btn-info">
-                <%= link_to "Novo Professor", admin_professores_path %>
-                <span class="glyphicon glyphicon-user"></span>
-            </button>
-            <button type="button" class="btn btn-info">
-                <%= link_to "Editar", admin_professores_path %>
-                <span class="glyphicon glyphicon-edit"></span> 
-            </button>
             
-            <%= t.submit "Enviar para Avaliacao", class: 'btn btn-primary pull-right' %>
+            <%= link_to "Novo Professor", admin_professores_path, class: "btn btn-info" %>
+            <%= link_to "Editar", admin_professores_path, class: "btn btn-info" %> 
+            <%= t.submit "Enviar para Avaliacao", class: 'form-group btn btn-primary pull-right' %>
         </div>
     <% elsif t.object.estado == "Enviado para Avaliação" %>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6 form-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
@@ -43,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6 form-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
@@ -62,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6 form-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
@@ -81,6 +75,8 @@
                 </div>
             </div>
         </div>
-        <%= t.submit "Enviar para Avaliacao", class: 'btn btn-primary pull-right' %>
+        <div class="panel-body">
+            <%= t.submit "Enviar para Avaliacao", class: 'form-group btn btn-primary pull-right' %>
+        </div>
     <% end %>
 <% end %>
