@@ -22,7 +22,7 @@ class ProfessoresController < ApplicationController
 	end
 
 	def professor_params 
-		params.require(:professor).permit(:nome, :email)
+		params.require(:professor).permit(:nome, :email, :password, :password_confirmation)
 	end
 
 end
