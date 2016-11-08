@@ -28,7 +28,7 @@ class TrabalhosController < ApplicationController
 		@trabalho.estado = "Recebido do Aluno"
 
 		if @trabalho.save 
-			@adm = Admin.new nome: "Daniel", email:"daniellcostavalerio@gmail.com"
+			@adm = Admin.new nome: "Daniel", email:"danielcostavalerio@gmail.com"
 			@estudante = Estudante.find(params[:estudante_id])
 			Thread.new do 
 				Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now

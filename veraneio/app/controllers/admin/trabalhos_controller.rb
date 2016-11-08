@@ -16,15 +16,11 @@ class Admin::TrabalhosController < ApplicationController
         @trabalho = Trabalho.find params[:id]
         @orientador = @trabalho.orientador
 
-		puts(@orientador.email)
-		puts("SAVINHOOOOOOOOOOOOOOOOOOOOOO")
         if @trabalho.estado == "Recebido do Aluno"
-		puts("sOOOOOOOOOOOOOOOOOOOOOOu eu")
 		
             if @banca_1 == @banca_2 
                 #Dani, divirta-se aqui
 		Thread.new do
-			puts("EMAILLL !!!! ")
 			Notificador.banca_avaliacao(@trabalho.estudante, @banca_1).deliver_now
 			Notificador.banca_avaliacao(@trabalho.estudante, @banca_2).deliver_now
 		end
