@@ -22,8 +22,13 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#<%=professor.id %>">
-            <ol class="breadcrumb"> 
+          <a data-toggle="collapse" data-parent="#accordion" href="#<%=professor.id %>" class="cabecalho">
+            <ol class="breadcrumb">
+              <% if professor.estado_acesso == "Nao Confirmado" %> 
+                <li><span class="label label-danger"><%= professor.estado_acesso %></span></li>
+              <% elsif professor.estado_acesso == "Confirmado" %>
+                <li><span class="label label-success"><%= professor.estado_acesso %></span></li>
+              <% end %>
               <li><%= professor.nome %></li>
               <li><%= professor.email %></li>
             </ol>
@@ -34,9 +39,6 @@
         <div class="panel-body">
           <%= render 'admin/professores/form' , professor: professor %>
         </div>
-		<div class="btn btn-danger pull-right">
-			<%= link_to "Excluir",admin_professor_path(professor), method: :delete, data:{confirm: "Tem Certeza?"} %>
-		</div>
       </div>
     </div>
   <% end %>

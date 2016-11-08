@@ -1,29 +1,11 @@
-<div class="panel-group" id="accordion2">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion2" href="#a">
-            <ol class="breadcrumb"> 
-              <li>Novo Estudante</li>
-            </ol>
-          </a>
-        </h4>
-      </div>
-      <div id="#a" class="panel-collapse collapse in">
-        <div class="panel-body">
-          
-        </div>
-      </div>
-    </div>
-</div>
-
 <div class="panel-group" id="accordion">
   <% @estudantes.each do |estudante| %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#<%=estudante.id %>">
+          <a data-toggle="collapse" data-parent="#accordion" href="#<%=estudante.id %>" class="cabecalho">
             <ol class="breadcrumb"> 
+              <li><%= estudante.ra %></li>
               <li><%= estudante.nome %></li>
               <li><%= estudante.email %></li>
             </ol>

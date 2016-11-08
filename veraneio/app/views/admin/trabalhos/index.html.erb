@@ -9,7 +9,7 @@
                         </div>
                         <div class="col-xs-9 text-left">
                             <div>Recebidos do Aluno</div>
-                            <div class="huge">26</div>
+                            <div class="badge"><%= @count_recebidos %></div>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-xs-9 text-left">
                             <div>Enviados para Avaliacao</div>
-                            <div class="huge">26</div>
+                            <div class="badge"><%= @count_avaliacao %></div>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-xs-9 text-left">
                             <div>Encaminhado para o Orientador</div>
-                            <div class="huge">26</div>
+                            <div class="badge"><%= @count_encaminhado %></div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,11 @@
             <!-- /.panel -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
+                    <% if @trabalhos.empty? %>
+                        <i class="fa fa-clock-o fa-fw"></i> Sem trabalhos, ainda
+                    <% else %>
+                        <i class="fa fa-clock-o fa-fw"></i> Trabalhos
+                    <% end %>
                 </div>
                 <!-- /.panel-heading -->
                 
@@ -62,9 +66,9 @@
                   <div class="panel-group" id="accordion">
                     <% @trabalhos.each do |trabalho| %>
                       <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading ca">
                           <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#<%=trabalho.id %>">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#<%=trabalho.id %>" class="cabecalho">
                               <ol class="breadcrumb">
                                 <% if trabalho.estado == "Recebido do Aluno" %> 
                                     <li><span class="label label-danger"><%= trabalho.estado %></span></li>
@@ -99,3 +103,9 @@
     <!-- /.row -->
 <!-- /#page-wrapper -->
 </div>
+
+<% if notice %>
+    <div class='alert alert-success'><%= notice %></div>
+<% elsif alert %>
+    <div class='alert alert-danger'><%= alert %></div>
+<% end %>

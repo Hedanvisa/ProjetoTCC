@@ -7,7 +7,7 @@ class ProfessoresController < ApplicationController
 
 	def create
 		@professor = Professor.new(professor_params)
-
+		@professor.estado_acesso = "Nao Confirmado"
 		if @professor.save
 			redirect_to admin_professores_path, notice: "Professor salvo com sucesso"
 		else
@@ -22,7 +22,7 @@ class ProfessoresController < ApplicationController
 	end
 
 	def professor_params 
-		params.require(:professor).permit(:nome, :email)
+		params.require(:professor).permit(:nome, :email, :password, :password_confirmation)
 	end
 
 end

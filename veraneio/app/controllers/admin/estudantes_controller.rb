@@ -20,6 +20,6 @@ class Admin::EstudantesController < ApplicationController
 
     private
     def estudante_param
-        params.require(:estudante).permit(:nome, :email)
+        params.require(:estudante).permit(:nome, :email, :ra)
     end
 end

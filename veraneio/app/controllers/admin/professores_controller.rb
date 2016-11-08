@@ -22,7 +22,12 @@ class Admin::ProfessoresController < ApplicationController
 		end
 	end
 
+    def edit
+		@professor = Professor.find(params[:id])
+	end
+
     def update
+        @professor = Professor.find(params[:id])
         if @professor.update professor_params
             redirect_to admin_professores_path, notice: "Professor atualizado com sucesso"
         else
