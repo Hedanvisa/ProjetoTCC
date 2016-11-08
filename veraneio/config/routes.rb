@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :periodos
   end
   root 'sessions#new'
-  
+
   resources :sessions
   resources :professores
   resources :estudantes, only: [:create, :new, :show] do
@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   get 'cadastrar', to: 'estudantes#new', as: 'cadastrar'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
+
+  namespace 'professores' do
+    get 'avaliacao', to: 'avaliacao#index', as: 'avaliacao'
+  end
 
   namespace 'admin' do
 	  resources :professores

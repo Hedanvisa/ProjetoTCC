@@ -1,0 +1,2 @@
+module Professores::AvaliacaoHelper
+end
