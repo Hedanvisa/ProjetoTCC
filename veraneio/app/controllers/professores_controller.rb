@@ -1,6 +1,12 @@
 class ProfessoresController < ApplicationController
 	before_action :set_professor, only: [:destroy]
 
+	def index
+		@trabalhos_orientador = Trabalho.where(orientador: 1).first
+		@trabalhos_banca_1 = Trabalho.where(banca_1: 1).first
+		@trabalhos_banca_2 = Trabalho.where(id: 1).first
+	end
+
 	def new
 		@professor = Professor.new
 	end
