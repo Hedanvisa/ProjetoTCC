@@ -14,7 +14,7 @@ class TrabalhosController < ApplicationController
 		@banca_1 = @trabalho.banca_1
 		@banca_2 = @trabalho.banca_2
 
-		render 'new'
+		render 'edit'
 	end
 
 	def create
