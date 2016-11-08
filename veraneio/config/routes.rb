@@ -12,10 +12,6 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  namespace 'professor' do
-    get 'avaliacao', to: 'avaliacao#index', as: 'avaliacao'
-  end
-
   namespace 'admin' do
 	  resources :professores
 	  resources :trabalhos

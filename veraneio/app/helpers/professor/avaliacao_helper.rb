@@ -1,2 +1,0 @@
-module Professor::AvaliacaoHelper
-end
