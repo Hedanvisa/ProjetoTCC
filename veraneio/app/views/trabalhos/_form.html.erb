@@ -17,31 +17,29 @@
 		<%= trabalho.text_field :titulo, class: 'form-control' %>
 	</div>
 
-	<% unless @trabalho.arquivo.exists? %>
+	<% if @trabalho.arquivo.exists? %>
 		<div class='form-group'>
 			<%= trabalho.label :arquivo %>
-			<%= trabalho.file_field :arquivo, class: 'form-control' %>
-		</div>
-	<% else %>
-		<div class='form-group'>
-			<%= trabalho.label :arquivo %>
-			<%= link_to "Trabalho" , @trabalho.arquivo.url(:original) %>
-			<%= button_to "Remover", {:action => :update},  class:'btn btn-danger', data: {confirm: "Você tem certeza?"} %>
+			<%= link_to "#{@trabalho.arquivo_file_name}" , @trabalho.arquivo.url(:original) %>
 		</div>
 	<% end %>
+		<div class='form-group'>
+			<%= trabalho.label "Fazer upload" %>
+			<%= trabalho.file_field :arquivo, class: 'form-control' %>
+		</div>
 
 
 	<%= trabalho.fields_for :orientador, @trabalho.orientador do |orientador| %>
 		<div class='form-group'>
 			<%= orientador.label :nome, "Nome do Orientador" %>
-			<%= orientador.text_field :nome, class: 'form-control' %>
+			<%= orientador.text_field :nome, class: 'form-control', required: true %>
 		</div>
 		<div class='form-group'>
 			<%= orientador.label :email, "Email do Orientador" %>
 			<%= orientador.email_field :email, class: 'form-control' , required: true %>
 		</div>
 	<% end %>
-
+	
 	<%= trabalho.fields_for :banca_1, @trabalho.banca_1 do |banca| %>
 		<div class='form-group'>
 			<%= banca.label :nome, "Nome da Banca 1" %>
@@ -56,6 +54,6 @@
 		</div>
 	<% end %>
 
-	<%= trabalho.submit "Upload", class: 'btn btn-primary' %>
+	<%= trabalho.submit class: 'btn btn-primary' %>
 
 <% end %>

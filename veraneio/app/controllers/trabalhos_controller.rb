@@ -23,6 +23,59 @@ class TrabalhosController < ApplicationController
 		@banca_1 = Professor.where(nome: params[:trabalho][:banca_1_attributes][:nome]).first
 		@banca_2 = Professor.where(nome: params[:trabalho][:banca_2_attributes][:nome]).first
 
+		verifica_se_existe_no_banco
+
+		@trabalho.estado = "Recebido do Aluno"
+
+		if @trabalho.save 
+			@adm = Admin.new nome: "Daniel", email:"daniellcostavalerio@gmail.com"
+			@estudante = Estudante.find(params[:estudante_id])
+			Thread.new do 
+				Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now
+				Notificador.aluno_novo_trabalho(@trabalho,@estudante).deliver_now
+			end
+			flash[:notice] = "Trabalho enviado com sucesso!"
+			redirect_to login_path
+		else
+			render 'new'
+		end
+	end
+	
+	def edit
+		@trabalho = @estudante.trabalho
+	end
+
+	def update
+		@trabalho = @estudante.trabalho
+		@orientador = Professor.where(email: params[:trabalho][:orientador_attributes][:email]).first
+		@banca_1 = Professor.where(nome: params[:trabalho][:banca_1_attributes][:nome]).first
+		@banca_2 = Professor.where(nome: params[:trabalho][:banca_2_attributes][:nome]).first
+
+		verifica_se_existe_no_banco
+
+		@trabalho.titulo = params[:trabalho][:titulo]
+		unless params[:trabalho][:arquivo].nil?
+			@trabalho.arquivo = params[:trabalho][:arquivo]
+		end
+		
+		if @trabalho.save
+			flash.now[:notice] = "Seu trabalho foi atualizado com sucesso!"
+			render :edit
+		else
+			render :edit
+		end
+	end
+
+	private
+	def trabalhos_param
+		params.require(:trabalho).permit(:titulo, :arquivo, orientador_attributes: [:nome, :email], banca_1_attributes: [:nome], banca_2_attributes: [:nome])
+	end
+
+	def set_estudante
+		@estudante = Estudante.find(params[:estudante_id])
+	end
+
+	def verifica_se_existe_no_banco
 		if @orientador
 			@trabalho.orientador = @orientador
 		else
@@ -40,40 +93,5 @@ class TrabalhosController < ApplicationController
 		else
 			@trabalho.banca_2 = Professor.create(trabalhos_param[:banca_2_attributes])
 		end
-
-		if @trabalho.save 
-			@adm = Admin.new nome: "Daniel", email:"danielcostavalerio@gmail.com"
-			@estudante = Estudante.find(params[:estudante_id])
-			Thread.new do 
-				Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now
-				Notificador.aluno_novo_trabalho(@trabalho,@estudante).deliver_now
-			end
-			redirect_to login_path, notice: "Trabalho enviado com sucesso!!!"
-		else
-			render 'new'
-		end
-	end
-	
-	def edit
-		@trabalho = @estudante.trabalho
-		@trabalho.arquivo.destroy
-		@trabalho.arquivo = nil
-
-		render 'new'
-	end
-
-	def update
-		@estudante.trabalho.arquivo.destroy
-		@estudante.trabalho.arquivo.clear
-		redirect_to estudante_trabalho_path
-	end
-
-	private
-	def trabalhos_param
-		params.require(:trabalho).permit(:titulo, :arquivo, orientador_attributes: [:nome, :email], banca_1_attributes: [:nome], banca_2_attributes: [:nome])
-	end
-
-	def set_estudante
-		@estudante = Estudante.find(params[:estudante_id])
 	end
 end

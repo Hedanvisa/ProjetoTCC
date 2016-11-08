@@ -1,0 +1,22 @@
+<div class="panel-group" id="accordion">
+  <% @estudantes.each do |estudante| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#<%=estudante.id %>" class="cabecalho">
+            <ol class="breadcrumb"> 
+              <li><%= estudante.ra %></li>
+              <li><%= estudante.nome %></li>
+              <li><%= estudante.email %></li>
+            </ol>
+          </a>
+        </h4>
+      </div>
+      <div id="<%=estudante.id %>" class="panel-collapse collapse out">
+        <div class="panel-body">
+          <%= render 'admin/estudantes/form' , estudante: estudante %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

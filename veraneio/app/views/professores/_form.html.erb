@@ -1,8 +1,14 @@
 <%= form_for @professor do |f| %>
-	<%= f.label :nome %>
-	<%= f.text_field :nome %>
-	<%= f.label :email %>
-	<%= f.email_field :email %>
+	<div class="panel-body">
+		<%= f.label :nome, class: 'form-group' %>
+		<%= f.text_field :nome, class: 'form-control form-group' %>
+		<%= f.label :email, class: 'form-group' %>
+		<%= f.email_field :email, class: 'form-control form-group' %>
 
-	<%= f.submit %>
+		<%= f.label :password, class: 'form-group' %>
+		<%= f.password_field :password, class: 'form-control form-group' %>
+		<%= f.label :password_confirmation, class: 'form-group' %>
+		<%= f.password_field :password_confirmation, class: 'form-control form-group' %>
+		<%= f.submit class: "btn btn-primary"%>
+	</div>
 <% end %>

@@ -1,43 +1,93 @@
 <%= form_for ([:admin, trabalho]) do |t| %>
-    <div class="panel-group" id="accordion2">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion2" href="#<%=t.object.id %>">
-                        <ol class="breadcrumb"> 
-                            <li><span class="label label-info"><%= t.object.estado %></span></li>
-                            <li><%= t.object.updated_at %></li>
-                            <li><%= t.object.estudante.nome %></li>
-                            <li><%= t.object.titulo %></li>
-                        </ol>
-                    </a>
-                </h4>
-            </div>
-            <div id="<%=t.object.id %>" class="panel-collapse collapse out">
-                <div class="panel-body">
-                    <form role="form">
-                        <div class="form-group">                            
-                            
-                            <%= select_tag 'orientador', options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
-                        
-                            <%= select_tag 'banca_1', options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
-                        
-                            <%= select_tag 'banca_2', options_for_select(@professores.collect{ |p| [p.nome, p.email] }) %>
+    <% if t.object.estado == "Recebido do Aluno" %>
+        <div class="panel-body">
+            <div role="form">
+                <div class="form-group">                            
+                    <label> Orientador </label>
+			        <%= t.select :orientador, options_for_select([t.object.orientador.nome]), {}, { class: "form form-group form-control" } %>
+                    <label> Banca 1 </label>
+                    <%= t.select :banca_1, options_for_select(@professores.collect{ |p| [p.nome, p.email] }), {}, { class: "form form-group form-control" } %>
+                    <label> Banca 2 </label>
+                    <%= t.select :banca_2, options_for_select(@professores.collect{ |p| [p.nome, p.email] }), {}, { class: "form form-group form-control" } %>
 
+                </div>
+            </div>
+            
+            <%= link_to "Novo Professor", admin_professores_path, class: "btn btn-info" %>
+            <%= link_to "Editar", admin_professores_path, class: "btn btn-info" %> 
+            <%= t.submit "Enviar para Avaliacao", class: 'form-group btn btn-primary pull-right' %>
+        </div>
+    <% elsif t.object.estado == "Enviado para Avaliação" %>
+        <div class="col-lg-4 col-md-6 form-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <h4>Orientador</h4>
+                            <% if t.object.orientador.nil? %>
+                                <h4> Sem Professores </h4>
+                            <% else %>
+                                <h4><%= t.object.orientador.nome %></h4>
+                            <% end %>
+                            <% if t.object.nota_banca_1.nil? %>
+                                <span class="label label-warning">Aguardando Nota </span>
+                            <% else %>
+                                <span class="label label-success">Avaliado</span>
+                                <span class="badge"><%= t.object.nota_banca_1 %></span>
+                            <% end %>
                         </div>
-                    </form>
-                        <button type="button" class="btn btn-info">
-                            <%= link_to "Novo Professor", admin_professor_index_path %>
-                            <span class="glyphicon glyphicon-user"></span>
-                        </button>
-                        <button type="button" class="btn btn-info">
-                            <%= link_to "Editar", admin_professor_index_path %>
-                            <span class="glyphicon glyphicon-edit"></span> 
-                        </button>
-                    
-                    <%= t.submit "Enviar para Avaliacao", class: 'btn btn-primary pull-right' %>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col-lg-4 col-md-6 form-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-12 text-left">
+                            <h4>Banca 1</h4>
+                            <% if t.object.banca_1.nil? %>
+                                <h4> Sem professores </h4>
+                            <% else %>
+                                <h4><%= t.object.banca_1.nome %></h4>
+                            <% end %>
+
+                            <% if t.object.nota_banca_1.nil? %>
+                                <span class="label label-warning">Aguardando Nota </span>
+                            <% else %>
+                                <span class="label label-success">Avaliado</span>
+                                <span class="badge"><%= t.object.nota_banca_1 %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 form-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-9 text-left">
+                            <h4>Banca 2</h4>
+                            <% if t.object.banca_2.nil? %>
+                                <h4> Sem professores </h4>
+                            <% else %>
+                                <h4><%= t.object.banca_2.nome %></h4>
+                            <% end %>
+
+                            <% if t.object.nota_banca_2.nil? %>
+                                <span class="label label-success">Aguardando Nota </span>
+                            <% else %>
+                                <span class="label label-success">Avaliado</span>
+                                <span class="badge"><%= t.object.nota_banca_2 %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <%= t.submit "Encaminhar para o Orientador", class: 'form-group btn btn-primary pull-right' %>
+        </div>
+    <% end %>
 <% end %>

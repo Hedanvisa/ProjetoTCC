@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020193027) do
+ActiveRecord::Schema.define(version: 20161107055309) do
 
   create_table "trabalhos", force: :cascade do |t|
     t.string   "titulo"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 20161020193027) do
     t.integer  "arquivo_file_size"
     t.datetime "arquivo_updated_at"
     t.string   "estado"
+    t.float    "nota_banca_1"
+    t.float    "nota_banca_2"
+    t.float    "nota_orientador"
   end
 
   add_index "trabalhos", ["banca_1_id"], name: "index_trabalhos_on_banca_1_id"
@@ -41,6 +44,8 @@ ActiveRecord::Schema.define(version: 20161020193027) do
     t.string   "type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "estado"
+    t.string   "estado_acesso"
   end
 
 end

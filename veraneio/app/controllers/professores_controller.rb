@@ -1,4 +1,5 @@
 class ProfessoresController < ApplicationController
+	before_action :set_professor, only: [:destroy]
 
 	def new
 		@professor = Professor.new
@@ -6,19 +7,22 @@ class ProfessoresController < ApplicationController
 
 	def create
 		@professor = Professor.new(professor_params)
-
+		@professor.estado_acesso = "Nao Confirmado"
 		if @professor.save
-			redirect_to admin_professor_index_path, notice: "Professor salvo com sucesso"
+			redirect_to admin_professores_path, notice: "Professor salvo com sucesso"
 		else
-			redirect_to admin_professor_index_path, alert: "Erro ao salvar"
+			redirect_to admin_professores_path, alert: "Erro ao salvar"
 		end
 	end
 
 
 	private
+	def set_professor
+		@professor = Professor.find(params[:id])
+	end
 
 	def professor_params 
-		params.require(:professor).permit(:nome, :email)
+		params.require(:professor).permit(:nome, :email, :password, :password_confirmation)
 	end
 
 end
