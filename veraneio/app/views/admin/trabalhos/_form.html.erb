@@ -76,7 +76,7 @@
                             <% end %>
 
                             <% if t.object.nota_banca_2.nil? %>
-                                <span class="label label-success">Aguardando Nota </span>
+                                <span class="label label-warning">Aguardando Nota </span>
                             <% else %>
                                 <span class="label label-success">Avaliado</span>
                                 <span class="badge"><%= t.object.nota_banca_2 %></span>

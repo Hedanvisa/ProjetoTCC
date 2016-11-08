@@ -24,7 +24,7 @@ class Admin::TrabalhosController < ApplicationController
 
         if @trabalho.estado == "Recebido do Aluno"
             if @banca_1.email.empty? or @banca_2.email.empty?
-                flash[:notice] = "Trabalho enviado com sucesso!"
+                flash[:alert] = "Algum email vazio!"
                 puts(">>>>>>>>>>> Algum email vazio")
             
             elsif @banca_1.email != @banca_2.email and @banca_1.email != @orientador.email and @banca_2.email != @orientador.email
@@ -37,8 +37,10 @@ class Admin::TrabalhosController < ApplicationController
                     Notificador.banca_avaliacao(@trabalho.estudante, @banca_2).deliver_now
                 end
                 puts(">>>>>>>>>>> Enviado para Avaliação")
-                @trabalho.update estado: "Enviado para Avaliação"
+                #@trabalho.update estado: "Enviado para Avaliação"
+                flash[:notice] = "Trabalho enviado com sucesso!"
             else
+                flash[:alert] = "Professores iguais!"
                 puts(">>>>>>>>>>> Prof iguais")
             end
         end

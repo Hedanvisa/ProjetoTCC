@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'sessions#new'
-
+  
   resources :sessions
   resources :professores
   resources :estudantes, only: [:create, :new, :show] do
