@@ -3,10 +3,6 @@ class Admin < Usuario
 	validates :email, presence: true
 	has_secure_password
 
-def self.table_name
-	'admin'
-end
-
 end
 			
 
