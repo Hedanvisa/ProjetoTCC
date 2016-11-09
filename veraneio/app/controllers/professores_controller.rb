@@ -7,6 +7,10 @@ class ProfessoresController < ApplicationController
 		@trabalhos_banca_2 = Trabalho.where(banca_2: 2, estado: "Enviado para Avaliação")
 	end
 
+	def show
+
+	end
+
 	def new
 		@professor = Professor.new
 	end

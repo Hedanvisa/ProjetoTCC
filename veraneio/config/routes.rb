@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   root 'sessions#new'
 
   resources :sessions
-  resources :professores
+  get 'professores/:professor_id/avaliacao/:trabalho_id', to: 'professores/avaliacao#index', as: 'avaliacao'
+  resources :professores do
+  end
   resources :estudantes, only: [:create, :new, :show] do
 	  resources :trabalhos do
 	  end
@@ -14,10 +16,6 @@ Rails.application.routes.draw do
   get 'cadastrar', to: 'estudantes#new', as: 'cadastrar'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
-
-  namespace 'professores' do
-    get 'avaliacao', to: 'avaliacao#index', as: 'avaliacao'
-  end
 
   namespace 'admin' do
 	  resources :professores
