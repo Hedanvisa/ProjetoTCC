@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20161107055309) do
     t.string   "type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "estado"
     t.string   "estado_acesso"
   end
 

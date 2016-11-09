@@ -76,6 +76,15 @@ class TrabalhosController < ApplicationController
 	end
 
 	def verifica_se_existe_no_banco
+		puts "banca_1: nil #{@banca_1.nil?}"
+		puts "banca_1 so ele: #{@banca_1}"
+
+		puts "Empty: #{trabalhos_param[:banca_1_attributes][:nome].empty?}"
+		puts "Nil: #{trabalhos_param[:banca_1_attributes][:nome].nil?}"
+
+		puts "Empty: #{trabalhos_param[:banca_2_attributes][:nome].empty?}"
+		puts "Nil: #{trabalhos_param[:banca_2_attributes][:nome].nil?}"
+
 		if @orientador
 			@trabalho.orientador = @orientador
 		else
@@ -84,13 +93,13 @@ class TrabalhosController < ApplicationController
 
 		if @banca_1
 			@trabalho.banca_1 = @banca_1
-		else
+		elsif !trabalhos_param[:banca_1_attributes][:nome].empty?
 			@trabalho.banca_1 = Professor.create(trabalhos_param[:banca_1_attributes])
 		end
 
 		if @banca_2
 			@trabalho.banca_2 = @banca_2
-		else
+		elsif !trabalhos_param[:banca_2_attributes][:nome].empty?
 			@trabalho.banca_2 = Professor.create(trabalhos_param[:banca_2_attributes])
 		end
 	end

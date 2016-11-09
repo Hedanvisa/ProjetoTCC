@@ -19,8 +19,8 @@ class Admin::TrabalhosController < ApplicationController
         @trabalho = Trabalho.find params[:id]
         @orientador = @trabalho.orientador
 
-	puts("Email 1 #{@banca_1.email}")
-        puts("Email 2 #{@banca_2.email}")
+	    #puts("Email 1 #{@banca_1.email}")
+        #puts("Email 2 #{@banca_2.email}")
 
         if @trabalho.estado == "Recebido do Aluno"
             if @banca_1.email.empty? or @banca_2.email.empty?
@@ -29,7 +29,7 @@ class Admin::TrabalhosController < ApplicationController
             
             elsif @banca_1.email != @banca_2.email and @banca_1.email != @orientador.email and @banca_2.email != @orientador.email
                 @trabalho.banca_1 = @banca_1
-                @trabalho.banca_1 = @banca_2
+                @trabalho.banca_2 = @banca_2
 
                 Thread.new do
                     Notificador.banca_avaliacao(@trabalho.estudante, @orientador).deliver_now
@@ -37,7 +37,7 @@ class Admin::TrabalhosController < ApplicationController
                     Notificador.banca_avaliacao(@trabalho.estudante, @banca_2).deliver_now
                 end
                 puts(">>>>>>>>>>> Enviado para Avaliação")
-                #@trabalho.update estado: "Enviado para Avaliação"
+                @trabalho.update estado: "Enviado para Avaliação"
                 flash[:notice] = "Trabalho enviado com sucesso!"
             else
                 flash[:alert] = "Professores iguais!"
