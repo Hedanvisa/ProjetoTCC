@@ -1,0 +1,11 @@
+<%= form_for @parecer do |p| %>
+	<div class="panel-body">	
+		<%= p.label :pagina, class: 'form-group' %>
+		<%= p.text_field :pagina, class: 'form-control form-group' %>
+		<%= p.label :texto, class: 'form-group' %>
+		<%= p.text_field :texto, class: 'form-control form-group' %>
+
+		<%= link_to "Excluir",professor_trabalho_pareceres_path(parecer), method: :delete, data:{confirm: "Tem Certeza?"},class: "btn btn-danger pull-right" %>
+		<%= p.submit class: "btn btn-primary" %>
+	</div>
+<% end %>

@@ -25,8 +25,9 @@
 
 			<h4><%= trabalho.titulo %></h4>
 
-			<%= link_to "Abrir arquivo para avaliação", trabalho.arquivo.url, class: 'btn btn-primary' %>
-			<%= link_to "Concluir Avaliação", trabalho.arquivo.url, class: 'btn btn-success pull-right' %>
+			<%= link_to "Abrir arquivo para avaliação", trabalho.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
+			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho), class: 'btn btn-primary' %>
+			<%= link_to "Concluir Avaliação", trabalho.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
 		  </div>
 		<% end %>
 		</ul>                
@@ -63,8 +64,9 @@
 
 			<h4><%= trabalho1.titulo %></h4>
 
-			<%= link_to "Abrir arquivo para avaliação", trabalho1.arquivo.url, class: 'btn btn-primary' %>
-			<%= link_to "Concluir Avaliação", trabalho1.arquivo.url, class: 'btn btn-success pull-right' %>
+			<%= link_to "Abrir arquivo para avaliação", trabalho1.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
+			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho1), class: 'btn btn-primary' %>
+			<%= link_to "Concluir Avaliação", trabalho1.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
 		  </div>
 		<% end %>
 		  <% @trabalhos_banca_2.each do |trabalho2|%>
@@ -82,8 +84,9 @@
 
 			<h4><%= trabalho2.titulo %></h4>
 
-			<%= link_to "Abrir arquivo para avaliação", trabalho2.arquivo.url, class: 'btn btn-primary' %>
-			<%= link_to "Concluir Avaliação", trabalho2.arquivo.url, class: 'btn btn-success pull-right' %>
+			<%= link_to "Abrir arquivo para avaliação", trabalho2.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
+			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho2), class: 'btn btn-primary' %>
+			<%= link_to "Concluir Avaliação", trabalho2.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
 		  </div>
 		<% end %>
 		</ul>           
