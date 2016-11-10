@@ -1,0 +1,1 @@
+json.partial! "admin_periodos/admin_periodo", admin_periodo: @admin_periodo
