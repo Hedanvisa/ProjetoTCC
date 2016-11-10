@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'sessions#new'
 
   resources :sessions
+  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
   get 'professores/:professor_id/avaliacao/:trabalho_id', to: 'professores/avaliacao#index', as: 'avaliacao'
   resources :professores do
 	resources :trabalhos do
