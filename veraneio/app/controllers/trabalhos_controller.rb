@@ -1,5 +1,6 @@
 class TrabalhosController < ApplicationController
 	before_action :set_estudante
+	before_action :autenticar_usuario!, only: [:edit, :show, :update]
 
 	def new
 		@trabalho = @estudante.build_trabalho
@@ -28,7 +29,7 @@ class TrabalhosController < ApplicationController
 		@trabalho.estado = "Recebido do Aluno"
 
 		if @trabalho.save 
-			@adm = Admin.new nome: "Daniel", email:"ddanielcostavalerio@gmail.com"
+			@adm = Admin.new nome: "Daniel", email:"danielcostavalerio@gmail.com"
 			@estudante = Estudante.find(params[:estudante_id])
 			Thread.new do 
 				Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now
