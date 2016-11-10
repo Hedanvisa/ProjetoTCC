@@ -3,24 +3,20 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		@usuario = Usuario.find_by(email: params[:email])
+	  @usuario = Usuario.find_by(email: params[:email])
+	  if @usuario && @usuario.authenticate(params[:password])
+		session[:usuario_id] = @usuario.id
 		if @usuario.class == Estudante
-			if @usuario && @usuario.authenticate(params[:password])
-				session[:usuario_id] = @usuario.id
-				redirect_to estudante_trabalho_path estudante_id: @usuario.id, id: @usuario.trabalho
-			else
-				flash.now[:alert]= "Senha ou Email inválido"
-				render "new"
-			end
+		  redirect_to estudante_trabalho_path estudante_id: @usuario.id, id: @usuario.trabalho
 		elsif @usuario.class == Professor
-			if @usuario && @usuario.authenticate(params[:password])
-				session[:usuario_id] = @usuario.id
-				redirect_to professor_path @usuario
-			else
-				flash.now[:alert]= "Senha ou Email inválido"
-				render "new"
-			end
+		  redirect_to professor_path @usuario
+		elsif @usuario.class == Admin
+		  redirect_to admin_trabalhos_path
 		end
+	  else
+		flash.now[:alert]= "Senha ou Email inválido"
+		render "new"
+	  end
 	end
 
 	def destroy

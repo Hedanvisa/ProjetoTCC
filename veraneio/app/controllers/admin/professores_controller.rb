@@ -37,9 +37,11 @@ class Admin::ProfessoresController < ApplicationController
     def update
         @professor = Professor.find(params[:id])
         if @professor.update professor_params
-            redirect_to admin_professores_path, notice: "Professor atualizado com sucesso"
+		  	flash[:notice] = "Professor atualizado com sucesso"
+			redirect_to admin_professores_path
         else
-            redirect_to admin_professores_path, alert: "Erro na atualizacao!"
+		  	flash[:alert] = "Erro na atualização"
+            redirect_to admin_professores_path
         end
     end
 
