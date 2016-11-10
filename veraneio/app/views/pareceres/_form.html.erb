@@ -1,0 +1,11 @@
+<%= form_for ([:professor, :trabalho,  @parecer]) do |p| %>
+	<div class="panel-body">	
+		<%= p.label :pagina, class: 'form-group' %>
+		<%= p.text_field :pagina, class: 'form-control form-group' %>
+		<%= p.label :texto, class: 'form-group' %>
+		<%= p.text_field :texto, class: 'form-control form-group' %>
+
+		
+		<%= p.submit class: "btn btn-primary" %>
+	</div>
+<% end %>

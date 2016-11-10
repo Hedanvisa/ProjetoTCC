@@ -1,0 +1,97 @@
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading ca">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#accord1" class="cabecalho">
+                    <h2> Orientador </h2>
+                </a>
+            </h4>
+        </div>
+        <div id="accord1" class="panel-collapse collapse out">
+            <div class="panel-body">
+                <ul class="list-group ">
+                    <% @trabalhos_orientador.each do |trabalho|%>
+                        <div class="panel-body list-group-item">
+                            
+                            <% if trabalho.estado == "Enviado para Avaliação" %> 
+                                <ol class="breadcrumb"> 
+                                    <li><span class="label label-warning">Aguardando</span></li>
+                                    <li><span class="label label-default">Nota 0.0 </span></li>
+                                    <li><%= trabalho.estudante.nome%></li>
+                                </ol>
+                            <% elsif trabalho.estado == "Encaminhado para o Orientador" %> 
+                                <span class="label label-success">Avaliado</span>
+                            <% end %>
+                            
+                            <h4><%= trabalho.titulo %></h4>
+                            
+                            <%= link_to "Abrir arquivo para avaliação", trabalho.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
+			                <%= link_to "Abrir Pareceres", professor_trabalho_pareceres, class: 'btn btn-primary' %>
+                            <%= link_to "Concluir Avaliação", trabalho.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
+                        </div>
+                    <% end %>
+                </ul>                
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading ca">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#accord2" class="cabecalho">
+                    <h2> Avaliador </h2>
+                </a>
+            </h4>
+        </div>
+        <div id="accord2" class="panel-collapse collapse out">
+            <div class="panel-body">
+                <ul class="list-group ">
+                    <% @trabalhos_banca_1.each do |trabalho1|%>
+                         <div class="panel-body list-group-item">
+                            
+                            <% if trabalho1.estado == "Enviado para Avaliação" %>
+                                <ol class="breadcrumb"> 
+                                    <li><span class="label label-warning">Aguardando</span></li>
+                                    <li><span class="label label-default">Nota 0.0 </span></li>
+                                    <li><%= trabalho1.estudante.nome%></li>
+                                </ol>
+                            <% elsif trabalho1.estado == "Encaminhado para o Orientador" %> 
+                                <span class="label label-success">Avaliado</span>
+                            <% end %>
+                            
+                            <h4><%= trabalho1.titulo %></h4>
+                            
+                            <%= link_to "Abrir arquivo para avaliação", trabalho1.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
+			                <%= link_to "Abrir Pareceres", professor_trabalho_pareceres, class: 'btn btn-primary' %>
+                            <%= link_to "Concluir Avaliação", trabalho1.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
+                        </div>
+                    <% end %>
+                    <% @trabalhos_banca_2.each do |trabalho2|%>
+                       <div class="panel-body list-group-item">
+                            
+                            <% if trabalho2.estado == "Enviado para Avaliação" %> 
+                                <ol class="breadcrumb"> 
+                                    <li><span class="label label-warning">Aguardando</span></li>
+                                    <li><span class="label label-default">Nota 0.0 </span></li>
+                                    <li><%= trabalho2.estudante.nome%></li>
+                                </ol>
+                            <% elsif trabalho2.estado == "Encaminhado para o Orientador" %> 
+                                <span class="label label-success">Avaliado</span>
+                            <% end %>
+                            
+                            <h4><%= trabalho2.titulo %></h4>
+                            
+                            <%= link_to "Abrir arquivo para avaliação", trabalho2.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
+			                <%= link_to "Abrir Pareceres", professor_trabalho_pareceres, class: 'btn btn-primary' %>
+                            <%= link_to "Concluir Avaliação", trabalho2.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
+                        </div>
+                    <% end %>
+                </ul>           
+            </div>
+        </div>
+    </div>
+</div> 

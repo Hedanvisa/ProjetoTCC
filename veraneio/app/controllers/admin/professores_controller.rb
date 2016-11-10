@@ -15,11 +15,19 @@ class Admin::ProfessoresController < ApplicationController
 	end
 
 	def destroy
-		if @professor.destroy
-			redirect_to admin_professores_path, notice: "Professor Excluido"
-		else
-			redirect_to admin_professores_path, notice: "Erro ao excluir Professor"
-		end
+        @em_orientacao = Trabalho.where(orientador: @professor.id)
+        @em_avaliacao_1 = Trabalho.where(banca_1: @professor.id, estado: "Enviado para Avaliação")
+        @em_avaliacao_2 = Trabalho.where(banca_2: @professor.id, estado: "Enviado para Avaliação")
+        
+        if @em_orientacao.empty? and @em_avaliacao_1.empty? and @em_avaliacao_2.empty?
+            if @professor.destroy
+                redirect_to admin_professores_path, notice: "Professor Excluido"
+            else
+                redirect_to admin_professores_path, notice: "Erro ao excluir Professor"
+            end
+        else
+            redirect_to admin_professores_path, alert: "Não é possível excluir esse professor. Ele está em Orientação ou recebeu trabalho como Avaliador"
+        end
 	end
 
     def edit
@@ -29,9 +37,11 @@ class Admin::ProfessoresController < ApplicationController
     def update
         @professor = Professor.find(params[:id])
         if @professor.update professor_params
-            redirect_to admin_professores_path, notice: "Professor atualizado com sucesso"
+		  	flash[:notice] = "Professor atualizado com sucesso"
+			redirect_to admin_professores_path
         else
-            redirect_to admin_professores_path, alert: "Erro na atualizacao!"
+		  	flash[:alert] = "Erro na atualização"
+            redirect_to admin_professores_path
         end
     end
 

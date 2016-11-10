@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Veraneio</title>
-		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-		<%= csrf_meta_tags %>
-	</head>
-	<body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-      	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
-			<ul class="nav navbar-nav">
-				<li class="<%= 'active' if current_page?(admin_trabalhos_path) %>"><%= link_to "Trabalhos", admin_trabalhos_path %></li>
-				<li class="<%= 'active' if current_page?(admin_estudantes_path) %>"><%= link_to "Estudantes", admin_estudantes_path %></li>
-				<li class="<%= 'active' if current_page?(admin_professores_path) %>"><%= link_to "Professores", admin_professores_path %></li>
-			</ul>
-		</div>
-      </div>
-    </nav>
-		<div class="container">
-			<%= yield %>
-		</div>
-	</body>
+<head>
+<title>Veraneio</title>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
+	  <ul class="nav navbar-nav">
+		<li class="<%= 'active' if current_page?(admin_trabalhos_path) %>"><%= link_to "Trabalhos", admin_trabalhos_path %></li>
+		<li class="<%= 'active' if current_page?(admin_estudantes_path) %>"><%= link_to "Estudantes", admin_estudantes_path %></li>
+		<li class="<%= 'active' if current_page?(admin_professores_path) %>"><%= link_to "Professores", admin_professores_path %></li>
+	  </ul>
+	  <% if !current_page?(login_path) and tem_alguem_logado %>
+	  <ul class="nav navbar-nav navbar-right">
+		<li><%= link_to "Sair", logout_path %></li>
+	  </ul>
+	<% end %>
+	</div>
+  </div>
+</nav>
+<div class="container">
+  <%= yield %>
+</div>
+</body>
 </html>

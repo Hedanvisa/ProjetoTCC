@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108224354) do
+ActiveRecord::Schema.define(version: 20161109165336) do
+
+  create_table "pareceres", force: :cascade do |t|
+    t.integer  "pagina"
+    t.string   "texto"
+    t.integer  "trabalho_id"
+    t.integer  "professor_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "pareceres", ["professor_id"], name: "index_pareceres_on_professor_id"
+  add_index "pareceres", ["trabalho_id"], name: "index_pareceres_on_trabalho_id"
 
   create_table "periodos", force: :cascade do |t|
     t.datetime "inicio"

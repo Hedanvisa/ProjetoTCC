@@ -29,11 +29,11 @@
                             <% else %>
                                 <h4><%= t.object.orientador.nome %></h4>
                             <% end %>
-                            <% if t.object.nota_banca_1.nil? %>
+                            <% if t.object.nota_orientador.nil? %>
                                 <span class="label label-warning">Aguardando Nota </span>
                             <% else %>
                                 <span class="label label-success">Avaliado</span>
-                                <span class="badge"><%= t.object.nota_banca_1 %></span>
+                                <span class="badge"><%= t.object.nota_orientador %></span>
                             <% end %>
                         </div>
                     </div>

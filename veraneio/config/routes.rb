@@ -3,9 +3,15 @@ Rails.application.routes.draw do
     resources :periodos
   end
   root 'sessions#new'
-  
+
   resources :sessions
-  resources :professores
+  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
+  get 'professores/:professor_id/avaliacao/:trabalho_id', to: 'professores/avaliacao#index', as: 'avaliacao'
+  resources :professores do
+	resources :trabalhos do
+	  resources :pareceres
+	end
+  end
   resources :estudantes, only: [:create, :new, :show] do
 	  resources :trabalhos do
 	  end

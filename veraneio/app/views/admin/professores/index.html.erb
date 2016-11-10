@@ -1,3 +1,9 @@
+<% if notice %>
+    <div class='alert alert-success'><%= notice %></div>
+<% elsif alert %>
+    <div class='alert alert-danger'><%= alert %></div>
+<% end %>
+
 <div class="panel-group" id="accordion2">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -24,7 +30,7 @@
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#<%=professor.id %>" class="cabecalho">
             <ol class="breadcrumb">
-              <% if professor.estado_acesso == "Nao Confirmado" %> 
+              <% if professor.estado_acesso == "Não Confirmado" %> 
                 <li><span class="label label-danger"><%= professor.estado_acesso %></span></li>
               <% elsif professor.estado_acesso == "Confirmado" %>
                 <li><span class="label label-success"><%= professor.estado_acesso %></span></li>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pagina: 1
+  texto: MyString
+  trabalho_id: 
+  professor_id: 
+
+two:
+  pagina: 1
+  texto: MyString
+  trabalho_id: 
+  professor_id: 
