@@ -88,19 +88,31 @@ class TrabalhosController < ApplicationController
 		if @orientador
 			@trabalho.orientador = @orientador
 		else
-			@trabalho.orientador = Professor.create(trabalhos_param[:orientador_attributes])
+		  	@orientador = Professor.new password_digest: BCrypt::Password.create('professor', cost: 4), estado_acesso: "Não Confirmado"
+		  	@orientador.nome = trabalhos_param[:orientador_attributes][:nome]
+		  	@orientador.email = trabalhos_param[:orientador_attributes][:email]
+			@orientador.save
+			@trabalho.orientador = @orientador
 		end
 
 		if @banca_1
 			@trabalho.banca_1 = @banca_1
 		elsif !trabalhos_param[:banca_1_attributes][:nome].empty?
-			@trabalho.banca_1 = Professor.create(trabalhos_param[:banca_1_attributes])
+		  	@banca_1 = Professor.new password_digest: BCrypt::Password.create('professor', cost: 4), estado_acesso: "Não Confirmado"
+		  	@banca_1.nome = trabalhos_param[:banca_1_attributes][:nome]
+		  	@banca_1.email = trabalhos_param[:banca_1_attributes][:email]
+			@banca_1.save
+			@trabalho.banca_1 = @banca_1
 		end
 
 		if @banca_2
 			@trabalho.banca_2 = @banca_2
 		elsif !trabalhos_param[:banca_2_attributes][:nome].empty?
-			@trabalho.banca_2 = Professor.create(trabalhos_param[:banca_2_attributes])
+		  	@banca_2 = Professor.new password_digest: BCrypt::Password.create('professor', cost: 4), estado_acesso: "Não Confirmado"
+		  	@banca_2.nome = trabalhos_param[:banca_2_attributes][:nome]
+		  	@banca_2.email = trabalhos_param[:banca_2_attributes][:email]
+			@banca_2.save
+			@trabalho.banca_2 = @banca_2
 		end
 	end
 end

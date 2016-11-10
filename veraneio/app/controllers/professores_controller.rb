@@ -2,13 +2,12 @@ class ProfessoresController < ApplicationController
 	before_action :set_professor, only: [:destroy]
 
 	def index
-		@trabalhos_orientador = Trabalho.where(orientador: 2, estado: "Enviado para Avaliação")
-		@trabalhos_banca_1 = Trabalho.where(banca_1: 2, estado: "Enviado para Avaliação")
-		@trabalhos_banca_2 = Trabalho.where(banca_2: 2, estado: "Enviado para Avaliação")
 	end
 
 	def show
-
+		@trabalhos_orientador = Trabalho.where(orientador: params[:id], estado: "Enviado para Avaliação")
+		@trabalhos_banca_1 = Trabalho.where(banca_1: params[:id], estado: "Enviado para Avaliação")
+		@trabalhos_banca_2 = Trabalho.where(banca_2: params[:id], estado: "Enviado para Avaliação")
 	end
 
 	def new
@@ -17,6 +16,8 @@ class ProfessoresController < ApplicationController
 
 	def create
 		@professor = Professor.new(professor_params)
+		@professor.password = 'professor'
+		@professor.password_confirmation = 'professor'
 		@professor.estado_acesso = "Nao Confirmado"
 		if @professor.save
 			redirect_to admin_professores_path, notice: "Professor salvo com sucesso"

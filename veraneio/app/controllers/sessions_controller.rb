@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
 	def create
 		@usuario = Usuario.find_by(email: params[:email])
-		if @usuario.type == "Estudante"
+		if @usuario.class == Estudante
 			if @usuario && @usuario.authenticate(params[:password])
 				session[:usuario_id] = @usuario.id
 				redirect_to estudante_trabalho_path estudante_id: @usuario.id, id: @usuario.trabalho
@@ -12,10 +12,10 @@ class SessionsController < ApplicationController
 				flash.now[:alert]= "Senha ou Email inválido"
 				render "new"
 			end
-		elsif @usuario.type == "Professor"
+		elsif @usuario.class == Professor
 			if @usuario && @usuario.authenticate(params[:password])
 				session[:usuario_id] = @usuario.id
-				redirect_to estudante_trabalho_path estudante_id: @usuario.id, id: @usuario.trabalho
+				redirect_to professor_path @usuario
 			else
 				flash.now[:alert]= "Senha ou Email inválido"
 				render "new"
