@@ -1,7 +1,15 @@
 class PareceresController < ApplicationController
 
     def index
-        @pareceres = Parecer.where(professor_id: params[:professor_id], trabalho_id: params[:trabalho_id])
+        @professor = Professor.find(params[:professor_id])
+        @trabalho = Trabalho.find(params[:trabalho_id])
+        
+        if @trabalho.orientador != @professor
+            @pareceres = Parecer.where(professor_id: params[:professor_id], trabalho_id: params[:trabalho_id])
+        else
+            @pareceres = Parecer.where(trabalho_id: params[:trabalho_id])
+        end
+        @parecer = Parecer.new
     end
 
     def new
@@ -9,7 +17,9 @@ class PareceresController < ApplicationController
 	end
 
     def create
-		@parecer = Parecer.new(parecer_params)
+        @professor = Professor.find(params[:professor_id])
+        @trabalho = Trabalho.find(params[:trabalho_id])
+		@parecer = Parecer.new(pagina: params[:parecer][:pagina], texto: params[:parecer][:texto], professor: @professor, trabalho: @trabalho)
 		
 		if @parecer.save
 			redirect_to professor_trabalho_pareceres_path, notice: "Professor salvo com sucesso"

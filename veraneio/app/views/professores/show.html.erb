@@ -15,15 +15,35 @@
 
 			<% if trabalho.estado == "Enviado para Avaliação" %> 
 			  <ol class="breadcrumb"> 
-			  <li><span class="label label-warning">Aguardando</span></li>
-			  <li><span class="label label-default">Nota 0.0 </span></li>
-			  <li><%= trabalho.estudante.nome%></li>
-			</ol>
+				
+					<% if trabalho.nota_orientador.nil? %>
+						<li><span class="label label-warning">Ainda sem nota</span></li>
+					<% else %>
+						<li><span class="label label-success">Minha Nota <%= trabalho.nota_orientador %></span></li>
+					<% end %>
+
+						<li>Avaliador 1</li>
+						<li><%= trabalho.banca_1.nome %></li>
+						<% if !trabalho.nota_banca_1.nil? %>
+							<li><span class="label label-success">Nota <%= trabalho.nota_banca_1 %></span></li>
+						<% else %>
+							<li><span class="label label-default">Aguardando</span></li>
+						<% end %>
+
+						<li>Avaliador 2</li>
+						<li><%= trabalho.banca_2.nome %></li>
+						<% if !trabalho.nota_banca_2.nil? %>
+							<li><span class="label label-success">Nota <%= trabalho.nota_banca_2 %></span></li>
+						<% else %>
+							<li><span class="label label-default">Aguardando</span></li>
+						<% end %>
+				</ol>
 		  <% elsif trabalho.estado == "Encaminhado para o Orientador" %> 
 			  <span class="label label-success">Avaliado</span>
 		  <% end %>
 
-			<h4><%= trabalho.titulo %></h4>
+			<h4><%= trabalho.estudante.nome %> </h4>
+			<h3><%= trabalho.titulo %></h3>
 
 			<%= link_to "Abrir arquivo para avaliação", trabalho.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
 			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho), class: 'btn btn-primary' %>
@@ -54,15 +74,21 @@
 
 			<% if trabalho1.estado == "Enviado para Avaliação" %>
 			  <ol class="breadcrumb"> 
-			  <li><span class="label label-warning">Aguardando</span></li>
-			  <li><span class="label label-default">Nota 0.0 </span></li>
-			  <li><%= trabalho1.estudante.nome%></li>
-			</ol>
+				
+					<% if trabalho1.nota_banca_1.nil? %>
+						<li><span class="label label-warning"> Ainda sem nota </span></li>
+					<% else %>
+						<li><span class="label label-success"> Minha Nota <%= trabalho1.nota_banca_1 %> </span></li>
+					<% end %>
+						<li>Professor Orientador</li>
+						<li><%= trabalho1.orientador.nome %></li>
+				</ol>
 		  <% elsif trabalho1.estado == "Encaminhado para o Orientador" %> 
 			  <span class="label label-success">Avaliado</span>
 		  <% end %>
 
-			<h4><%= trabalho1.titulo %></h4>
+			<h4><%= trabalho1.estudante.nome %> </h4>
+			<h3><%= trabalho1.titulo %></h3>
 
 			<%= link_to "Abrir arquivo para avaliação", trabalho1.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
 			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho1), class: 'btn btn-primary' %>
@@ -74,14 +100,20 @@
 
 			<% if trabalho2.estado == "Enviado para Avaliação" %> 
 			  <ol class="breadcrumb"> 
-			  <li><span class="label label-warning">Aguardando</span></li>
-			  <li><span class="label label-default">Nota 0.0 </span></li>
-			  <li><%= trabalho2.estudante.nome%></li>
-			</ol>
+				
+					<% if trabalho2.nota_banca_1.nil? %>
+						<li><span class="label label-warning"> Ainda sem nota </span></li>
+					<% else %>
+						<li><span class="label label-success"> Minha Nota <%= trabalho2.nota_banca_2 %> </span></li>
+					<% end %>
+						<li>Professor Orientador</li>
+						<li><%= trabalho2.orientador.nome %></li>
+				</ol>
 		  <% elsif trabalho2.estado == "Encaminhado para o Orientador" %> 
 			  <span class="label label-success">Avaliado</span>
 		  <% end %>
 
+			<h4> <%= trabalho2.estudante.nome %> </h4>
 			<h4><%= trabalho2.titulo %></h4>
 
 			<%= link_to "Abrir arquivo para avaliação", trabalho2.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
