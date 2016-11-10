@@ -19,8 +19,8 @@ class Admin::TrabalhosController < ApplicationController
         @trabalho = Trabalho.find params[:id]
         @orientador = @trabalho.orientador
 
-	    #puts("Email 1 #{@banca_1.email}")
-        #puts("Email 2 #{@banca_2.email}")
+	    puts("Email 1 #{@banca_1.email.empty?}")
+        puts("Email 2 #{@banca_2.email.empty?}")
 
         if @trabalho.estado == "Recebido do Aluno"
             if @banca_1.email.empty? or @banca_2.email.empty?

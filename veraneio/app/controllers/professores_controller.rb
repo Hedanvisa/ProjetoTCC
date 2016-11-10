@@ -18,7 +18,7 @@ class ProfessoresController < ApplicationController
 		@professor = Professor.new(professor_params)
 		@professor.password = 'professor'
 		@professor.password_confirmation = 'professor'
-		@professor.estado_acesso = "Nao Confirmado"
+		@professor.estado_acesso = "Não Confirmado"
 		if @professor.save
 			redirect_to admin_professores_path, notice: "Professor salvo com sucesso"
 		else
