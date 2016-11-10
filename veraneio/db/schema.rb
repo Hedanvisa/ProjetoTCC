@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108164332) do
+ActiveRecord::Schema.define(version: 20161108224354) do
 
-  create_table "admin_periodos", force: :cascade do |t|
+  create_table "periodos", force: :cascade do |t|
     t.datetime "inicio"
     t.datetime "termino"
     t.datetime "created_at", null: false

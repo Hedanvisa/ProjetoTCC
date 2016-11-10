@@ -4,7 +4,7 @@ class Admin::PeriodosController < ApplicationController
   # GET /admin/periodos
   # GET /admin/periodos.json
   def index
-    @admin_periodos = Admin::Periodo.all
+    @admin_periodos = Periodo.all
   end
 
   # GET /admin/periodos/1
@@ -14,7 +14,7 @@ class Admin::PeriodosController < ApplicationController
 
   # GET /admin/periodos/new
   def new
-    @admin_periodo = Admin::Periodo.new
+    @admin_periodo = Periodo.new
   end
 
   # GET /admin/periodos/1/edit
@@ -24,11 +24,11 @@ class Admin::PeriodosController < ApplicationController
   # POST /admin/periodos
   # POST /admin/periodos.json
   def create
-    @admin_periodo = Admin::Periodo.new(admin_periodo_params)
+    @admin_periodo = Periodo.new(admin_periodo_params)
 
     respond_to do |format|
       if @admin_periodo.save
-        format.html { redirect_to @admin_periodo, notice: 'Periodo was successfully created.' }
+        format.html { redirect_to admin_periodos_path, notice: 'Periodo was successfully created.' }
         format.json { render :show, status: :created, location: @admin_periodo }
       else
         format.html { render :new }
@@ -64,11 +64,11 @@ class Admin::PeriodosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_periodo
-      @admin_periodo = Admin::Periodo.find(params[:id])
+      @admin_periodo = Periodo.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_periodo_params
-      params.require(:admin_periodo).permit(:inicio, :termino)
+      params.require(:periodo).permit(:inicio, :termino)
     end
 end
