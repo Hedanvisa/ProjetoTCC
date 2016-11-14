@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20161113220758) do
   add_index "pareceres", ["professor_id"], name: "index_pareceres_on_professor_id"
   add_index "pareceres", ["trabalho_id"], name: "index_pareceres_on_trabalho_id"
 
+  create_table "periodos", force: :cascade do |t|
+    t.datetime "inicio"
+    t.datetime "termino"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "trabalhos", force: :cascade do |t|
     t.string   "titulo"
     t.integer  "estudante_id"

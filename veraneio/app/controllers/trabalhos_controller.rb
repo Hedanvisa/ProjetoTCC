@@ -7,6 +7,8 @@ class TrabalhosController < ApplicationController
 		@trabalho.build_orientador
 		@trabalho.build_banca_1
 		@trabalho.build_banca_2
+		@horario_servidor = DateTime.now
+		@periodo_maximo = Periodo.order(:termino).last.termino
 	end
 
 	def show
@@ -19,6 +21,9 @@ class TrabalhosController < ApplicationController
 	end
 
 	def create
+
+		@horario_servidor = DateTime.now
+		@periodo_maximo = Periodo.order(:termino).last.termino
 		@trabalho = @estudante.build_trabalho(titulo: params[:trabalho][:titulo], arquivo: params[:trabalho][:arquivo])
 		@orientador = Professor.where(email: params[:trabalho][:orientador_attributes][:email]).first
 		@banca_1 = Professor.where(nome: params[:trabalho][:banca_1_attributes][:nome]).first
@@ -28,7 +33,7 @@ class TrabalhosController < ApplicationController
 
 		@trabalho.estado = "Recebido do Aluno"
 
-		if @trabalho.save 
+		if (@periodo_maximo >= @horario_servidor) and @trabalho.save 
 			@adm = Admin.first
 			@estudante = Estudante.find(params[:estudante_id])
 			Thread.new do 
@@ -59,7 +64,7 @@ class TrabalhosController < ApplicationController
 			@trabalho.arquivo = params[:trabalho][:arquivo]
 		end
 		
-		if @trabalho.save
+		if (@periodo_maximo >= @horario_servidor) and @trabalho.save
 			flash.now[:notice] = "Seu trabalho foi atualizado com sucesso!"
 			render :edit
 		else

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+	</head>
+	<body>
+		<h1>Um trabalho de TCC necessita de sua avaliação.</h1>
+		<p>
+		Um trabalho de TCC foi submetido para que seja avaliado por você.</br>
+		Título do trabalho: <%=@estudante.trabalho.titulo%></br>
+		Aluno <%=@estudante.nome%></br>
+	       	RA: <%=@estudante.ra%></br>
+		Para visualizar o trabalho clique <%=link_to "aqui" , estudante_trabalho_url({estudante_id: @estudante.id, id:@estudante.trabalho.id})%>
+		</p>
+	</body>
+</html>
+
