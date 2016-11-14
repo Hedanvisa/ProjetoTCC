@@ -3,25 +3,28 @@
         <div class="panel-body">
             <div role="form">
                 <div class="form-group">                            
-                    <ol class="breadcrumb">
-			            <li> Orientador </li>
-                    </ol>
-                    <%= t.select :orientador, options_for_select([t.object.orientador.nome]), {}, { class: "form form-group form-control" } %>
-                    <ol class="breadcrumb">
-                        <li>Avaliador 1</li>
-                        <% if !t.object.banca_1.nil? %>
-                            <li> Sugestao </li>
-                            <li><%= t.object.banca_1.nome %></li>
-                        <% end %>
-                    </ol>
-                    <%= t.select :banca_1, options_for_select(@professores.collect{ |p| [p.nome, p.email] }), {include_blank: 'Ninguem selecionado'}, { class: "form form-group form-control" } %>
-                    <ol class="breadcrumb">
-                        <li>Avaliador 2</li>
-                        <% if !t.object.banca_2.nil? %>
-                            <li> Sugestao </li>
-                            <li><%= t.object.banca_2.nome %></li>
-                        <% end %>
-                    </ol>
+                    <h4>
+                        <ol class="breadcrumb">
+                            <li> Orientador </li>
+                        </ol>
+                    
+                        <%= t.select :orientador, options_for_select([t.object.orientador.nome]), {}, { class: "form form-group form-control" } %>
+                        <ol class="breadcrumb">
+                            <li>Avaliador 1</li>
+                            <% if !t.object.banca_1.nil? %>
+                                <li> Sugestao </li>
+                                <li><%= t.object.banca_1.nome %></li>
+                            <% end %>
+                        </ol>
+                        <%= t.select :banca_1, options_for_select(@professores.collect{ |p| [p.nome, p.email] }), {include_blank: 'Ninguem selecionado'}, { class: "form form-group form-control" } %>
+                        <ol class="breadcrumb">
+                            <li>Avaliador 2</li>
+                            <% if !t.object.banca_2.nil? %>
+                                <li> Sugestao </li>
+                                <li><%= t.object.banca_2.nome %></li>
+                            <% end %>
+                        </ol>
+                    </h4>
                     <%= t.select :banca_2, options_for_select(@professores.collect{ |p| [p.nome, p.email] }), {include_blank: 'Ninguem selecionado'}, { class: "form form-group form-control" } %>
 
                 </div>
