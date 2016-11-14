@@ -6,7 +6,8 @@ class Admin::TrabalhosController < ApplicationController
         @professores = Professor.all
         @count_recebidos = Trabalho.where(estado: "Recebido do Aluno").count
         @count_avaliacao = Trabalho.where(estado: "Enviado para Avaliação").count
-        @count_encaminhado = Trabalho.where(estado: "Encaminhado para o Orientador").count
+        @count_avaliado = Trabalho.where(estado: "Avaliado").count
+        @count_disponivel = Trabalho.where(estado: "Disponibilizada a Nota").count
     end
 
     def edit
@@ -19,11 +20,11 @@ class Admin::TrabalhosController < ApplicationController
         @trabalho = Trabalho.find params[:id]
         @orientador = @trabalho.orientador
 
-	    puts("Email 1 #{@banca_1.email.empty?}")
-        puts("Email 2 #{@banca_2.email.empty?}")
+	    #puts("Email 1 #{@banca_1.email.empty?}")
+        #puts("Email 2 #{@banca_2.email.empty?}")
 
         if @trabalho.estado == "Recebido do Aluno"
-            if @banca_1.email.empty? or @banca_2.email.empty?
+            if @banca_1.nil? or @banca_2.nil?
                 flash[:alert] = "Algum email vazio!"
                 puts(">>>>>>>>>>> Algum email vazio")
             

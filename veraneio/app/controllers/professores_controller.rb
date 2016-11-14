@@ -5,7 +5,7 @@ class ProfessoresController < ApplicationController
 	end
 
 	def show
-		@trabalhos_orientador = Trabalho.where(orientador: params[:id], estado: "Enviado para Avaliação")
+		@trabalhos_orientador = Trabalho.where(orientador: params[:id], estado: "Avaliado")
 		@trabalhos_banca_1 = Trabalho.where(banca_1: params[:id], estado: "Enviado para Avaliação")
 		@trabalhos_banca_2 = Trabalho.where(banca_2: params[:id], estado: "Enviado para Avaliação")
 	end

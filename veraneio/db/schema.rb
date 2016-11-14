@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109165336) do
+ActiveRecord::Schema.define(version: 20161113220758) do
 
   create_table "pareceres", force: :cascade do |t|
     t.integer  "pagina"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20161109165336) do
     t.float    "nota_banca_1"
     t.float    "nota_banca_2"
     t.float    "nota_orientador"
+    t.float    "nota_final"
   end
 
   add_index "trabalhos", ["banca_1_id"], name: "index_trabalhos_on_banca_1_id"

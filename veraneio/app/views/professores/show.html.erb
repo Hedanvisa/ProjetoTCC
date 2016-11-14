@@ -13,7 +13,7 @@
 		  <% @trabalhos_orientador.each do |trabalho|%>
 			<div class="panel-body list-group-item">
 
-			<% if trabalho.estado == "Enviado para Avaliação" %> 
+			<% if trabalho.estado == "Avaliado" %> 
 			  <ol class="breadcrumb"> 
 				
 					<% if trabalho.nota_orientador.nil? %>
@@ -45,7 +45,7 @@
 			<h4><%= trabalho.estudante.nome %> </h4>
 			<h3><%= trabalho.titulo %></h3>
 
-			<%= link_to "Abrir arquivo para avaliação", trabalho.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
+			<%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:id], trabalho), class: 'btn btn-primary', :target => "_blank" %>
 			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho), class: 'btn btn-primary' %>
 			<%= link_to "Concluir Avaliação", trabalho.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
 		  </div>
@@ -90,7 +90,7 @@
 			<h4><%= trabalho1.estudante.nome %> </h4>
 			<h3><%= trabalho1.titulo %></h3>
 
-			<%= link_to "Abrir arquivo para avaliação", trabalho1.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
+			<%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:id], trabalho1), class: 'btn btn-primary', :target => "_blank" %>
 			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho1), class: 'btn btn-primary' %>
 			<%= link_to "Concluir Avaliação", trabalho1.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
 		  </div>
@@ -116,7 +116,7 @@
 			<h4> <%= trabalho2.estudante.nome %> </h4>
 			<h4><%= trabalho2.titulo %></h4>
 
-			<%= link_to "Abrir arquivo para avaliação", trabalho2.arquivo.url, class: 'btn btn-primary', :target => "_blank" %>
+			<%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:id], trabalho2), class: 'btn btn-primary', :target => "_blank" %>
 			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho2), class: 'btn btn-primary' %>
 			<%= link_to "Concluir Avaliação", trabalho2.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
 		  </div>
