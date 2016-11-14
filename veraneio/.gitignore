@@ -27,3 +27,4 @@ tags
 /log/*
 !/log/.keep
 /tmp
+*.cache
