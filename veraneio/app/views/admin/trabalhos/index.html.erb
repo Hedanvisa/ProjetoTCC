@@ -73,19 +73,12 @@
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
-            <!-- /.panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <% if @trabalhos.empty? %>
-                        <i class="fa fa-clock-o fa-fw"></i> Sem trabalhos, ainda
-                    <% else %>
-                        <i class="fa fa-clock-o fa-fw"></i> Trabalhos
-                    <% end %>
-                </div>
-                <!-- /.panel-heading -->
+            <% if @trabalhos.empty? %>
+                <h4> Sem trabalhos, ainda</h4>
+            <% else %>
+                <h4> Trabalhos </h4>
+            <% end %>
                 
-                <div class="panel-body">
-
                   <div class="panel-group" id="accordion">
                     <% @trabalhos.each do |trabalho| %>
                       <div class="panel panel-default">
@@ -115,11 +108,7 @@
                         </div>
                       </div>
                     <% end %>
-                  </div>                            
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
+                  </div>
         </div>
         <!-- /.col-lg-8 -->
     </div>
