@@ -6,16 +6,12 @@ class Admin::PeriodosController < ApplicationController
   # GET /admin/periodos.json
   def index
     @admin_periodos = Periodo.all
+    @admin_periodo = Periodo.new
   end
 
   # GET /admin/periodos/1
   # GET /admin/periodos/1.json
   def show
-  end
-
-  # GET /admin/periodos/new
-  def new
-    @admin_periodo = Periodo.new
   end
 
   # GET /admin/periodos/1/edit
