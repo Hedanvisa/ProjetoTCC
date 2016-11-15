@@ -25,11 +25,11 @@ class Admin::PeriodosController < ApplicationController
   # POST /admin/periodos
   # POST /admin/periodos.json
   def create
-    @admin_periodo = Periodo.new(admin_periodo_params)
+    @admin_periodo = Periodo.new(inicio: params[:inicio], termino: params[:termino])
 
     respond_to do |format|
       if @admin_periodo.save
-        format.html { redirect_to admin_periodos_path, notice: 'Período criado com sucesso.' }
+        format.html { redirect_to admin_periodo_path(@admin_periodo), notice: 'Período criado com sucesso.' }
         format.json { render :show, status: :created, location: @admin_periodo }
       else
         format.html { render :new }
@@ -42,8 +42,8 @@ class Admin::PeriodosController < ApplicationController
   # PATCH/PUT /admin/periodos/1.json
   def update
     respond_to do |format|
-      if @admin_periodo.update(admin_periodo_params)
-        format.html { redirect_to admin_periodos_path, notice: 'Período atualizado com sucesso.' }
+      if @admin_periodo.update(inicio: params[:inicio], termino: params[:termino])
+        format.html { redirect_to admin_periodo_path(@admin_periodo), notice: 'Período atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @admin_periodo }
       else
         format.html { render :edit }
