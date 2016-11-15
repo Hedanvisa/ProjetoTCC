@@ -23,7 +23,10 @@ Rails.application.routes.draw do
 
   namespace 'admin' do
 	  resources :professores
-	  resources :trabalhos
+	  resources :trabalhos do 
+		  get 'reenviar_email/:professor_id',to: 'trabalhos#reenviar_email' ,as: 'reenviar'
+	  end
+
 	  resources :estudantes
   end
 
