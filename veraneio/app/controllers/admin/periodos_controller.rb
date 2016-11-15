@@ -1,4 +1,5 @@
 class Admin::PeriodosController < ApplicationController
+  layout 'admin'
   before_action :set_admin_periodo, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/periodos
@@ -28,7 +29,7 @@ class Admin::PeriodosController < ApplicationController
 
     respond_to do |format|
       if @admin_periodo.save
-        format.html { redirect_to admin_periodos_path, notice: 'Periodo was successfully created.' }
+        format.html { redirect_to admin_periodos_path, notice: 'Período criado com sucesso.' }
         format.json { render :show, status: :created, location: @admin_periodo }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class Admin::PeriodosController < ApplicationController
   def update
     respond_to do |format|
       if @admin_periodo.update(admin_periodo_params)
-        format.html { redirect_to @admin_periodo, notice: 'Periodo was successfully updated.' }
+        format.html { redirect_to @admin_periodo, notice: 'Período atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @admin_periodo }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class Admin::PeriodosController < ApplicationController
   def destroy
     @admin_periodo.destroy
     respond_to do |format|
-      format.html { redirect_to admin_periodos_url, notice: 'Periodo was successfully destroyed.' }
+      format.html { redirect_to admin_periodos_url, notice: 'Período foi apagado.' }
       format.json { head :no_content }
     end
   end
