@@ -43,7 +43,7 @@ class Admin::PeriodosController < ApplicationController
   def update
     respond_to do |format|
       if @admin_periodo.update(admin_periodo_params)
-        format.html { redirect_to @admin_periodo, notice: 'Período atualizado com sucesso.' }
+        format.html { redirect_to admin_periodos_path, notice: 'Período atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @admin_periodo }
       else
         format.html { render :edit }
