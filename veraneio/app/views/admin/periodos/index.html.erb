@@ -1,5 +1,8 @@
-<p id="notice"><%= notice %></p>
-
+<% if notice %>
+    <div class='alert alert-success'><%= notice %></div>
+<% elsif alert %>
+    <div class='alert alert-danger'><%= alert %></div>
+<% end %>
 <h1>Listing Admin Periodos</h1>
 
 <table>
@@ -14,8 +17,8 @@
   <tbody>
     <% @admin_periodos.each do |admin_periodo| %>
       <tr>
-        <td><%= admin_periodo.inicio %></td>
-        <td><%= admin_periodo.termino %></td>
+        <td><%= admin_periodo.inicio.strftime("%m/%d/%Y %I:%M%p") %></td>
+        <td><%= admin_periodo.termino.strftime("%m/%d/%Y %I:%M%p") %></td>
         <td><%= link_to 'Show', admin_periodos_path %></td>
         <td><%= link_to 'Edit', edit_admin_periodo_path(admin_periodo) %></td>
         <td><%= link_to 'Destroy', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' } %></td>
