@@ -5,12 +5,13 @@
 <% end %>
 <div id="page-wrapper">
     <div class="row">
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-primary">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-danger">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
                             <i class="fa fa-comments fa-5x"></i>
+                            <span class="glyphicon glyphicon-cloud-upload teste"></span>
                         </div>
                         <div class="col-xs-9 text-left">
                             <div>Recebidos do Aluno</div>
@@ -20,13 +21,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-primary">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-warning">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
                             <i class="fa fa-comments fa-5x"></i>
-                            <span class="glyphicon glyphicon-edit teste"></span>
+                            <span class="glyphicon glyphicon-send teste"></span>
                         </div>
                         <div class="col-xs-9 text-left">
                             <div>Enviados para Avaliacao</div>
@@ -36,16 +37,33 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="panel panel-primary">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
                             <i class="fa fa-comments fa-5x"></i>
+                            <span class="glyphicon glyphicon-pencil teste"></span>
                         </div>
                         <div class="col-xs-9 text-left">
-                            <div>Encaminhado para o Orientador</div>
-                            <div class="badge"><%= @count_encaminhado %></div>
+                            <div>Avaliados</div>
+                            <div class="badge"><%= @count_avaliado %></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                            <span class="glyphicon glyphicon-ok teste"></span>
+                        </div>
+                        <div class="col-xs-9 text-left">
+                            <div>Notas Disponibilizadas</div>
+                            <div class="badge"><%= @count_disponivel %></div>
                         </div>
                     </div>
                 </div>
@@ -55,35 +73,28 @@
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
-            <!-- /.panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <% if @trabalhos.empty? %>
-                        <i class="fa fa-clock-o fa-fw"></i> Sem trabalhos, ainda
-                    <% else %>
-                        <i class="fa fa-clock-o fa-fw"></i> Trabalhos
-                    <% end %>
-                </div>
-                <!-- /.panel-heading -->
+            <% if @trabalhos.empty? %>
+                <h4> Sem trabalhos, ainda</h4>
+            <% else %>
+                <h4> Trabalhos </h4>
+            <% end %>
                 
-                <div class="panel-body">
-
                   <div class="panel-group" id="accordion">
                     <% @trabalhos.each do |trabalho| %>
                       <div class="panel panel-default">
                         <div class="panel-heading ca">
                           <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#<%=trabalho.id %>" class="cabecalho">
-                              <ol class="breadcrumb">
+                              <ol class="breadcrumb teste">
                                 <% if trabalho.estado == "Recebido do Aluno" %> 
                                     <li><span class="label label-danger"><%= trabalho.estado %></span></li>
                                 <% elsif trabalho.estado == "Enviado para Avaliação" %> 
                                     <li><span class="label label-warning"><%= trabalho.estado %></span></li>
-                                <% elsif trabalho.estado == "Encaminhado para o Orientador" %> 
-                                    <li><span class="label label-info"><%= trabalho.estado %></span></li>
+                                <% elsif trabalho.estado == "Avaliado" %> 
+                                    <li><span class="label label-success"><%= trabalho.estado %></span></li>
                                 <% end %>
                                 
-                                <li><%= trabalho.updated_at %></li>
+                                <li><%= trabalho.updated_at.strftime("%m/%d/%Y %I:%M%p") %></li>
                                 <li><%= trabalho.estudante.nome %></li>
                                 <li><%= trabalho.titulo %></li>
                               </ol>
@@ -97,11 +108,7 @@
                         </div>
                       </div>
                     <% end %>
-                  </div>                            
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
+                  </div>
         </div>
         <!-- /.col-lg-8 -->
     </div>

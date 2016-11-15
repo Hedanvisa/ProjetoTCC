@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Admin Periodos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Inicio</th>
+      <th>Termino</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_periodos.each do |admin_periodo| %>
+      <tr>
+        <td><%= admin_periodo.inicio %></td>
+        <td><%= admin_periodo.termino %></td>
+        <td><%= link_to 'Show', admin_periodos_path %></td>
+        <td><%= link_to 'Edit', edit_admin_periodo_path(admin_periodo) %></td>
+        <td><%= link_to 'Destroy', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Periodo', new_admin_periodo_path %>

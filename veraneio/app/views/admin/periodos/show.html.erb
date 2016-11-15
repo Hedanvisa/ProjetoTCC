@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inicio:</strong>
+  <%= @admin_periodo.inicio %>
+</p>
+
+<p>
+  <strong>Termino:</strong>
+  <%= @admin_periodo.termino %>
+</p>
+
+<%= link_to 'Edit', edit_admin_periodo_path(@admin_periodo) %> |
+<%= link_to 'Back', admin_periodos_path %>
