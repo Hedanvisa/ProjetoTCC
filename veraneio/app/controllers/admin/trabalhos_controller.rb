@@ -48,6 +48,15 @@ class Admin::TrabalhosController < ApplicationController
         redirect_to admin_trabalhos_path
     end
 
+	def reenviar_email
+		professor = Professor.find(params[:professor_id])
+		trabalho = Trabalho.find(params[:trabalho_id])
+		Thread.new do
+			Notificador.banca_avaliacao(trabalho.estudante, professor).deliver_now
+		end
+		redirect_to admin_trabalhos_path
+	end
+
     private
     def trabalhos_param
         params.require(:trabalho).permit(:orientador, :banca_1, :banca_2)

@@ -63,7 +63,9 @@
                         <% else %>
                             <li><span class="label label-default">Nota Final <%= t.object.nota_orientador %></span></li>
                         <% end %>
-                        <li><%= link_to "Reenviar E-mail", admin_professores_path, class: "btn btn-info" %></li>
+						<li><%= link_to "Reenviar E-mail",
+							admin_trabalho_reenviar_url(professor_id: t.object.orientador.id, trabalho_id: t.object.id), class: "btn btn-info" 
+						%></li>
                     </ol>
                     <ol class="breadcrumb">
                         <li>Avaliador 1</li>
@@ -74,7 +76,9 @@
                             <li><span class="label label-success">Avaliado</span></li>
                             <li><span class="label label-default">Nota <%= t.object.nota_banca_1 %></span></li>
                         <% end %>
-                        <li><%= link_to "Reenviar E-mail", admin_professores_path, class: "btn btn-info" %></li>
+						<li><%= link_to "Reenviar E-mail",
+							admin_trabalho_reenviar_url(professor_id: t.object.banca_1.id, trabalho_id: t.object.id), class: "btn btn-info" 
+						%></li>
                     </ol>
                     <ol class="breadcrumb">
                         <li>Avaliador 2</li>
@@ -85,7 +89,9 @@
                             <li><span class="label label-success">Avaliado</span></li>
                             <li><span class="label label-default">Nota <%= t.object.nota_banca_2 %></span></li>
                         <% end %>
-                        <li><%= link_to "Reenviar E-mail", admin_professores_path, class: "btn btn-info" %></li>
+						<li><%= link_to "Reenviar E-mail",
+							admin_trabalho_reenviar_url(professor_id: t.object.banca_2.id, trabalho_id: t.object.id), class: "btn btn-info" 
+						%></li>
                     </ol>
                 </div>
             </div>
