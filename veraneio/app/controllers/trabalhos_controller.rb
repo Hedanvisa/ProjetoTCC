@@ -1,6 +1,6 @@
 class TrabalhosController < ApplicationController
 	before_action :set_estudante
-	before_action :autenticar_usuario!, only: [:edit, :show, :update]
+	before_action :autenticar_usuario!, only: [:edit, :show, :update, :create]
 
 	def new
 		@trabalho = @estudante.build_trabalho
@@ -21,7 +21,6 @@ class TrabalhosController < ApplicationController
 	end
 
 	def create
-
 		@horario_servidor = DateTime.now
 		@periodo_maximo = Periodo.order(:termino).last.termino
 		@trabalho = @estudante.build_trabalho(titulo: params[:trabalho][:titulo], arquivo: params[:trabalho][:arquivo])
@@ -35,23 +34,25 @@ class TrabalhosController < ApplicationController
 
 		if (@periodo_maximo >= @horario_servidor) and @trabalho.save 
 			@adm = Admin.first
-			@estudante = Estudante.find(params[:estudante_id])
 			Thread.new do 
 				Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now
 				Notificador.aluno_novo_trabalho(@trabalho,@estudante).deliver_now
 			end
+			log_out @usuario_atual
 			flash[:notice] = "Trabalho enviado com sucesso!"
-			redirect_to login_path
+			redirect_to root_path
 		else
 			render 'new'
 		end
 	end
-	
+
 	def edit
 		@trabalho = @estudante.trabalho
 	end
 
 	def update
+		@horario_servidor = DateTime.now
+		@periodo_maximo = Periodo.order(:termino).last.termino
 		@trabalho = @estudante.trabalho
 		@orientador = Professor.where(email: params[:trabalho][:orientador_attributes][:email]).first
 		@banca_1 = Professor.where(nome: params[:trabalho][:banca_1_attributes][:nome]).first
@@ -63,7 +64,7 @@ class TrabalhosController < ApplicationController
 		unless params[:trabalho][:arquivo].nil?
 			@trabalho.arquivo = params[:trabalho][:arquivo]
 		end
-		
+
 		if (@periodo_maximo >= @horario_servidor) and @trabalho.save
 			flash.now[:notice] = "Seu trabalho foi atualizado com sucesso!"
 			render :edit
@@ -85,13 +86,13 @@ class TrabalhosController < ApplicationController
 		unless @orientador.nil?
 			@trabalho.orientador = @orientador
 		else
-		  	@orientador = Professor.where(nome: trabalhos_param[:orientador_attributes][:nome]).first
+			@orientador = Professor.where(nome: trabalhos_param[:orientador_attributes][:nome]).first
 			if @orientador
-			  @orientador.email = trabalhos_param[:orientador_attributes][:email]
+				@orientador.email = trabalhos_param[:orientador_attributes][:email]
 			else
-			  @orientador = Professor.new password_digest: BCrypt::Password.create('professor', cost: 4), estado_acesso: "Não Confirmado"
-			  @orientador.nome = trabalhos_param[:orientador_attributes][:nome]
-			  @orientador.email = trabalhos_param[:orientador_attributes][:email]
+				@orientador = Professor.new password_digest: BCrypt::Password.create('professor', cost: 4), estado_acesso: "Não Confirmado"
+				@orientador.nome = trabalhos_param[:orientador_attributes][:nome]
+				@orientador.email = trabalhos_param[:orientador_attributes][:email]
 			end
 			@orientador.save
 			@trabalho.orientador = @orientador
@@ -100,8 +101,8 @@ class TrabalhosController < ApplicationController
 		if !@banca_1.nil?
 			@trabalho.banca_1 = @banca_1
 		elsif !params[:trabalho][:banca_1_attributes][:nome].empty?
-		  	@banca_1 = Professor.new password_digest: BCrypt::Password.create('professor', cost: 4), estado_acesso: "Não Confirmado"
-		  	@banca_1.nome = trabalhos_param[:banca_1_attributes][:nome]
+			@banca_1 = Professor.new password_digest: BCrypt::Password.create('professor', cost: 4), estado_acesso: "Não Confirmado"
+			@banca_1.nome = trabalhos_param[:banca_1_attributes][:nome]
 			@banca_1.save
 			@trabalho.banca_1 = @banca_1
 		end
@@ -109,8 +110,8 @@ class TrabalhosController < ApplicationController
 		if !@banca_2.nil?
 			@trabalho.banca_2 = @banca_2
 		elsif !params[:trabalho][:banca_2_attributes][:nome].empty?
-		  	@banca_2 = Professor.new password_digest: BCrypt::Password.create('professor', cost: 4), estado_acesso: "Não Confirmado"
-		  	@banca_2.nome = trabalhos_param[:banca_2_attributes][:nome]
+			@banca_2 = Professor.new password_digest: BCrypt::Password.create('professor', cost: 4), estado_acesso: "Não Confirmado"
+			@banca_2.nome = trabalhos_param[:banca_2_attributes][:nome]
 			@banca_2.save
 			@trabalho.banca_2 = @banca_2
 		end

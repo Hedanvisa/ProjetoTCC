@@ -7,6 +7,7 @@ class EstudantesController < ApplicationController
 		@estudante = Estudante.new estudante_params
 
 		if @estudante.save
+			session[:usuario_id] = @estudante.id
 			redirect_to new_estudante_trabalho_url @estudante.id
 		else
 			render :new

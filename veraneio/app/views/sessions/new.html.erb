@@ -13,21 +13,15 @@
 <% end %>
 
 
-<%= form_tag sessions_path, class: 'form-signin' do %>
+<%= form_for :session, url: login_path, class: 'form-signin' do |f| %>
 	<div class='form-group'>
-		<%= label_tag :email %>
-		<%= email_field_tag :email, nil,  class: 'form-control' %>
+		<%= f.label :email %>
+		<%= f.email_field :email, class: 'form-control' %>
 	</div>
 	<div class='form-group'>
-		<%= label_tag :password %>
-		<%= password_field_tag :password, nil,  class: 'form-control' %>
+		<%= f.label :password %>
+		<%= f.password_field :password, class: 'form-control' %>
 	</div>
-	<div class='form-group'>
-		<%= label_tag :lembrar %>
-		<%= check_box_tag :lembrar, checked: false, class: 'form-control' %>
-	</div>
-
-	<%= submit_tag 'Log In', class: 'btn btn-primary' %>
-	<%= link_to 'Cadastre-se', new_estudante_path, class: 'btn btn-primary' %>
+	<%= f.submit 'Log In', class: 'btn btn-primary' %>
+	<%= link_to 'Cadastre-se', cadastro_path, class: 'btn btn-primary' %>
 <% end %>
-

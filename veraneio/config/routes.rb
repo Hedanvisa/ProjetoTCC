@@ -1,79 +1,38 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :periodos
-  end
-  root 'sessions#new'
 
-  resources :sessions
-  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
-  get 'professores/:professor_id/avaliacao/:trabalho_id', to: 'professores/avaliacao#index', as: 'avaliacao'
-  resources :professores do
-	resources :trabalhos do
-	  resources :pareceres
+	# Rotas para controle de login/logout
+	get 'login', to: 'sessions#new'
+	post 'login', to: 'sessions#create'
+	delete 'logout', to: 'sessions#destroy'
+
+	# Rota para cadastro
+	get 'cadastro', to: 'estudantes#new', as: 'cadastro'
+
+	# Rota padrao
+	root "sessions#new"
+
+	# Rotas das paginas de estudante e seu trabalho
+	resources :estudantes, only: [:create, :new, :show, :update] do
+		resources :trabalhos
 	end
-  end
-  resources :estudantes, only: [:create, :new, :show] do
-	  resources :trabalhos do
-	  end
-  end
 
-  get 'cadastrar', to: 'estudantes#new', as: 'cadastrar'
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
+	# Rotas para os professores
+	get 'professores/:professor_id/avaliacao/:trabalho_id', to: 'professores/avaliacao#index', as: 'avaliacao'
+	resources :professores do
+		resources :trabalhos do
+			resources :pareceres
+		end
+	end
 
-  namespace 'admin' do
-	  resources :professores
-	  resources :trabalhos
-	  resources :estudantes
-  end
+	# Rotas para as paginas de Admin
+	namespace 'admin' do
+		resources :professores
+		resources :trabalhos
+		resources :estudantes
+		resources :periodos
+	end
 
+	# Rotas para a leitura de pdf
+	mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
