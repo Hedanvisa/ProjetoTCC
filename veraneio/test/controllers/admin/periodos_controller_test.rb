@@ -12,7 +12,7 @@ class Admin::PeriodosControllerTest < ActionController::TestCase
   end
 
   test "should create admin_periodo" do
-    assert_difference('Admin::Periodo.count') do
+    assert_difference('Periodo.count') do
       post :create, periodo: { inicio: @admin_periodo.inicio, termino: @admin_periodo.termino }
     end
 
@@ -35,7 +35,7 @@ class Admin::PeriodosControllerTest < ActionController::TestCase
   end
 
   test "should destroy admin_periodo" do
-    assert_difference('Admin::Periodo.count', -1) do
+    assert_difference('Periodo.count', -1) do
       delete :destroy, id: @admin_periodo
     end
 
