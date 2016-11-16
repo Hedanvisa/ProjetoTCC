@@ -2,7 +2,7 @@ class Admin::TrabalhosController < ApplicationController
     layout 'admin'
 
     def index
-        @trabalhos = Trabalho.all
+        @trabalhos = Trabalho.order('updated_at DESC').all
         @professores = Professor.all
         @count_recebidos = Trabalho.where(estado: "Recebido do Aluno").count
         @count_avaliacao = Trabalho.where(estado: "Enviado para Avaliação").count
@@ -15,8 +15,8 @@ class Admin::TrabalhosController < ApplicationController
     end
 
     def update
-        @banca_1 = Professor.where(email: params[:trabalho][:banca_1]).first
-        @banca_2 = Professor.where(email: params[:trabalho][:banca_2]).first
+        @banca_1 = Professor.find_by(id: params[:trabalho][:banca_1])
+        @banca_2 = Professor.find_by(id: params[:trabalho][:banca_2])
         @trabalho = Trabalho.find params[:id]
         @orientador = @trabalho.orientador
 
@@ -24,7 +24,7 @@ class Admin::TrabalhosController < ApplicationController
         #puts("Email 2 #{@banca_2.email.empty?}")
 
         if @trabalho.estado == "Recebido do Aluno"
-            if @banca_1.nil? or @banca_2.nil?
+            if @banca_1.email.nil? or @banca_2.email.nil?
                 flash[:alert] = "Algum email vazio!"
                 puts(">>>>>>>>>>> Algum email vazio")
             
@@ -47,6 +47,15 @@ class Admin::TrabalhosController < ApplicationController
         end
         redirect_to admin_trabalhos_path
     end
+
+	def reenviar_email
+		professor = Professor.find(params[:professor_id])
+		trabalho = Trabalho.find(params[:trabalho_id])
+		Thread.new do
+			Notificador.banca_avaliacao(trabalho.estudante, professor).deliver_now
+		end
+		redirect_to admin_trabalhos_path
+	end
 
     private
     def trabalhos_param

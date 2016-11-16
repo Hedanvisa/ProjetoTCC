@@ -7,7 +7,7 @@ class FluxoCadastroEstudanteTrabalhoTest < ActionDispatch::IntegrationTest
 	end
 	
 	test "cadastro de estudante" do
-		get "/cadastrar"
+		get "/cadastro"
 		assert_response :success
 
 		post_via_redirect "/estudantes",
@@ -26,9 +26,9 @@ class FluxoCadastroEstudanteTrabalhoTest < ActionDispatch::IntegrationTest
 		get "/login"
 		assert_response :success
 
-		post_via_redirect "/sessions", 
-			email: @estudante.email, 
-			password: 'root'
+		post_via_redirect "/login", 
+			session: { email: @estudante.email, 
+			  		   password: 'root'}
 
 		assert_equal "/estudantes/#{@estudante.id}/trabalhos/#{@estudante.trabalho.id}", path
 		assert_response :success

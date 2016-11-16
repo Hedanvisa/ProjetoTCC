@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
 	# Rotas para controle de login/logout
 	get 'login', to: 'sessions#new'
 	post 'login', to: 'sessions#create'
@@ -13,7 +12,9 @@ Rails.application.routes.draw do
 
 	# Rotas das paginas de estudante e seu trabalho
 	resources :estudantes, only: [:create, :new, :show, :update] do
-		resources :trabalhos
+		resources :trabalhos do
+		  get 'reenviar_email/:professor_id',to: 'trabalhos#reenviar_email' ,as: 'reenviar'
+		end
 	end
 
 	# Rotas para os professores
@@ -34,5 +35,4 @@ Rails.application.routes.draw do
 
 	# Rotas para a leitura de pdf
 	mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
-
 end

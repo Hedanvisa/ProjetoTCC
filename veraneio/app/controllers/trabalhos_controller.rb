@@ -1,4 +1,5 @@
 class TrabalhosController < ApplicationController
+	include Admin::PeriodosHelper
 	before_action :set_estudante
 	before_action :autenticar_usuario!, only: [:edit, :show, :update, :create]
 
@@ -7,8 +8,6 @@ class TrabalhosController < ApplicationController
 		@trabalho.build_orientador
 		@trabalho.build_banca_1
 		@trabalho.build_banca_2
-		@horario_servidor = DateTime.now
-		@periodo_maximo = Periodo.order(:termino).last.termino
 	end
 
 	def show
@@ -32,7 +31,7 @@ class TrabalhosController < ApplicationController
 
 		@trabalho.estado = "Recebido do Aluno"
 
-		if (@periodo_maximo >= @horario_servidor) and @trabalho.save 
+		if @trabalho.save 
 			@adm = Admin.first
 			Thread.new do 
 				Notificador.admin_novo_trabalho(@adm, @estudante).deliver_now

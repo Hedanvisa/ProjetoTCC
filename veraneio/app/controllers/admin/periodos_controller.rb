@@ -5,17 +5,13 @@ class Admin::PeriodosController < ApplicationController
   # GET /admin/periodos
   # GET /admin/periodos.json
   def index
-    @admin_periodos = Periodo.all
+    @admin_periodos = Periodo.order('termino DESC').all
+    @admin_periodo = Periodo.new
   end
 
   # GET /admin/periodos/1
   # GET /admin/periodos/1.json
   def show
-  end
-
-  # GET /admin/periodos/new
-  def new
-    @admin_periodo = Periodo.new
   end
 
   # GET /admin/periodos/1/edit
@@ -25,7 +21,7 @@ class Admin::PeriodosController < ApplicationController
   # POST /admin/periodos
   # POST /admin/periodos.json
   def create
-    @admin_periodo = Periodo.new(admin_periodo_params)
+    @admin_periodo = Periodo.new admin_periodo_params
 
     respond_to do |format|
       if @admin_periodo.save
@@ -42,8 +38,8 @@ class Admin::PeriodosController < ApplicationController
   # PATCH/PUT /admin/periodos/1.json
   def update
     respond_to do |format|
-      if @admin_periodo.update(admin_periodo_params)
-        format.html { redirect_to @admin_periodo, notice: 'Período atualizado com sucesso.' }
+      if @admin_periodo.update admin_periodo_params 
+        format.html { redirect_to admin_periodo_path(@admin_periodo), notice: 'Período atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @admin_periodo }
       else
         format.html { render :edit }
