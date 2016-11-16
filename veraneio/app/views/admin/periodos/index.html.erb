@@ -24,7 +24,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="table-responsive">
+                            <div class="table-responsive teste">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -52,8 +52,8 @@
                                     <% @admin_periodos.each do |admin_periodo| %>
                                     <tbody>
                                         <tr>
-                                            <td><%= admin_periodo.inicio.strftime("%m/%d/%Y ") %><span class="text-muted small"><em><%= admin_periodo.termino.strftime(" %I:%M%p") %></em></td>
-                                            <td><%= admin_periodo.termino.strftime("%m/%d/%Y ") %><span class="text-muted small"><em><%= admin_periodo.termino.strftime(" %I:%M%p") %></em></td>
+                                            <td><%= admin_periodo.inicio.strftime("%d/%m/%Y ") %><span class="text-muted small"><em><%= admin_periodo.termino.strftime(" %I:%M%p") %></em></td>
+                                            <td><%= admin_periodo.termino.strftime("%d/%m/%Y ") %><span class="text-muted small"><em><%= admin_periodo.termino.strftime(" %I:%M%p") %></em></td>
                                             <td>10/21/2013</td>
                                             <% # link_to 'Edit', edit_admin_periodo_path(admin_periodo) %>
                                             <td><%= link_to 'Apagar Periodo', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-right" %></td>

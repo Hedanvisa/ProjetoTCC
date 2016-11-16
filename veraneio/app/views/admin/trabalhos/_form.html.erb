@@ -21,7 +21,11 @@
                                 <% end %>
                             <% end %>
                         </ol>
-                        <%= t.select :banca_1, options_for_select(@professores.collect{ |p| [p.nome, p.email] }), {include_blank: 'Ninguem selecionado'}, { class: "form form-group form-control" } %>
+                        <% if t.object.banca_1.nil? %>
+                            <%= t.collection_select :banca_1, Professor.all, :id, :nome_email, include_blank: 'Ninguem selecionado', class: "form form-group form-control"  %>
+                        <% else %>
+                            <%= t.collection_select :banca_1, Professor.all, :id, :nome_email, {:selected => t.object.banca_1.id}, {class: "form form-group form-control"}  %>
+                        <% end %>
                         <ol class="breadcrumb">
                             <li>Avaliador 2</li>
                             <% if !t.object.banca_2.nil? %>
@@ -37,8 +41,12 @@
                             <% end %>
                         </ol>
                     </h4>
-                    <%= t.select :banca_2, options_for_select(@professores.collect{ |p| [p.nome, p.email] }), {include_blank: 'Ninguem selecionado'}, { class: "form form-group form-control" } %>
-
+                        <% if t.object.banca_2.nil? %>
+                            <%= t.collection_select :banca_2, Professor.all, :id, :nome_email, {include_blank: 'Ninguem selecionado'}, { class: "form form-group form-control" } %>
+                        <% else %>
+                            <%= t.collection_select :banca_2, Professor.all, :id, :nome_email, {:selected => t.object.banca_2.id}, {class: "form form-group form-control"}  %>    
+                        <% end %>
+                        
                 </div>
             </div>
             

@@ -8,7 +8,7 @@ class Admin::ProfessoresController < ApplicationController
 
     def index
         @professor = Professor.new
-        @professores = Professor.all
+        @professores = Professor.order('updated_at DESC').all
     end
 
 	def edit

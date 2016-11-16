@@ -5,7 +5,7 @@ class Admin::PeriodosController < ApplicationController
   # GET /admin/periodos
   # GET /admin/periodos.json
   def index
-    @admin_periodos = Periodo.all
+    @admin_periodos = Periodo.order('termino DESC').all
     @admin_periodo = Periodo.new
   end
 
@@ -25,7 +25,7 @@ class Admin::PeriodosController < ApplicationController
 
     respond_to do |format|
       if @admin_periodo.save
-        format.html { redirect_to admin_periodo_path(@admin_periodo), notice: 'Período criado com sucesso.' }
+        format.html { redirect_to admin_periodos_path, notice: 'Período criado com sucesso.' }
         format.json { render :show, status: :created, location: @admin_periodo }
       else
         format.html { render :new }
