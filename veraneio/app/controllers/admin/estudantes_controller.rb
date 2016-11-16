@@ -2,7 +2,7 @@ class Admin::EstudantesController < ApplicationController
     layout 'admin'
     
     def index
-        @estudantes = Estudante.all
+        @estudantes = Estudante.order('updated_at DESC').all
     end
 
     def edit
