@@ -54,6 +54,6 @@
 		</div>
 	<% end %>
 
-	<%= trabalho.submit class: 'btn btn-primary' %>
+	<%= trabalho.submit disabled: !esta_periodo_aberto?, class: 'btn btn-primary' %>
 
 <% end %>

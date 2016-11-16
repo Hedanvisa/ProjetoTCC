@@ -1,4 +1,4 @@
-<h1>Novo Trabalho</h1>
+<h1>Alterar Trabalho</h1>
 
 <% if notice %>
 	<div class='alert alert-success'>
@@ -7,6 +7,10 @@
 <% elsif alert %>
 	<div class='alert alert-danger'>
 		<%= alert %>
+	</div>
+<% elsif !esta_periodo_aberto? %>
+	<div class='alert alert-danger'>
+		Voce nao pode atualizar o trabalho porque o periodo de envio terminou
 	</div>
 <% end %>
 

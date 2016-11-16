@@ -1,4 +1,5 @@
 class TrabalhosController < ApplicationController
+	include Admin::PeriodosHelper
 	before_action :set_estudante
 	before_action :autenticar_usuario!, only: [:edit, :show, :update]
 
