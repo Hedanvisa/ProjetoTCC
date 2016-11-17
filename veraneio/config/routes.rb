@@ -12,9 +12,7 @@ Rails.application.routes.draw do
 
 	# Rotas das paginas de estudante e seu trabalho
 	resources :estudantes, only: [:create, :new, :show, :update] do
-		resources :trabalhos do
-		  get 'reenviar_email/:professor_id',to: 'trabalhos#reenviar_email' ,as: 'reenviar'
-		end
+		resources :trabalhos 
 	end
 
 	# Rotas para os professores
@@ -28,7 +26,9 @@ Rails.application.routes.draw do
 	# Rotas para as paginas de Admin
 	namespace 'admin' do
 		resources :professores
-		resources :trabalhos
+		resources :trabalhos do
+		  get 'reenviar_email/:professor_id',to: 'trabalhos#reenviar_email' ,as: 'reenviar'
+		end
 		resources :estudantes
 		resources :periodos
 	end

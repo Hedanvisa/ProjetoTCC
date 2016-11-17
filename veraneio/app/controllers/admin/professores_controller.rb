@@ -16,8 +16,8 @@ class Admin::ProfessoresController < ApplicationController
 
 	def destroy
         @em_orientacao = Trabalho.where(orientador: @professor.id)
-        @em_avaliacao_1 = Trabalho.where(banca_1: @professor.id, estado: "Enviado para Avaliação")
-        @em_avaliacao_2 = Trabalho.where(banca_2: @professor.id, estado: "Enviado para Avaliação")
+        @em_avaliacao_1 = Trabalho.where(banca_1: @professor.id).where.not(estado: "Recebido do Aluno")
+        @em_avaliacao_2 = Trabalho.where(banca_2: @professor.id).where.not(estado: "Recebido do Aluno")
         
         if @em_orientacao.empty? and @em_avaliacao_1.empty? and @em_avaliacao_2.empty?
             if @professor.destroy
@@ -26,7 +26,7 @@ class Admin::ProfessoresController < ApplicationController
                 redirect_to admin_professores_path, notice: "Erro ao excluir Professor"
             end
         else
-            redirect_to admin_professores_path, alert: "Não é possível excluir esse professor. Ele está em Orientação ou recebeu trabalho como Avaliador"
+            redirect_to admin_professores_path, alert: "Não é possível excluir esse professor. Ele está em Orientação ou recebeu um Trabalho como Avaliador"
         end
 	end
 

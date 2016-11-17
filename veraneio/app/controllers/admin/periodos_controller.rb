@@ -7,6 +7,9 @@ class Admin::PeriodosController < ApplicationController
   def index
     @admin_periodos = Periodo.order('termino DESC').all
     @admin_periodo = Periodo.new
+    @periodo_atual = Periodo.where(termino: Periodo.maximum('termino')).first
+    @termino = DateTime.new
+    @inicio = DateTime.new
   end
 
   # GET /admin/periodos/1
@@ -22,9 +25,14 @@ class Admin::PeriodosController < ApplicationController
   # POST /admin/periodos.json
   def create
     @admin_periodo = Periodo.new admin_periodo_params
+    @periodo_atual = Periodo.where(termino: Periodo.maximum('termino')).first
 
     respond_to do |format|
-      if @admin_periodo.save
+      if @admin_periodo.inicio < @periodo_atual.termino
+        format.html { redirect_to admin_periodos_path, alert: 'Nao e possivel criar um novo Periodo. Data inicial e menor que a data final do ultimo periodo valido.' }
+      elsif @admin_periodo.termino < @admin_periodo.inicio
+        format.html { redirect_to admin_periodos_path, alert: 'Periodo invalido. Data final e menor que data inicial.' }        
+      elsif @admin_periodo.save
         format.html { redirect_to admin_periodos_path, notice: 'Período criado com sucesso.' }
         format.json { render :show, status: :created, location: @admin_periodo }
       else

@@ -5,6 +5,7 @@
 <% end %>
     <div class="row">
         <div class="col-lg-12">
+            <% if @periodo_atual.nil? or @periodo_atual.termino < DateTime.now %>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3> Novo Periodo </h3>
@@ -15,6 +16,9 @@
                 </div>
                 <!-- /.panel-body -->
             </div>
+            <% else %>
+
+            <% end %>
             <!-- /.panel -->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -56,7 +60,14 @@
                                             <td><%= admin_periodo.termino.strftime("%d/%m/%Y ") %><span class="text-muted small"><em><%= admin_periodo.termino.strftime(" %I:%M%p") %></em></td>
                                             <td>10/21/2013</td>
                                             <% # link_to 'Edit', edit_admin_periodo_path(admin_periodo) %>
-                                            <td><%= link_to 'Apagar Periodo', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-right" %></td>
+                                            <% if admin_periodo.termino == @periodo_atual.termino%>
+                                                <td>
+                                                    <%= link_to 'Apagar Periodo', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-right" %>
+                                                    <%= link_to 'Abrir Excecao', edit_admin_periodo_path(admin_periodo), class: "btn btn-info" %>
+                                                </td>
+                                            <% else %>
+                                                <td><%= link_to 'Apagar Periodo', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-right" %></td>
+                                            <% end %>
                                         </tr>
                                     </tbody>
                                     <% end %>
