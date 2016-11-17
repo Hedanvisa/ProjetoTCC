@@ -28,9 +28,9 @@ class Admin::PeriodosController < ApplicationController
     @periodo_atual = Periodo.where(termino: Periodo.maximum('termino')).first
 
     respond_to do |format|
-      if @admin_periodo.inicio < @periodo_atual.termino
+      if !@periodo_atual.nil? and @admin_periodo.inicio < @periodo_atual.termino
         format.html { redirect_to admin_periodos_path, alert: 'Nao e possivel criar um novo Periodo. Data inicial e menor que a data final do ultimo periodo valido.' }
-      elsif @admin_periodo.termino < @admin_periodo.inicio
+      elsif !@periodo_atual.nil? and @admin_periodo.termino < @admin_periodo.inicio
         format.html { redirect_to admin_periodos_path, alert: 'Periodo invalido. Data final e menor que data inicial.' }        
       elsif @admin_periodo.save
         format.html { redirect_to admin_periodos_path, notice: 'Período criado com sucesso.' }
