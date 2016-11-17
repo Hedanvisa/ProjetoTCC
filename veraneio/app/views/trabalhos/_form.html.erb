@@ -1,18 +1,19 @@
-<%= form_for([@estudante, @trabalho]) do |trabalho| %>
-	<% if @trabalho.errors.any? %>
+<%=form_for([@estudante, @trabalho]) do |trabalho|%>
+	<%if @trabalho.errors.any?%>
 		<div class='alert alert-danger'>
 			<strong>
 				Não foi possível completar o cadastro:
 			</strong>
 			<ul>
-				<% @trabalho.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
+				<%@trabalho.errors.full_messages.each do |msg|%>
+					<li><%=msg%></li>
+				<%end%>
 			</ul>
 		</div>
-	<% end %>
+	<%end%>
 
 	<div class='form-group'>
+
 			<ol class="breadcrumb"> 
 				<li> <b>Data limite: <%= ultimo_periodo %></b> </li>
 			       		</ol>
@@ -33,37 +34,39 @@
 
 		<% if esta_periodo_aberto? %>
 		<div class='form-group'>
-			<%= trabalho.label "Fazer upload" %>
-			<%= trabalho.file_field :arquivo, class: 'form-control' %>
+			<%=trabalho.label "Fazer upload"%>
+			<%=trabalho.file_field :arquivo, class: 'form-control'%>
 		</div>
 	<% end %>
 
 
-	<%= trabalho.fields_for :orientador, @trabalho.orientador do |orientador| %>
+	<%=trabalho.fields_for :orientador, @trabalho.orientador do |orientador|%>
 		<div class='form-group'>
-			<%= orientador.label :nome, "Nome do Orientador" %>
-			<%= orientador.text_field :nome, class: 'form-control', required: true %>
+			<%=orientador.label :nome, "Nome do Orientador"%>
+			<%=orientador.text_field :nome, class: 'form-control', required: true%>
 		</div>
 		<div class='form-group'>
-			<%= orientador.label :email, "Email do Orientador" %>
-			<%= orientador.email_field :email, class: 'form-control' , required: true %>
+			<%=orientador.label :email, "Email do Orientador"%>
+			<%=orientador.email_field :email, class: 'form-control' , required: true%>
 		</div>
-	<% end %>
+	<%end%>
 	
-	<%= trabalho.fields_for :banca_1, @trabalho.banca_1 do |banca| %>
+	<%=trabalho.fields_for :banca_1, @trabalho.banca_1 do |banca|%>
 		<div class='form-group'>
-			<%= banca.label :nome, "Nome da Banca 1" %>
-			<%= banca.text_field :nome, class: 'form-control' %>
+			<%=banca.label :nome, "Nome da Banca 1"%>
+			<%=banca.text_field :nome, class: 'form-control'%>
 		</div>
-	<% end %>
+	<%end%>
 
-	<%= trabalho.fields_for :banca_2, @trabalho.banca_2 do |banca| %>
+	<%=trabalho.fields_for :banca_2, @trabalho.banca_2 do |banca|%>
 		<div class='form-group'>
-			<%= banca.label :nome, "Nome da Banca 2" %>
-			<%= banca.text_field :nome, class: 'form-control' %>
+			<%=banca.label :nome, "Nome da Banca 2"%>
+			<%=banca.text_field :nome, class: 'form-control'%>
 		</div>
-	<% end %>
+	<%end%>
 
-	<%= trabalho.submit disabled: !esta_periodo_aberto?, class: 'btn btn-primary' %>
+	<%if esta_periodo_aberto?%>
+	<%=trabalho.submit  class: 'btn btn-primary'%>
+	<%end%>
 
-<% end %>
+<%end%>
