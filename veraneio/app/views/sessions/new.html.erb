@@ -2,6 +2,12 @@
 	<h2>Log in</h2>
 </div>
 
+<%if !esta_periodo_aberto?%>
+	<div class="alert alert-warning">
+		O período de Cadastros e Envios acabou, não será possivel atualizar ou enviar seu trabalho.
+	</div>
+<% end %>
+
 <% if notice %>
 	<div class='alert alert-success'>
 		<%= notice %>
@@ -23,10 +29,10 @@
 		<%= f.password_field :password, class: 'form-control' %>
 	</div>
 	<%= f.submit 'Log In', class: 'btn btn-primary' %>
-	<%if esta_periodo_aberto?%>
+	<% if esta_periodo_aberto?%>
 		<%= link_to 'Cadastre-se', cadastro_path, class: 'btn btn-primary' %>
-	<%else %>
+	<% else %>
 	 <div class='btn btn-primary disabled'>Cadastre-se</div>
-	<%end%>
+	<% end %>
 
 <% end %>
