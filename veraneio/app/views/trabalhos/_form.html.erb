@@ -13,10 +13,13 @@
 	<%end%>
 
 	<div class='form-group'>
-
-			<ol class="breadcrumb"> 
-				<li> <b>Data limite: <%= ultimo_periodo %></b> </li>
-			       		</ol>
+			<ol class="breadcrumb">
+				<% if @ultimo_periodo.nil? %>
+					<li> <b>Não há Período válido. Aguarde a abertura de um novo Período. </b></li>
+				<% else %>
+					<li> <b>Data limite: <%= ultimo_periodo %></b> </li>
+				<% end %>
+			</ol>
 		<%= trabalho.label :titulo %>
 		<%= trabalho.text_field :titulo, class: 'form-control' %>
 	</div>
@@ -25,14 +28,11 @@
 		<div class='form-group'>
 			<%= trabalho.label :arquivo %>
 			<%= link_to "#{@trabalho.arquivo_file_name}" , @trabalho.arquivo.url(:original) %>
-			<ol class="breadcrumb"> 
-				<li> <b>Data limite: <%= ultimo_periodo %></b> </li>
-			       		</ol>
 		</div>
 	<% end %>
 
 
-		<% if esta_periodo_aberto? %>
+	<% if esta_periodo_aberto? %>
 		<div class='form-group'>
 			<%=trabalho.label "Fazer upload"%>
 			<%=trabalho.file_field :arquivo, class: 'form-control'%>

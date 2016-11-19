@@ -8,6 +8,7 @@ class TrabalhosController < ApplicationController
 		@trabalho.build_orientador
 		@trabalho.build_banca_1
 		@trabalho.build_banca_2
+		@periodo_maximo = Periodo.order(:termino).last
 	end
 
 	def show

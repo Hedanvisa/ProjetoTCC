@@ -1,38 +1,60 @@
-<div class='page-header'>
-	<h2>Log in</h2>
+
+<div class="container">
+    <div class="row">
+        <div class='col-md-3'></div>
+			<div class="col-md-6">
+				
+				<% if !esta_periodo_aberto? %>
+					<div class="alert alert-warning">
+						O período de Cadastros e Envios acabou, não será possivel atualizar ou enviar seu trabalho.
+					</div>
+				<% end %>
+
+				<% if notice %>
+					<div class='alert alert-success'>
+						<%= notice %>
+					</div>
+				<% elsif alert %>
+					<div class='alert alert-danger'>
+						<%= alert %>
+					</div>
+				<% end %>
+				<div class="login-box well">
+						
+					<%= form_for :session, url: login_path, class: 'form-signin' do |f| %>
+						<legend>Sign In</legend>
+						<div class='form-group'>
+							<%= f.label :email %>
+							<%= f.email_field :email, class: 'form-control' %>
+						</div>
+						<div class='form-group'>
+							<%= f.label :password %>
+							<%= f.password_field :password, class: 'form-control' %>
+						</div>
+						<%= f.submit 'Log In', class: 'btn btn-success btn-login-submit btn-block m-t-md' %>
+					
+						<div class="input-group">
+							<div class="checkbox">
+							<label>
+								<input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+							</label>
+							</div>
+						</div>
+						
+						<span class='text-center'><a href="/resetting/request" class="text-sm">Forgot Password?</a></span>
+						<div class="form-group">
+							<p class="text-center m-t-xs text-sm">Ainda não tem acesso?</p>
+							<% if esta_periodo_aberto?%>
+								<%= link_to 'Cadastre-se', cadastro_path, class: 'btn btn-warning btn-block m-t-md' %>
+							<% else %>
+								<div class='btn btn-warning btn-block m-t-md disabled'>Cadastre-se</div>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+        <div class='col-md-3'></div>
+    </div>
 </div>
 
-<%if !esta_periodo_aberto?%>
-	<div class="alert alert-warning">
-		O período de Cadastros e Envios acabou, não será possivel atualizar ou enviar seu trabalho.
-	</div>
-<% end %>
 
-<% if notice %>
-	<div class='alert alert-success'>
-		<%= notice %>
-	</div>
-<% elsif alert %>
-	<div class='alert alert-danger'>
-		<%= alert %>
-	</div>
-<% end %>
-
-
-<%= form_for :session, url: login_path, class: 'form-signin' do |f| %>
-	<div class='form-group'>
-		<%= f.label :email %>
-		<%= f.email_field :email, class: 'form-control' %>
-	</div>
-	<div class='form-group'>
-		<%= f.label :password %>
-		<%= f.password_field :password, class: 'form-control' %>
-	</div>
-	<%= f.submit 'Log In', class: 'btn btn-primary' %>
-	<% if esta_periodo_aberto?%>
-		<%= link_to 'Cadastre-se', cadastro_path, class: 'btn btn-primary' %>
-	<% else %>
-	 <div class='btn btn-primary disabled'>Cadastre-se</div>
-	<% end %>
-
-<% end %>
