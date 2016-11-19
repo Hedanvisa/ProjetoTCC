@@ -22,7 +22,7 @@
                             <% end %>
                         </ol>
                         <% if t.object.banca_1.nil? %>
-                            <%= t.collection_select :banca_1, Professor.all, :id, :nome_email, include_blank: 'Ninguem selecionado', class: "form form-group form-control"  %>
+                            <%= t.collection_select :banca_1, Professor.all, :id, :nome_email, {include_blank: 'Ninguem selecionado'}, {class: "form form-group form-control"}  %>
                         <% else %>
                             <%= t.collection_select :banca_1, Professor.all, :id, :nome_email, {:selected => t.object.banca_1.id}, {class: "form form-group form-control"}  %>
                         <% end %>

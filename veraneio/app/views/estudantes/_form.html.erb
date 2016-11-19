@@ -1,33 +1,67 @@
-<%= form_for(@estudante) do |f| %>
-	<% if @estudante.errors.any? %>
-		<div class='alert alert-danger'>
-			<strong>
-				Não foi possível completar o cadastro:
-			</strong>
-			<ul>
-				<% @estudante.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
+
+<div class="container">
+    <div class="row">
+        <div class='col-md-3'></div>
+			<div class="col-md-6">
+				
+				<% if !esta_periodo_aberto? %>
+					<div class="alert alert-warning">
+						O período de Cadastros e Envios acabou, não será possivel atualizar ou enviar seu trabalho.
+					</div>
 				<% end %>
-			</ul>
-		</div>
-	<% end %>
 
-	<%= f.label :nome, class: 'form-group' %>
-	<%= f.text_field :nome, class: 'form-control form-group' %>
-	
-	<%= f.label :ra, class: 'form-group' %>
-	<%= f.text_field :ra, class: 'form-control form-group' %>
+				<% if notice %>
+					<div class='alert alert-success'>
+						<%= notice %>
+					</div>
+				<% elsif alert %>
+					<div class='alert alert-danger'>
+						<%= alert %>
+					</div>
+				<% end %>
+				<% if @estudante.errors.any? %>
+					<div class='alert alert-danger'>
+						<strong>
+							Não foi possível completar o cadastro:
+						</strong>
+						<ul>
+							<% @estudante.errors.full_messages.each do |msg| %>
+								<li><%= msg %></li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
+				<div class="login-box well">
+						
+					<%= form_for(@estudante) do |f| %>
+						<legend>Novo Aluno</legend>
 
-	<%= f.label :email, class: 'form-group' %>
-	<%= f.email_field :email, class: 'form-control form-group' %>
+						<%= f.label :nome, class: 'form-group' %>
+						<%= f.text_field :nome, class: 'form-control form-group' %>
+						
+						<%= f.label :ra, class: 'form-group' %>
+						<%= f.text_field :ra, class: 'form-control form-group' %>
 
-	<%= f.label :password, class: 'form-group' %>
-	<%= f.password_field :password, class: 'form-control form-group' %>
+						<%= f.label :email, class: 'form-group' %>
+						<%= f.email_field :email, class: 'form-control form-group' %>
 
-	<%= f.label :password_confirmation, class: 'form-group' %>
-	<%= f.password_field :password_confirmation, class: 'form-control form-group' %>
+						<%= f.label :senha, class: 'form-group' %>
+						<%= f.password_field :password, class: 'form-control form-group' %>
 
-	<%= f.submit "Cadastrar", class: 'btn btn-primary' %>
+						<%= f.label :confirmacao_de_senha, class: 'form-group' %>
+						<%= f.password_field :confirmacao_de_senha, class: 'form-control form-group' %>
 
-<% end %>
+						<%= f.submit "Avançar", class: 'btn btn-primary btn-login-submit btn-block m-t-md' %>
+
+					<% end %>
+
+
+				</div>
+			</div>
+        <div class='col-md-3'></div>
+    </div>
+</div>
+
+
+
 

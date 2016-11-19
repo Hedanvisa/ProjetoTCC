@@ -16,6 +16,7 @@ class TrabalhosController < ApplicationController
 		@orientador = @trabalho.orientador
 		@banca_1 = @trabalho.banca_1
 		@banca_2 = @trabalho.banca_2
+		@periodo_maximo = Periodo.order(:termino).last
 
 		render 'edit'
 	end
