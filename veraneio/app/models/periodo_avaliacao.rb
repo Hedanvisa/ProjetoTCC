@@ -1,0 +1,2 @@
+class PeriodoAvaliacao < Periodo
+end

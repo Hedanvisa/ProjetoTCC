@@ -1,0 +1,2 @@
+class PeriodoTrabalho < Periodo
+end
