@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
 	# Rotas das paginas de estudante e seu trabalho
 	resources :estudantes, only: [:create, :new, :show, :update] do
-		resources :trabalhos 
+		resources :trabalhos, only: [:create, :new, :show, :destroy, :update]
 	end
 
 	# Rotas para os professores
