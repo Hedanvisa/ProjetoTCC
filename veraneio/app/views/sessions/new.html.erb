@@ -3,10 +3,10 @@
     <div class="row">
         <div class='col-md-3'></div>
 			<div class="col-md-6">
-				
+
 				<% if !esta_periodo_aberto? %>
 					<div class="alert alert-warning">
-						O período de Cadastros e Envios acabou, não será possivel atualizar ou enviar seu trabalho.
+						O período de Cadastros e Envios acabou. Não será possivel atualizar ou enviar seu trabalho.
 					</div>
 				<% end %>
 
@@ -20,7 +20,7 @@
 					</div>
 				<% end %>
 				<div class="login-box well">
-						
+
 					<%= form_for :session, url: login_path, class: 'form-signin' do |f| %>
 						<legend>Sign In</legend>
 						<div class='form-group'>
@@ -32,7 +32,7 @@
 							<%= f.password_field :password, class: 'form-control' %>
 						</div>
 						<%= f.submit 'Log In', class: 'btn btn-success btn-login-submit btn-block m-t-md' %>
-					
+
 						<div class="input-group">
 							<div class="checkbox">
 							<label>
@@ -40,7 +40,7 @@
 							</label>
 							</div>
 						</div>
-						
+
 						<span class='text-center'><a href="/resetting/request" class="text-sm">Forgot Password?</a></span>
 						<div class="form-group">
 							<p class="text-center m-t-xs text-sm">Ainda não tem acesso?</p>
@@ -56,5 +56,3 @@
         <div class='col-md-3'></div>
     </div>
 </div>
-
-
