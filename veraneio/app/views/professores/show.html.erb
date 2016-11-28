@@ -101,7 +101,7 @@
 			<% if trabalho2.estado == "Enviado para Avaliação" %> 
 			  <ol class="breadcrumb"> 
 				
-					<% if trabalho2.nota_banca_1.nil? %>
+					<% if trabalho2.nota_banca_2.nil? %>
 						<li><span class="label label-warning"> Ainda sem nota </span></li>
 					<% else %>
 						<li><span class="label label-success"> Minha Nota <%= trabalho2.nota_banca_2 %> </span></li>
