@@ -13,9 +13,9 @@
 		  <% @trabalhos_orientador.each do |trabalho|%>
 			<div class="panel-body list-group-item">
 
-			<% if trabalho.estado == "Avaliado" %> 
-			  <ol class="breadcrumb"> 
-				
+			<% if trabalho.estado == "Avaliado" %>
+			  <ol class="breadcrumb">
+
 					<% if trabalho.nota_orientador.nil? %>
 						<li><span class="label label-warning">Ainda sem nota</span></li>
 					<% else %>
@@ -38,23 +38,23 @@
 							<li><span class="label label-default">Aguardando</span></li>
 						<% end %>
 				</ol>
-		  <% elsif trabalho.estado == "Encaminhado para o Orientador" %> 
+		  <% elsif trabalho.estado == "Encaminhado para o Orientador" %>
 			  <span class="label label-success">Avaliado</span>
 		  <% end %>
 
 			<h4><%= trabalho.estudante.nome %> </h4>
 			<h3><%= trabalho.titulo %></h3>
 
-			<%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:id], trabalho), class: 'btn btn-primary', :target => "_blank" %>
+			<%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:id], trabalho), class: 'btn btn-primary' %>
 			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho), class: 'btn btn-primary' %>
-			<%= link_to "Concluir Avaliação", trabalho.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
+			<%= link_to "Concluir Avaliação", trabalho.arquivo.url, class: 'btn btn-success pull-right' %>
 		  </div>
 		<% end %>
-		</ul>                
+		</ul>
 	  </div>
 	</div>
   </div>
-</div> 
+</div>
 
 
 <div class="panel-group" id="accordion">
@@ -73,8 +73,8 @@
 			<div class="panel-body list-group-item">
 
 			<% if trabalho1.estado == "Enviado para Avaliação" %>
-			  <ol class="breadcrumb"> 
-				
+			  <ol class="breadcrumb">
+
 					<% if trabalho1.nota_banca_1.nil? %>
 						<li><span class="label label-warning"> Ainda sem nota </span></li>
 					<% else %>
@@ -83,16 +83,16 @@
 						<li>Professor Orientador</li>
 						<li><%= trabalho1.orientador.nome %></li>
 				</ol>
-		  <% elsif trabalho1.estado == "Encaminhado para o Orientador" %> 
+		  <% elsif trabalho1.estado == "Encaminhado para o Orientador" %>
 			  <span class="label label-success">Avaliado</span>
 		  <% end %>
 
 			<h4><%= trabalho1.estudante.nome %> </h4>
 			<h3><%= trabalho1.titulo %></h3>
 
-			<%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:id], trabalho1), class: 'btn btn-primary', :target => "_blank" %>
+			<%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:id], trabalho1), class: 'btn btn-primary'%>
 			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho1), class: 'btn btn-primary' %>
-			<%= link_to "Concluir Avaliação", trabalho1.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
+			<%= link_to "Concluir Avaliação", trabalho1.arquivo.url, class: 'btn btn-success pull-right'%>
 		  </div>
 		<% end %>
 		  <% @trabalhos_banca_2.each do |trabalho2|%>
@@ -109,19 +109,19 @@
 						<li>Professor Orientador</li>
 						<li><%= trabalho2.orientador.nome %></li>
 				</ol>
-		  <% elsif trabalho2.estado == "Encaminhado para o Orientador" %> 
+		  <% elsif trabalho2.estado == "Encaminhado para o Orientador" %>
 			  <span class="label label-success">Avaliado</span>
 		  <% end %>
 
 			<h4> <%= trabalho2.estudante.nome %> </h4>
 			<h4><%= trabalho2.titulo %></h4>
 
-			<%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:id], trabalho2), class: 'btn btn-primary', :target => "_blank" %>
+			<%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:id], trabalho2), class: 'btn btn-primary' %>
 			<%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:id], trabalho2), class: 'btn btn-primary' %>
-			<%= link_to "Concluir Avaliação", trabalho2.arquivo.url, class: 'btn btn-success pull-right', :target => "_blank" %>
+			<%= link_to "Concluir Avaliação", trabalho2.arquivo.url, class: 'btn btn-success pull-right' %>
 		  </div>
 		<% end %>
-		</ul>           
+		</ul>
 	  </div>
 	</div>
   </div>
