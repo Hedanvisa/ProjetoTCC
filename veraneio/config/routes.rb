@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 	# Rotas para os professores
 	get 'professores/:professor_id/avaliacao/:trabalho_id', to: 'professores/avaliacao#index', as: 'avaliacao'
 	resources :professores do
-		resources :trabalhos do
+		resources :trabalhos, controller: 'professores/trabalhos' do
 			resources :pareceres
 		end
 	end

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Veraneio</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
+					<ul class="nav navbar-nav">
+                        <% if params[:professor_id].nil? %>
+                            <% params[:professor_id] = params[:id]%>
+                        <% end %>
+						<li class="<%= 'active' if current_page?(professor_trabalhos_path(params[:professor_id])) %>"><%= link_to "Trabalhos", professor_trabalhos_path(params[:professor_id]) %></li>
+					</ul>
+					<% if !current_page?(login_path) and tem_alguem_logado %>
+						<ul class="nav navbar-nav navbar-right">
+							<li><%= link_to "Sair", logout_path %></li>
+						</ul>
+					<% end %>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<%= yield %>
+		</div>
+	</body>
+</html>

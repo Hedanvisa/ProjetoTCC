@@ -1,5 +1,6 @@
 class ProfessoresController < ApplicationController
 	before_action :set_professor, only: [:destroy]
+	layout 'professor'
 
 	def index
 	end
