@@ -3,10 +3,10 @@
     <div class="row">
         <div class='col-md-3'></div>
 			<div class="col-md-6">
-				
+
 				<% if !esta_periodo_aberto? %>
-					<div class="alert alert-warning">
-						O período de Cadastros e Envios acabou, não será possivel atualizar ou enviar seu trabalho.
+					<div class="alert alert-danger">
+						O período de Cadastros e Envios acabou. Não será possivel atualizar ou enviar seu trabalho.
 					</div>
 				<% elsif notice %>
 					<div class='alert alert-success notification-show'>
@@ -30,7 +30,7 @@
 				<% end %>
 				<div class="login-box well">
 					<%=form_for([@estudante, @trabalho]) do |trabalho|%>
-						
+
 						<legend>Trabalho de Conclusão de Curso 1</legend>
 						<div class='form-group'>
 								<ol class="breadcrumb">
@@ -43,7 +43,7 @@
 							<%= trabalho.label :titulo %>
 							<%= trabalho.text_field :titulo, class: 'form-control' %>
 						</div>
-						
+
 						<% if @trabalho.arquivo.exists? %>
 							<div class='form-group'>
 								<%= trabalho.label :arquivo %>
@@ -70,7 +70,7 @@
 								<%=orientador.email_field :email, class: 'form-control' , required: true%>
 							</div>
 						<%end%>
-						
+
 						<%=trabalho.fields_for :banca_1, @trabalho.banca_1 do |banca|%>
 							<div class='form-group'>
 								<%=banca.label :nome, "Nome da Banca 1"%>
