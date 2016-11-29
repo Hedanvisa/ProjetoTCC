@@ -7,7 +7,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
       <div>
-        <%= link_to 'Voltar para trabalhos', professor_path(@professor), class: 'btn btn-warning btn-block' %>
+        <%= link_to 'Voltar para trabalhos', professor_trabalhos_path(@professor), class: 'btn btn-warning btn-block' %>
       </div>
         <% if @pareceres.empty? %>
             <i class="fa fa-clock-o fa-fw"></i> Sem Pareceres, ainda
