@@ -6,6 +6,9 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
+      <div>
+        <%= link_to 'Voltar para trabalhos', professor_path(@professor), class: 'btn btn-warning btn-block' %>
+      </div>
         <% if @pareceres.empty? %>
             <i class="fa fa-clock-o fa-fw"></i> Sem Pareceres, ainda
         <% else %>
@@ -19,7 +22,7 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion2" href="#a">
-                        <ol class="breadcrumb"> 
+                        <ol class="breadcrumb">
                         <li>Novo Parecer</li>
                         </ol>
                     </a>

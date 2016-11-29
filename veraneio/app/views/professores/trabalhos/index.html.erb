@@ -1,0 +1,46 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+	<div class="panel-heading ca">
+	  <h4 class="panel-title">
+		<a data-toggle="collapse" data-parent="#accordion" href="#accord1" class="cabecalho">
+		  <h2> Orientador </h2>
+		</a>
+	  </h4>
+	</div>
+	<div id="accord1" class="panel-collapse collapse out">
+	  <div class="panel-body">
+			<ul class="list-group ">
+				<% @trabalhos_orientador.each do |trabalho|%>
+					<%= render 'form' , trabalho: trabalho %>
+				<% end %>
+			</ul>
+	  </div>
+	</div>
+  </div>
+</div>
+
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+	<div class="panel-heading ca">
+	  <h4 class="panel-title">
+		<a data-toggle="collapse" data-parent="#accordion" href="#accord2" class="cabecalho">
+		  <h2> Avaliador </h2>
+		</a>
+	  </h4>
+	</div>
+	<div id="accord2" class="panel-collapse collapse out">
+	  <div class="panel-body">
+		<ul class="list-group ">
+		  <% @trabalhos_banca_1.each do |trabalho1|%>
+				<%= render 'form' , trabalho: trabalho1 %>
+			<% end %>
+
+		  <% @trabalhos_banca_2.each do |trabalho2|%>
+				<%= render 'form' , trabalho: trabalho2 %>
+			<% end %>
+		</ul>
+	  </div>
+	</div>
+  </div>
+</div>

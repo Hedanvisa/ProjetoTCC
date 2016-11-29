@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :periodo_trabalhos
+  resources :periodo_avaliacoes
 	# Rotas para controle de login/logout
 	get 'login', to: 'sessions#new'
 	post 'login', to: 'sessions#create'
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
 	# Rotas para os professores
 	get 'professores/:professor_id/avaliacao/:trabalho_id', to: 'professores/avaliacao#index', as: 'avaliacao'
 	resources :professores do
-		resources :trabalhos do
+		resources :trabalhos, controller: 'professores/trabalhos' do
 			resources :pareceres
 		end
 	end

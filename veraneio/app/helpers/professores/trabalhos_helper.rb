@@ -1,0 +1,2 @@
+module Professores::TrabalhosHelper
+end
