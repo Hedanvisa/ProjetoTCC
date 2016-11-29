@@ -1,0 +1,2 @@
+class PeriodoAvaliacoesController < ApplicationController
+end
