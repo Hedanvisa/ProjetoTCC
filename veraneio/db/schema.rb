@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161113220758) do
+ActiveRecord::Schema.define(version: 20161122225052) do
 
   create_table "pareceres", force: :cascade do |t|
     t.integer  "pagina"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20161113220758) do
     t.datetime "termino"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "type"
   end
 
   create_table "trabalhos", force: :cascade do |t|

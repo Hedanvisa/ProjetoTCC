@@ -1,0 +1,2 @@
+class PeriodoTrabalhosController < ApplicationController
+end

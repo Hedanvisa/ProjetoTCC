@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :periodo_trabalhos
+  resources :periodo_avaliacoes
 	# Rotas para controle de login/logout
 	get 'login', to: 'sessions#new'
 	post 'login', to: 'sessions#create'
