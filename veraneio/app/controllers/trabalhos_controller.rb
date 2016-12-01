@@ -14,11 +14,13 @@ class TrabalhosController < ApplicationController
 	def show
 		@trabalho = @estudante.trabalho
 		@orientador = @trabalho.orientador
-		@banca_1 = @trabalho.banca_1
-		@banca_2 = @trabalho.banca_2
+		@banca_1 = @trabalho.banca_1 || @trabalho.build_banca_1
+		@banca_2 = @trabalho.banca_2 || @trabalho.build_banca_2
 		@periodo_maximo = Periodo.order(:termino).last
 
-		render 'edit'
+		respond_to do |format|
+			format.html { render 'edit' } 
+		end
 	end
 
 	def create
@@ -49,15 +51,17 @@ class TrabalhosController < ApplicationController
 
 	def edit
 		@trabalho = @estudante.trabalho
+		@trabalho.banca_1 ||= @trabalho.build_banca_1
+		@trabalho.banca_2 ||= @trabalho.build_banca_2
 	end
 
 	def update
 		@horario_servidor = DateTime.now
 		@periodo_maximo = Periodo.order(:termino).last.termino
 		@trabalho = @estudante.trabalho
-		@orientador = Professor.where(email: params[:trabalho][:orientador_attributes][:email]).first
-		@banca_1 = Professor.where(nome: params[:trabalho][:banca_1_attributes][:nome]).first
-		@banca_2 = Professor.where(nome: params[:trabalho][:banca_2_attributes][:nome]).first
+		@orientador = Professor.find_by(email: params[:trabalho][:orientador_attributes][:email])
+		@banca_1 = Professor.find_by(nome: params[:trabalho][:banca_1_attributes][:nome])
+		@banca_2 = Professor.find_by(nome: params[:trabalho][:banca_2_attributes][:nome])
 
 		verifica_se_existe_no_banco
 
@@ -66,11 +70,13 @@ class TrabalhosController < ApplicationController
 			@trabalho.arquivo = params[:trabalho][:arquivo]
 		end
 
-		if (@periodo_maximo >= @horario_servidor) and @trabalho.save
-			flash.now[:notice] = "Seu trabalho foi atualizado com sucesso!"
-			render :edit
-		else
-			render :edit
+		respond_to do |format|
+			if (@periodo_maximo >= @horario_servidor) and @trabalho.save
+				flash.now[:notice] = "Seu trabalho foi atualizado com sucesso!"
+				format.html { redirect_to estudante_trabalho_path @estudante, @trabalho }
+			else
+				format.html { render :edit }
+			end
 		end
 	end
 

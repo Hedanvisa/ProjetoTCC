@@ -18,6 +18,8 @@
 					</ul>
 					<% if !current_page?(login_path) and tem_alguem_logado %>
 						<ul class="nav navbar-nav navbar-right">
+
+							<li><%= link_to 'Minha Conta', professor_path(params[:professor_id]) %></li>
 							<li><%= link_to "Sair", logout_path %></li>
 						</ul>
 					<% end %>
