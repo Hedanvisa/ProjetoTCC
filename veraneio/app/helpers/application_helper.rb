@@ -1,6 +1,6 @@
 module ApplicationHelper
   
-  def tem_alguem_logado
+  def tem_alguem_logado?
 	if usuario_atual
 	  return true
 	end

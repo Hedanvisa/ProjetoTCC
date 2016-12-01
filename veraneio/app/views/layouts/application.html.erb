@@ -7,7 +7,7 @@
 <%= csrf_meta_tags %>
 </head>
 <body>
-<% if !current_page?(login_path) and tem_alguem_logado %>
+<% if !current_page?(login_path) and tem_alguem_logado? %>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">

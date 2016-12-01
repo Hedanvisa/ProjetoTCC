@@ -16,11 +16,11 @@
                         <% end %>
 						<li class="<%= 'active' if current_page?(professor_trabalhos_path(params[:professor_id])) %>"><%= link_to "Trabalhos", professor_trabalhos_path(params[:professor_id]) %></li>
 					</ul>
-					<% if !current_page?(login_path) and tem_alguem_logado %>
+					<% if !current_page?(login_path) and tem_alguem_logado? %>
 						<ul class="nav navbar-nav navbar-right">
 
 							<li><%= link_to 'Minha Conta', professor_path(params[:professor_id]) %></li>
-							<li><%= link_to "Sair", logout_path %></li>
+							<li><%= link_to "Sair", logout_path, method: :delete %></li>
 						</ul>
 					<% end %>
 				</div>
