@@ -2,6 +2,12 @@
 pt-BR:
   activerecord:
     errors:
+      models:
+          trabalho:
+              attributes:
+                  arquivo:
+                       in_between: "deve ter entre %{min} e %{max}"
+                       spoofed_media_type: "deve ser do tipo PDF"
       messages:
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:
