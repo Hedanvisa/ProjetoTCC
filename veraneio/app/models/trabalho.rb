@@ -16,7 +16,7 @@ class Trabalho < ActiveRecord::Base
 
   has_attached_file :arquivo
   validates :arquivo, attachment_presence: true
-  validates_attachment_content_type :arquivo, content_type: { content_type: ['application/pdf'] }
+  validates_attachment_content_type :arquivo, content_type: ['application/pdf']
 
   def avaliado_por_todos?
     !self.nota_banca_1.nil? and !self.nota_banca_2.nil? and !self.nota_orientador.nil?

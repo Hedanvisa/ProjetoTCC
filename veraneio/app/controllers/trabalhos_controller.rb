@@ -32,7 +32,6 @@ class TrabalhosController < ApplicationController
 		@banca_2 = Professor.where(nome: params[:trabalho][:banca_2_attributes][:nome]).first
 
 		verifica_se_existe_no_banco
-
 		@trabalho.estado = "Recebido do Aluno"
 
 		if @trabalho.save 
