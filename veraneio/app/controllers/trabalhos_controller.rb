@@ -44,6 +44,8 @@ class TrabalhosController < ApplicationController
 			flash[:notice] = "Trabalho enviado com sucesso!"
 			redirect_to root_path
 		else
+			@banca_1 ||= @trabalho.build_banca_1
+			@banca_2 ||= @trabalho.build_banca_2
 			render 'new'
 		end
 	end
@@ -74,6 +76,8 @@ class TrabalhosController < ApplicationController
 				flash.now[:notice] = "Seu trabalho foi atualizado com sucesso!"
 				format.html { redirect_to estudante_trabalho_path @estudante, @trabalho }
 			else
+				@banca_1 ||= @trabalho.build_banca_1
+				@banca_2 ||= @trabalho.build_banca_2
 				format.html { render :edit }
 			end
 		end
