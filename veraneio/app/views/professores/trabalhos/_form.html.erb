@@ -1,27 +1,50 @@
 <%= form_for (:trabalho) do |t| %>
     <div class="panel-body list-group-item">
-        <% if trabalho.estado == "Enviado para Avaliação" %>
+        <% if trabalho.estado != "Recebido do Aluno" %>
+            <h4>
             <ol class="breadcrumb">
 
-                <% if trabalho.nota_banca_1.nil? %>
-                    <li><span class="label label-warning"> Ainda sem nota </span></li>
+                <% if trabalho.banca_1 == @professor %>
+                    <% if trabalho.nota_banca_1.nil? %>
+                        <li><span class="label label-warning"> Ainda sem nota </span></li>
+                    <% else %>
+                        <li><span class="label label-success"> Minha Nota <%= trabalho.nota_banca_1 %> </span></li>
+                    <% end %>
+                <% elsif trabalho.banca_2 == @professor %>
+                    <% if trabalho.nota_banca_2.nil? %>
+                        <li><span class="label label-warning"> Ainda sem nota </span></li>
+                    <% else %>
+                        <li><span class="label label-success"> Minha Nota <%= trabalho.nota_banca_2 %> </span></li>
+                    <% end %>
                 <% else %>
-                    <li><span class="label label-success"> Minha Nota <%= trabalho.nota_banca_1 %> </span></li>
+                    <% if trabalho.nota_orientador.nil? %>
+                        <li><span class="label label-warning"> Ainda sem nota </span></li>
+                    <% else %>
+                        <li><span class="label label-success"> Minha Nota <%= trabalho.nota_orientador %> </span></li>
+                    <% end %>
                 <% end %>
-                    <li>Professor Orientador</li>
-                    <li><%= trabalho.orientador.nome %></li>
+
+                <li>Professor Orientador</li>
+                <li><%= trabalho.orientador.nome %></li>
             </ol>
+                
+            <ol class="breadcrumb">
+                <li>Aluno</li>
+                <li> <%= trabalho.estudante.nome %> </li>
+            </ol>
+            <ol class="breadcrumb">
+                <li>Titulo</li>
+                <li> <%= trabalho.titulo %> </li>
+            </ol>
+            </h4>
         <% elsif trabalho.estado == "Encaminhado para o Orientador" %>
             <span class="label label-success">Avaliado</span>
         <% end %>
 
-        <h4><%= trabalho.estudante.nome %> </h4>
-        <h3><%= trabalho.titulo %></h3>
-
         <%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:professor_id], trabalho), class: 'btn btn-primary'%>
         <%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:professor_id], trabalho), class: 'btn btn-primary' %>
-        <%= t.label :nota_banca_1 %>
-        <%= t.text_field :nota_banca_1 %>
+        <%= t.label :nota %>
+        <%= t.text_field :nota %>
         <%= t.hidden_field :id, value: trabalho.id %>
         <%= t.submit  class: 'btn btn-success pull-right' %>
     </div>
