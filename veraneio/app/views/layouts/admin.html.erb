@@ -16,9 +16,9 @@
 						<li class="<%= 'active' if current_page?(admin_professores_path) %>"><%= link_to "Professores", admin_professores_path %></li>
 						<li class="<%= 'active' if current_page?(admin_periodos_path) %>"><%= link_to "Períodos", admin_periodos_path %></li>
 					</ul>
-					<% if !current_page?(login_path) and tem_alguem_logado %>
+					<% if !current_page?(login_path) and tem_alguem_logado? %>
 						<ul class="nav navbar-nav navbar-right">
-							<li><%= link_to "Sair", logout_path %></li>
+							<li><%= link_to "Sair", logout_path, method: :delete %></li>
 						</ul>
 					<% end %>
 				</div>

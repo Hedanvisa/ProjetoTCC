@@ -13,7 +13,7 @@ module SessionsHelper
 	end
 
 	def logado?
-		!@usuario_atual.nil?
+		!usuario_atual.nil?
 	end
 
 	def autenticar_usuario!
