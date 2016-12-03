@@ -7,7 +7,7 @@ class Admin::TrabalhosController < ApplicationController
         @count_recebidos = Trabalho.where(estado: "Recebido do Aluno").count
         @count_avaliacao = Trabalho.where(estado: "Enviado para Avaliação").count
         @count_avaliado = Trabalho.where(estado: "Avaliado").count
-        @count_disponivel = Trabalho.where(estado: "Disponibilizada a Nota").count
+        @count_disponivel = Trabalho.where(estado: "Nota Disponibilizada").count
     end
 
     def edit
@@ -15,18 +15,16 @@ class Admin::TrabalhosController < ApplicationController
     end
 
     def update
-        @banca_1 = Professor.find_by(id: params[:trabalho][:banca_1])
-        @banca_2 = Professor.find_by(id: params[:trabalho][:banca_2])
         @trabalho = Trabalho.find params[:id]
-        @orientador = @trabalho.orientador
-
-	    #puts("Email 1 #{@banca_1.email.empty?}")
-        #puts("Email 2 #{@banca_2.email.empty?}")
+        @estudante = Estudante.where(:trabalho == @trabalho.id).first
 
         if @trabalho.estado == "Recebido do Aluno"
+            @banca_1 = Professor.find_by(id: params[:trabalho][:banca_1])
+            @banca_2 = Professor.find_by(id: params[:trabalho][:banca_2])
+            @orientador = @trabalho.orientador
+            
             if @banca_1.email.nil? or @banca_2.email.nil?
                 flash[:alert] = "Algum email vazio!"
-                puts(">>>>>>>>>>> Algum email vazio")
             
             elsif @banca_1.email != @banca_2.email and @banca_1.email != @orientador.email and @banca_2.email != @orientador.email
                 @trabalho.banca_1 = @banca_1
@@ -37,13 +35,15 @@ class Admin::TrabalhosController < ApplicationController
                     Notificador.banca_avaliacao(@trabalho.estudante, @banca_1).deliver_now
                     Notificador.banca_avaliacao(@trabalho.estudante, @banca_2).deliver_now
                 end
-                puts(">>>>>>>>>>> Enviado para Avaliação")
                 @trabalho.update estado: "Enviado para Avaliação"
                 flash[:notice] = "Trabalho enviado com sucesso!"
             else
                 flash[:alert] = "Professores iguais!"
                 puts(">>>>>>>>>>> Prof iguais")
             end
+        else
+            @trabalho.update estado: "Nota Disponibilizada"
+            flash[:notice] = "Agora o #{@estudante.nome} pode ver sua nota!"
         end
         redirect_to admin_trabalhos_path
     end

@@ -1,9 +1,14 @@
+<% if notice %>
+    <div class='alert alert-success'><%= notice %></div>
+<% end %>
+
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
 	<div class="panel-heading ca">
 	  <h4 class="panel-title">
 		<a data-toggle="collapse" data-parent="#accordion" href="#accord1" class="cabecalho">
 		  <h2> Orientador </h2>
+      <h2> <%= @professor.nome %></h2>
 		</a>
 	  </h4>
 	</div>
@@ -11,22 +16,6 @@
 	  <div class="panel-body">
 			<ul class="list-group ">
 				<% @trabalhos_orientador.each do |trabalho|%>
-				<div class="panel-body list-group-item">
-    
-        <% if trabalho.estado == "Enviado para Avaliação" %>
-            <ol class="breadcrumb">
-
-                <% if trabalho.nota_orientador.nil? %>
-                    <li><span class="label label-warning"> Ainda sem nota </span></li>
-                <% else %>
-                    <li><span class="label label-success"> Minha Nota <%= trabalho.nota_orientador %> </span></li>
-                <% end %>
-                    <li>Professor Orientador</li>
-                    <li><%= trabalho.orientador.nome %></li>
-            </ol>
-        <% elsif trabalho.estado == "Encaminhado para o Orientador" %>
-            <span class="label label-success">Avaliado</span>
-        <% end %>
 					<%= render 'form' , trabalho: trabalho %>
 				<% end %>
 			</ul>
@@ -49,42 +38,10 @@
 	  <div class="panel-body">
 		<ul class="list-group ">
 		  <% @trabalhos_banca_1.each do |trabalho1|%>
-			<div class="panel-body list-group-item">
-    
-        <% if trabalho1.estado == "Enviado para Avaliação" %>
-            <ol class="breadcrumb">
-
-                <% if trabalho1.nota_banca_1.nil? %>
-                    <li><span class="label label-warning"> Ainda sem nota </span></li>
-                <% else %>
-                    <li><span class="label label-success"> Minha Nota <%= trabalho1.nota_banca_1 %> </span></li>
-                <% end %>
-                    <li>Professor Orientador</li>
-                    <li><%= trabalho1.orientador.nome %></li>
-            </ol>
-        <% elsif trabalho1.estado == "Encaminhado para o Orientador" %>
-            <span class="label label-success">Avaliado</span>
-        <% end %>
 				<%= render 'form' , trabalho: trabalho1 %>
 			<% end %>
 
 		  <% @trabalhos_banca_2.each do |trabalho2|%>
-			<div class="panel-body list-group-item">
-    
-        <% if trabalho2.estado == "Enviado para Avaliação" %>
-            <ol class="breadcrumb">
-
-                <% if trabalho2.nota_banca_2.nil? %>
-                    <li><span class="label label-warning"> Ainda sem nota </span></li>
-                <% else %>
-                    <li><span class="label label-success"> Minha Nota <%= trabalho2.nota_banca_2 %> </span></li>
-                <% end %>
-                    <li>Professor Orientador</li>
-                    <li><%= trabalho2.orientador.nome %></li>
-            </ol>
-        <% elsif trabalho2.estado == "Encaminhado para o Orientador" %>
-            <span class="label label-success">Avaliado</span>
-        <% end %>
 				<%= render 'form' , trabalho: trabalho2 %>
 			<% end %>
 		</ul>

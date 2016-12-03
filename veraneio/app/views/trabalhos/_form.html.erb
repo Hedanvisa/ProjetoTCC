@@ -2,6 +2,8 @@
 <div class="container">
     <div class="row">
         <div class='col-md-3'></div>
+
+				
 			<div class="col-md-6">
 
 				<% if !esta_periodo_aberto? %>
@@ -26,6 +28,50 @@
 								<li><%= msg %></li>
 							<% end %>
 						</ul>
+					</div>
+				<% end %>
+				<% if @trabalho.estado == "Recebido do Aluno" %>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-1">
+									<i class="fa fa-comments fa-5x"></i>
+									<span class="glyphicon glyphicon-cloud-upload icon"></span>
+								</div>
+								<div class="col-xs-11 text-left">
+									<div>Seu trabalho foi recebido. Ao final do periodo de envios sera encaminhado para a banca de avaliacao.</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% elsif @trabalho.estado == "Nota Disponibilizada" %>
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-1">
+									<i class="fa fa-comments fa-5x"></i>
+									<span class="glyphicon glyphicon-ok icon"></span>
+								</div>
+								<div class="col-xs-11 text-left">
+									<div>Parabens! Sua nota ja foi disponibilizada. Em caso de inconsistencias, procure a Professora da Disciplina de TCC1.</div>
+									<div class="badge"><%= @trabalho.nota_final %></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% else %>
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-1">
+									<i class="fa fa-comments fa-5x"></i>
+									<span class="glyphicon glyphicon-send icon"></span>
+								</div>
+								<div class="col-xs-11 text-left">
+									<div>Seu trabalho foi enviado para Avaliação. Ao final desse Período, tera sua nota disponivel aqui mesmo. Aguarde!</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				<% end %>
 				<div class="login-box well">

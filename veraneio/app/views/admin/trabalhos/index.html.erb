@@ -30,7 +30,7 @@
                             <span class="glyphicon glyphicon-send icon"></span>
                         </div>
                         <div class="col-xs-9 text-left">
-                            <div>Enviados para Avaliacao</div>
+                            <div>Enviado para Avaliação</div>
                             <div class="badge"><%= @count_avaliacao %></div>
                         </div>
                     </div>
@@ -92,6 +92,8 @@
                                     <li><span class="label label-warning"><%= trabalho.estado %></span></li>
                                 <% elsif trabalho.estado == "Avaliado" %> 
                                     <li><span class="label label-success"><%= trabalho.estado %></span></li>
+                                <% elsif trabalho.estado == "Nota Disponibilizada" %> 
+                                    <li><span class="label label-info"><%= trabalho.estado %></span></li>
                                 <% end %>
                                 
                                 <li><%= trabalho.updated_at.strftime("%d / %m / %Y %I:%M %p") %></li>

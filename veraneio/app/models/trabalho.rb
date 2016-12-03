@@ -16,4 +16,10 @@ class Trabalho < ActiveRecord::Base
   validates :titulo, presence: true
   validates :estudante, presence: true
   validates :orientador, presence: true
+  
+
+  def avaliado_por_todos?
+    !self.nota_banca_1.nil? and !self.nota_banca_2.nil? and !self.nota_orientador.nil?
+  end
+
 end
