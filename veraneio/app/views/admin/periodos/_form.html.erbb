@@ -1,0 +1,25 @@
+<%= form_for([:admin,@admin_periodo]) do |f| %>
+  <% if @admin_periodo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_periodo.errors.count, "error") %> prohibited this admin_periodo from being saved:</h2>
+
+      <ul>
+      <% @admin_periodo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :inicio %><br>
+    <%= f.datetime_select :inicio, { ampm: true, order: [:day, :month, :year] }, { class: "btn" } %>
+  </div>
+  <div class="field">
+    <%= f.label :termino %><br>
+    <%= f.datetime_select :termino, { ampm: true, order: [:day, :month, :year] }, { class: "btn" } %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "form-group btn btn-primary pull-right"%>
+  </div>
+<% end %>

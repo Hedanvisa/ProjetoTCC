@@ -1,4 +1,4 @@
-<%= form_for([:admin,@admin_periodo]) do |f| %>
+<%= form_tag([:admin,@admin_periodo], :method=>"post") do %>
   <% if @admin_periodo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_periodo.errors.count, "error") %> prohibited this admin_periodo from being saved:</h2>
@@ -12,14 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :inicio %><br>
-    <%= f.datetime_select :inicio, { ampm: true, order: [:day, :month, :year] }, { class: "btn" } %>
+    <%= label_tag :'inicio submissão'%><br>
+    <%=  select_datetime(datetime = DateTime.current, prefix: 'trabalho_inicio') %>
   </div>
+
   <div class="field">
-    <%= f.label :termino %><br>
-    <%= f.datetime_select :termino, { ampm: true, order: [:day, :month, :year] }, { class: "btn" } %>
+    <%= label_tag :'termino submissao'%><br>
+    <%=  select_datetime(datetime = DateTime.current, prefix: 'trabalho_termino') %>
   </div>
-  <div class="actions">
-    <%= f.submit class: "form-group btn btn-primary pull-right"%>
+
+    </br>
+
+  <div class="field">
+    <%= label_tag :'inicio avaliação'%><br>
+    <%=  select_datetime(datetime = DateTime.current, prefix: 'avaliacao_inicio') %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :'termino avaliação'%><br>
+    <%=  select_datetime(datetime = DateTime.current, prefix: 'avaliacao_termino') %>
+  </div>
+	    </br>
+  <div class="actions form-group btn pull-right">
+    <%= submit_tag 'Criar'%>
   </div>
 <% end %>
