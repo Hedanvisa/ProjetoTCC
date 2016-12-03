@@ -13,14 +13,6 @@ class Admin::PeriodosControllerTest < ActionController::TestCase
 		assert_not_nil assigns(:admin_periodos)
 	end
 
-	test "should create admin_periodo" do
-		assert_difference('Periodo.count') do
-			post :create, periodo: { inicio: "2020-1-1 20:30:00", termino: "2021-1-1 20:30:00" }
-		end
-
-		assert_redirected_to admin_periodos_path
-	end
-
 	test "should show admin_periodo" do
 		get :show, id: @admin_periodo
 		assert_response :success
