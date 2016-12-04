@@ -1,1 +1,30 @@
-<h1> Em construcao </h1>
+<% if @professor.estado_acesso == "Não Confirmado"%>
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-11 text-left">
+                    <div>Clique em Atualizar para confirmar seu acesso.</div>
+                </div>
+                <div class="col-xs-1">
+                    <i class="fa fa-comments fa-5x"></i>
+                    <span class="glyphicon glyphicon-remove-circle icon"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+<% else %>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-11 text-left">
+                    <div>Seu acesso está confirmado. Vá para Trabalhos para ver seus convites de Avaliação.</div>
+                </div>
+                <div class="col-xs-1">
+                    <i class="fa fa-comments fa-5x"></i>
+                    <span class="glyphicon glyphicon-ok icon"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+<%= render 'professores/edit' , professor: @professor %>

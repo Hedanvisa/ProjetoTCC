@@ -1,4 +1,3 @@
-
 <div class="container">
     <div class="row">
         <div class='col-md-3'></div>
@@ -6,7 +5,7 @@
 				
 			<div class="col-md-6">
 
-				<% if !esta_periodo_aberto? %>
+				<% if !esta_periodo_aberto? and @estudante.exception == false%>
 					<div class="alert alert-danger">
 						O período de Cadastros e Envios acabou. Não será possivel atualizar ou enviar seu trabalho.
 					</div>
@@ -53,12 +52,14 @@
 									<span class="glyphicon glyphicon-ok icon"></span>
 								</div>
 								<div class="col-xs-11 text-left">
-									<div>Parabens! Sua nota ja foi disponibilizada. Em caso de inconsistencias, procure a Professora da Disciplina de TCC1.</div>
+									<div>Parabéns! Sua nota ja foi disponibilizada. Em caso de inconsistências, procure a Professora da Disciplina de TCC1.</div>
 									<div class="badge"><%= @trabalho.nota_final %></div>
 								</div>
 							</div>
 						</div>
 					</div>
+				<% elsif @trabalho.estado.nil? %>
+
 				<% else %>
 					<div class="panel panel-warning">
 						<div class="panel-heading">
@@ -68,7 +69,7 @@
 									<span class="glyphicon glyphicon-send icon"></span>
 								</div>
 								<div class="col-xs-11 text-left">
-									<div>Seu trabalho foi enviado para Avaliação. Ao final desse Período, tera sua nota disponivel aqui mesmo. Aguarde!</div>
+									<div>Seu trabalho foi enviado para Avaliação. Ao final desse Período, tera sua nota disponível aqui mesmo. Aguarde!</div>
 								</div>
 							</div>
 						</div>
@@ -131,8 +132,8 @@
 							</div>
 						<%end%>
 
-						<%if esta_periodo_aberto?%>
-						<%=trabalho.submit  class: 'btn btn-success btn-login-submit btn-block m-t-md'%>
+						<%if esta_periodo_aberto? or @estudante.exception == true %>
+							<%=trabalho.submit  class: 'btn btn-success btn-login-submit btn-block m-t-md'%>
 						<%end%>
 
 					<%end%>

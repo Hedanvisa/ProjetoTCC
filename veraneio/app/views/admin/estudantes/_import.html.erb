@@ -1,0 +1,15 @@
+<%= form_tag([:admin,@estudante], :method=>"create") do %>
+    <legend>Novo Aluno</legend>
+
+    <%= label_tag 'Nome' %>
+    <%= text_field_tag 'nome'  %>
+    
+    <%= label_tag 'ra' %>
+    <%= text_field_tag 'ra' %>
+
+    <%= label_tag 'E-mail' %>
+    <%= email_field_tag 'email', nil, class: 'special_input' %>
+
+    <%= submit_tag "Avançar", class: 'btn btn-primary btn-login-submit btn-block m-t-md' %>
+
+<% end %>

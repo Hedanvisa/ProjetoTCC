@@ -1,8 +1,13 @@
 class Admin::TrabalhosController < ApplicationController
     layout 'admin'
+    require 'my_string'
 
     def index
-        @trabalhos = Trabalho.order('updated_at DESC').all
+        @trabalhos_recebidos = Trabalho.order('updated_at DESC').all.where(estado: "Recebido do Aluno")
+        @trabalhos_enviados = Trabalho.order('updated_at DESC').all.where(estado: "Enviado para Avaliação")
+        @trabalhos_avaliados = Trabalho.order('updated_at DESC').all.where(estado: "Avaliado")
+        @trabalhos_disponibilizados = Trabalho.order('updated_at DESC').all.where(estado: "Nota Disponibilizada")
+
         @professores = Professor.all
         @count_recebidos = Trabalho.where(estado: "Recebido do Aluno").count
         @count_avaliacao = Trabalho.where(estado: "Enviado para Avaliação").count
@@ -12,6 +17,10 @@ class Admin::TrabalhosController < ApplicationController
 
     def edit
         redirect_to root_path
+    end
+
+    def verifica_entrada
+        params[:trabalho][:nota_disciplina].numeric? and params[:trabalho][:nota_disciplina].to_f >= 0 and params[:trabalho][:nota_disciplina].to_f <= 10
     end
 
     def update
@@ -39,11 +48,23 @@ class Admin::TrabalhosController < ApplicationController
                 flash[:notice] = "Trabalho enviado com sucesso!"
             else
                 flash[:alert] = "Professores iguais!"
-                puts(">>>>>>>>>>> Prof iguais")
             end
-        else
-            @trabalho.update estado: "Nota Disponibilizada"
-            flash[:notice] = "Agora o #{@estudante.nome} pode ver sua nota!"
+
+        elsif @trabalho.estado == "Avaliado"
+
+            if params[:trabalho][:nota_disciplina] == ""
+                flash[:notice] = "Campo Nota vazio!"
+            
+            elsif verifica_entrada
+                @trabalho.nota_disciplina = params[:trabalho][:nota_disciplina]
+                @trabalho.nota_final = ((@trabalho.nota_banca_1 + @trabalho.nota_banca_2)/2 + @trabalho.nota_orientador + @trabalho.nota_disciplina)/3
+                @trabalho.save
+                @trabalho.update estado: "Nota Disponibilizada"
+                flash[:notice] = "Agora o #{@estudante.nome} pode ver sua nota!"
+            end
+        elsif @trabalho.estado == "Nota Disponibilizada"
+            @trabalho.update estado: "Avaliado"
+            flash[:notice] = "Trabalho em Revisão"
         end
         redirect_to admin_trabalhos_path
     end

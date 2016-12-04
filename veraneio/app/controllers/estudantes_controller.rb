@@ -5,6 +5,7 @@ class EstudantesController < ApplicationController
 
 	def create
 		@estudante = Estudante.new estudante_params
+		@estudante.exception = false
 
 		if @estudante.save
 			session[:usuario_id] = @estudante.id

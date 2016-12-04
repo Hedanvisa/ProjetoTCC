@@ -43,9 +43,11 @@
 
         <%= link_to "Abrir arquivo para avaliação", avaliacao_path(params[:professor_id], trabalho), class: 'btn btn-primary'%>
         <%= link_to "Abrir Pareceres", professor_trabalho_pareceres_path(params[:professor_id], trabalho), class: 'btn btn-primary' %>
-        <%= t.label :nota %>
-        <%= t.text_field :nota %>
-        <%= t.hidden_field :id, value: trabalho.id %>
-        <%= t.submit  class: 'btn btn-success pull-right' %>
+        <% if esta_periodo_avaliacao_aberto? %>
+            <%= t.label :nota %>
+            <%= t.text_field :nota %>
+            <%= t.hidden_field :id, value: trabalho.id %>
+            <%= t.submit  class: 'btn btn-success pull-right' %>
+        <% end %>
     </div>
 <% end %>

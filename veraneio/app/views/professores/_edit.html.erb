@@ -1,0 +1,16 @@
+<%= form_for @professor do |f| %>
+	<div class="panel-body">
+		<%= f.label :nome, class: 'form-group' %>
+		<%= f.text_field :nome, class: 'form-control form-group' %>
+		<%= f.label :email, class: 'form-group' %>
+		<%= f.email_field :email, class: 'form-control form-group' %>
+        
+        <%= f.label :senha, class: 'form-group' %>
+        <%= f.password_field :password, class: 'form-control form-group' %>
+
+        <%= f.label :confirmação_de_Senha, class: 'form-group' %>
+        <%= f.password_field :password_confirmartion, class: 'form-control form-group' %>
+
+		<%= f.submit class: "btn btn-primary"%>
+	</div>
+<% end %>

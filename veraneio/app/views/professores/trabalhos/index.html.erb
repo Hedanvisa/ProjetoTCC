@@ -2,6 +2,36 @@
     <div class='alert alert-success'><%= notice %></div>
 <% end %>
 
+<% if esta_periodo_avaliacao_aberto? %>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-xs-11 text-left">
+					<div>A nota da avaliação deve ser submetida com seus pareceres e sugestões até o dia <%= ultimo_periodo_avaliacao %>.</div>
+				</div>
+				<div class="col-xs-1">
+					<i class="fa fa-comments fa-5x"></i>
+					<span class="glyphicon glyphicon-pencil icon"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+<% else %>
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-xs-11 text-left">
+					<div>O período de submissão expirou em <%= ultimo_periodo_avaliacao %>. Em casos de trabalhos não avaliados, não será possível atribuir a nota. Entre em contato com a Professora de TCC1.</div>
+				</div>
+				<div class="col-xs-1">
+					<i class="fa fa-comments fa-5x"></i>
+					<span class="glyphicon glyphicon-remove-circle icon"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
 	<div class="panel-heading ca">

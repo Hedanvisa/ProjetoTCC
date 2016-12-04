@@ -7,6 +7,7 @@ class Professores::TrabalhosController < ApplicationController
         @trabalhos_orientador = Trabalho.where(orientador: params[:professor_id]).where.not(estado: "Recebido do Aluno")
 		@trabalhos_banca_1 = Trabalho.where(banca_1: params[:professor_id]).where.not(estado: "Recebido do Aluno")
 		@trabalhos_banca_2 = Trabalho.where(banca_2: params[:professor_id]).where.not(estado: "Recebido do Aluno")
+        @periodo_atual = Periodo.where(termino: Periodo.maximum('termino')).first
     end
 
     def verifica_entrada

@@ -3,6 +3,23 @@
 <% elsif alert %>
     <div class='alert alert-danger'><%= alert %></div>
 <% end %>
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading ca">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#accord1" class="cabecalho">
+                    <h2> Importar alunos </h2>
+                </a>
+            </h4>
+        </div>
+        <div id="accord1" class="panel-collapse collapse out">
+            <div class="panel-body">
+                <%= render 'admin/estudantes/import' %>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="panel-group" id="accordion">
   <% @estudantes.each do |estudante| %>
     <div class="panel panel-default">
@@ -19,7 +36,7 @@
       </div>
       <div id="<%=estudante.id %>" class="panel-collapse collapse out">
         <div class="panel-body">
-          <%= render 'admin/estudantes/form' , estudante: estudante %>
+          <%= render 'form' , estudante: estudante %>
         </div>
       </div>
     </div>

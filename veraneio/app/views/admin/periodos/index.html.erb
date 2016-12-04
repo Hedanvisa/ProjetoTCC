@@ -8,7 +8,7 @@
 		<% if @periodo_atual.nil? or @periodo_atual.termino < DateTime.now %>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3> Novo Periodo </h3>
+					<h3> Novo Período </h3>
 				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
@@ -22,7 +22,7 @@
 		<!-- /.panel -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3> Todos os Periodos </h3>
+				<h3> Todos os Períodos </h3>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
@@ -34,20 +34,17 @@
 									<tr>
 										<th>
 											<ol class="breadcrumb">
-												<li> Inicio </li>
-												<li> Submissao </li>
+												<li> Início dos Envios dos Trabalho </li>
 											</ol>
 										</th>
 										<th>
 											<ol class="breadcrumb">
-												<li> Termino </li>
-												<li> Submissao </li>
+												<li> Fim dos Envios dos Trabalhos </li>
 											</ol>
 										</th>
 										<th>
 											<ol class="breadcrumb">
-												<li> Termino </li>
-												<li> Avaliacao </li>
+												<li> Fim das Avaliações pelos Professores </li>
 											</ol>
 										</th>
 										<th></th>
@@ -58,15 +55,13 @@
 										<tr>
 											<td><%= admin_periodo.inicio.strftime("%d/%m/%Y ") %><span class="text-muted small"><em><%= admin_periodo.termino.strftime(" %I:%M%p") %></em></td>
 											<td><%= admin_periodo.termino.strftime("%d/%m/%Y ") %><span class="text-muted small"><em><%= admin_periodo.termino.strftime(" %I:%M%p") %></em></td>
-											<td>10/21/2013</td>
+											<td><%= admin_periodo.termino_avaliacao.strftime("%d/%m/%Y ") %><span class="text-muted small"><em><%= admin_periodo.termino_avaliacao.strftime(" %I:%M%p") %></em></td>
 											<% # link_to 'Edit', edit_admin_periodo_path(admin_periodo) %>
 											<% if admin_periodo.termino == @periodo_atual.termino%>
-												<td>
-													<%= link_to 'Apagar Periodo', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-right" %>
-													<%= link_to 'Abrir Excecao', edit_admin_periodo_path(admin_periodo), class: "btn btn-info" %>
-												</td>
+												<td><%= link_to 'Apagar Período', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-right" %></td>
+												<td><%= link_to 'Abrir Exceção', edit_admin_periodo_path(admin_periodo), class: "btn btn-info" %></td>
 											<% else %>
-												<td><%= link_to 'Apagar Periodo', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-right" %></td>
+												<td><%= link_to 'Apagar Período', admin_periodo_path(admin_periodo), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-right" %></td>
 											<% end %>
 										</tr>
 									</tbody>

@@ -19,29 +19,27 @@ class Admin::PeriodosController < ApplicationController
 
   # GET /admin/periodos/1/edit
   def edit
+    @estudantes_exception = Estudante.where(exception: true)
   end
 
   # POST /admin/periodos
   # POST /admin/periodos.json
   def create
-#    @admin_periodo = Periodo.new admin_periodo_params
-
-
-    @periodo_trabalho = PeriodoTrabalho.new inicio: params[:trabalho_inicio], termino: params[:trabalho_termino]
-    @periodo_avaliacao = PeriodoAvaliacao.new inicio: params[:avaliacao_inicio], termino: params[:avaliacao_termino]
-
-	puts "debug #{@periodo_trabalho}" 
-	puts "debug #{params[:trabalho_inicio]}" 
-    @periodo_atual = PeriodoAvaliacao.where(termino: PeriodoAvaliacao.maximum('termino')).first
+    @admin_periodo = Periodo.new admin_periodo_params
+    @periodo_atual = Periodo.where(termino: Periodo.maximum('termino')).first
 
     respond_to do |format|
-      if !@periodo_atual.nil? and @periodo_trabalho.inicio < @periodo_atual.termino
+      
+      if !@periodo_atual.nil? and @admin_periodo.inicio < @periodo_atual.termino
         format.html { redirect_to admin_periodos_path, alert: 'Nao e possivel criar um novo Periodo. Data inicial e menor que a data final do ultimo periodo valido.' }
-	      elsif !@periodo_atual.nil? and @periodo_avaliacao.termino < @periodo_avaliacao.inicio or @periodo_trabalho.termino > @periodo_trabalho.inicio
-        format.html { redirect_to admin_periodos_path, alert: 'Periodo invalido. Data final e menor que data inicial.' }        
-      elsif @periodo_trabalho.save and @periodo_avaliacao.save
-        format.html { redirect_to admin_periodos_path, notice: 'Períodos criados com sucesso.' }
+      
+      elsif !@periodo_atual.nil? and @admin_periodo.termino < @admin_periodo.inicio or @admin_periodo.termino_avaliacao < @admin_periodo.termino
+        format.html { redirect_to admin_periodos_path, alert: 'Periodo invalido. Data de término de avaliação ou término de submissão está incorreta ou é menor que data inicial.' }
+      
+      elsif @admin_periodo.save
+        format.html { redirect_to admin_periodos_path, notice: 'Período criado com sucesso.' }
         format.json { render :show, status: :created, location: @admin_periodo }
+      
       else
         format.html { render :new }
         format.json { render json: @admin_periodo.errors, status: :unprocessable_entity }
@@ -81,8 +79,6 @@ class Admin::PeriodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_periodo_params
-      params.require(:periodo).permit(:inicio, :termino)
+      params.require(:periodo).permit(:inicio, :termino, :termino_avaliacao)
     end
-
-
 end

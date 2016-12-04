@@ -19,7 +19,7 @@
 						<%= alert %>
 					</div>
 				<% end %>
-				<% if @estudante.errors.any? %>
+				<% if !@estudante.nil? and @estudante.errors.any? %>
 					<div class='alert alert-danger'>
 						<strong>
 							Não foi possível completar o cadastro:
@@ -49,7 +49,7 @@
 						<%= f.password_field :password, class: 'form-control form-group' %>
 
 						<%= f.label :confirmacao_de_senha, class: 'form-group' %>
-						<%= f.password_field :confirmacao_de_senha, class: 'form-control form-group' %>
+						<%= f.password_field :password_confirmation, class: 'form-control form-group' %>
 
 						<%= f.submit "Avançar", class: 'btn btn-primary btn-login-submit btn-block m-t-md' %>
 

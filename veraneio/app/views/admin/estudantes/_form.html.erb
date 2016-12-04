@@ -6,6 +6,15 @@
 		<%= e.text_field :nome, class: 'form-control form-group' %>
 		<%= e.label :email, class: 'form-group' %>
 		<%= e.email_field :email, class: 'form-control form-group' %>
+		
+		<%= e.fields_for :exception do |exception| %>
+			<% if estudante.exception == false %>
+    			<b> Abrir Exceção? </b> <%= exception.check_box :exception %>
+			<% else %>
+				<b> Revogar Exceção? </b> <%= exception.check_box :exception %>
+			<% end %>
+	  	<% end %>
+		
 		<%= e.submit class: "btn btn-primary" %>
 	</div>
 <% end %>

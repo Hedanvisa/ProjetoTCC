@@ -6,7 +6,7 @@ class ProfessoresController < ApplicationController
 	end
 
 	def show
-		
+		@professor = Professor.find(params[:id])
 	end
 
 	def new
@@ -24,6 +24,18 @@ class ProfessoresController < ApplicationController
 			redirect_to admin_professores_path, alert: "Erro ao salvar"
 		end
 	end
+
+	def update
+        @professor = Professor.find(params[:id])
+		@professor.estado_acesso = "Confirmado"
+        if @professor.update professor_params
+		  	flash[:notice] = "Professor atualizado com sucesso"
+			redirect_to professor_path
+        else
+		  	flash[:alert] = "Erro na atualização"
+            redirect_to professor_path
+        end
+    end
 
 
 	private

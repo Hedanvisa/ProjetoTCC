@@ -20,6 +20,6 @@ class Notificador < ApplicationMailer
 	def banca_avaliacao(estudante, membro_banca)
 		@estudante = estudante
 		@membro_banca = membro_banca
-		mail(to:@membro_banca.email, subject: "Um novo trabalho de TCC dependente de sua avaliação foi submetido")
+		mail(to:@membro_banca.email, subject: "Um novo trabalho de TCC dependente de sua avaliação foi submetido. Para acessar ao sistema, use o email #{@membro_banca.email}. Se form o primeiro acesso, a senha padrão é \"professor\". Sugerimos que atualize em seu primeiro acesso");
 	end
 end

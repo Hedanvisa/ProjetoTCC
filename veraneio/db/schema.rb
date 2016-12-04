@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122225052) do
+ActiveRecord::Schema.define(version: 20161203184056) do
 
   create_table "pareceres", force: :cascade do |t|
     t.integer  "pagina"
@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(version: 20161122225052) do
   create_table "periodos", force: :cascade do |t|
     t.datetime "inicio"
     t.datetime "termino"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "type"
+    t.datetime "termino_avaliacao"
   end
 
   create_table "trabalhos", force: :cascade do |t|
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 20161122225052) do
     t.float    "nota_banca_2"
     t.float    "nota_orientador"
     t.float    "nota_final"
+    t.float    "nota_disciplina"
   end
 
   add_index "trabalhos", ["banca_1_id"], name: "index_trabalhos_on_banca_1_id"
@@ -66,6 +68,7 @@ ActiveRecord::Schema.define(version: 20161122225052) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "estado_acesso"
+    t.boolean  "exception"
   end
 
 end

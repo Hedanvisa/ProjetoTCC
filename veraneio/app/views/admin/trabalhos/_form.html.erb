@@ -2,15 +2,16 @@
     <% if t.object.estado == "Recebido do Aluno" %>
         <div class="panel-body">
             <div role="form">
-                <% if esta_periodo_aberto? %>
+                <% if esta_periodo_aberto? and trabalho.estado == "Recebido do Aluno" %>
                     <div class="alert alert-danger">
 						O período de recebimentos ainda está aberto.
 					</div>
                 <% else %>
-                    <div class="alert alert-success">
+                    <div class="alert alert-danger">
 						O período de recebimentos se encerrou. É possível enviar trabalhos para avaliação!
 					</div>
                 <% end %>
+                
                 <div class="form-group">                            
                     <h4>
                         <ol class="breadcrumb">
@@ -67,7 +68,22 @@
     <% else %>
          <div class="panel-body">
             <div role="form">
-                <div class="form-group">                            
+                <% if trabalho.estado == "Enviado para Avaliação" %>
+                    <div class="alert alert-warning">
+						O trabalho está em avaliação. Quando estiver pronto, poderá disponibilizar a nota.
+					</div>
+                <% elsif esta_periodo_avaliacao_aberto? and trabalho.estado == "Avaliado" %>
+                    <div class="alert alert-success">
+						A avaliação do trabalho está completa, porém o prazo de avaliação ainda está aberto. Aguarde até o prazo se encerrar para poder disponibiliza-la.
+					</div>
+                <% elsif trabalho.estado == "Nota Disponibilizada" %>
+                    <div class="alert alert-info">
+						Caso haja alguma inconsistência, é possível é revisar a nota.
+					</div>
+                <% end %>
+
+                <div class="form-group">
+                    <h4>                            
                     <ol class="breadcrumb">
                         <li><%= link_to "Reenviar E-mail", admin_trabalho_reenviar_url(professor_id: t.object.orientador.id, trabalho_id: t.object.id), class: "btn btn-info" %></li>
                         <li>Orientador</li>
@@ -101,10 +117,41 @@
                             <li><span class="label label-default">Nota <%= t.object.nota_banca_2 %></span></li>
                         <% end %>
                     </ol>
+                    <ol class="breadcrumb">
+                        <li><span class="label label-info">Composição da Nota</span></li>
+                        <li>(A+B+C)/3</li>
+                        <li>Avaliadores
+                            <% if !t.object.nota_banca_1.nil? and !t.object.nota_banca_2.nil? %>
+                                <span class="label label-default">A = <%= (t.object.nota_banca_1 + t.object.nota_banca_2)/2 %></span>
+                            <% end %>
+                        </li>
+                        <li>Orientador <span class="label label-default">B = <%= (t.object.nota_orientador) %> </span></li>
+                        <li>Disciplina
+                            <% if t.object.nota_disciplina.nil? %>
+                                <span class="label label-default">C = Não Atribuida</span>
+                            <% else %>
+                                <span class="label label-default">C = <%= t.object.nota_disciplina %></span>
+                            <% end %>
+                        </li>
+                        <li>
+                            <% if !t.object.nota_final.nil? %>
+                                <span class="label label-info"> NF = <%= t.object.nota_final.round(1) %></span>
+                            <% end %>                        
+                        </li>
+                    </ol>
+                    <% if t.object.estado == "Avaliado" %>
+                        <ol class=breadcrumb>
+                            <%= t.label :nota_da_disciplina %>
+                            <%= t.text_field :nota_disciplina %>
+                        <ol>
+                    <% end %>
+                    </h4>
                 </div>
             </div>
-            <% if t.object.estado == "Avaliado" %>
+            <% if t.object.estado == "Avaliado" and !esta_periodo_avaliacao_aberto? %>
                 <%= t.submit "Disponibilizar Nota", class: 'form-group btn btn-success pull-right' %>
+            <% elsif t.object.estado == "Nota Disponibilizada" %>
+                <%= t.submit "Revisar Nota", class: 'form-group btn btn-success pull-right' %>
             <% end %>
         </div>
     <% end %>

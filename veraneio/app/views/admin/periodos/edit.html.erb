@@ -1,6 +1,29 @@
-<h1>Editing Admin Periodo</h1>
+<h1>Editandos Periodos de </h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Show', admin_periodo_path %> |
 <%= link_to 'Back', admin_periodos_path %>
+
+<div class="panel-group" id="accordion">
+  <% @estudantes_exception.each do |estudante| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#<%=estudante.id %>" class="cabecalho">
+            <ol class="breadcrumb"> 
+              <li><%= estudante.ra %></li>
+              <li><%= estudante.nome %></li>
+              <li><%= estudante.email %></li>
+            </ol>
+          </a>
+        </h4>
+      </div>
+      <div id="<%=estudante.id %>" class="panel-collapse collapse out">
+        <div class="panel-body">
+          <%= render 'admin/estudantes/form' , estudante: estudante %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
